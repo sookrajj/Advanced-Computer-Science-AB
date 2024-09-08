@@ -110,14 +110,14 @@ public class prog1050a {
         }
     }
 
-    public class calculationStuff {
+    public static class calculationStuff {
         private ArrayList<keep> stuff;
         private int salesteurope;
         private int cerealtcam;
         private double meatpro;
         private double highprio;
         private double fruitloss2012;
-        private int numpriolate;
+        private int numpriolate = 0;
         private String highpro;
         private String regmostsnacks;
 
@@ -127,6 +127,8 @@ public class prog1050a {
         }
 
         private void calc() {
+            ArrayList<counpro> pros = new ArrayList<>();
+            ArrayList<mosna> mo = new ArrayList<>();
             int numssales = 0;
             int certcam = 0;
             double meatprofit = 0;
@@ -147,6 +149,9 @@ public class prog1050a {
                 }
                 if (stuff.get(lcv).getOrderPriority().equals("H")) {
                     high++;
+                    if (numdays(lcv)) {
+                        numpriolate += stuff.get(lcv).getUnitsSold();
+                    }
                 } else if (stuff.get(lcv).getOrderPriority().equals("M")) {
                     med++;
                 } else {
@@ -158,61 +163,158 @@ public class prog1050a {
                         fruloss += stuff.get(lcv).getTotalProfit();
                     }
                 }
+                if (stuff.get(lcv).getItemType().equals("Personal Care")) {
+                    if (pros.isEmpty()) {
+                        pros.add(new counpro(stuff.get(lcv).getCountry(),
+                                stuff.get(lcv).getTotalProfit()));
+                    }
+                    boolean yes = false;
+                    for (int lv = 0; lv < pros.size(); lv++) {
+                        if (pros.get(lv).getCoun().equals(stuff.get(lcv).getCountry())) {
+                            pros.get(lv).setPro(stuff.get(lcv).getTotalProfit());
+                            yes = true;
+                        }
+                    }
+                    if (!yes) {
+                        pros.add(new counpro(stuff.get(lcv).getCountry(),
+                                stuff.get(lcv).getTotalProfit()));
+                    }
+                }
+                if (stuff.get(lcv).getItemType().equals("Snacks")) {
+                    if (mo.isEmpty()) {
+                        mo.add(new mosna(stuff.get(lcv).getRegion(),
+                                stuff.get(lcv).getUnitsSold()));
+                    }
+                    boolean yes = false;
+                    for (int lv = 0; lv < pros.size(); lv++) {
+                        if (mo.get(lv).getReg().equals(stuff.get(lcv).getRegion())) {
+                            mo.get(lv).setSnun(stuff.get(lcv).getUnitsSold());
+                            yes = true;
+                        }
+                    }
+                    if (!yes) {
+                        mo.add(new mosna(stuff.get(lcv).getRegion(),
+                                stuff.get(lcv).getUnitsSold()));
+                    }
+                }
             }
             salesteurope = numssales;
             cerealtcam = certcam;
             meatpro = meatprofit;
             highprio = high/(high+med+low);
             fruitloss2012 = fruloss;
+            int prohi = 0;
+            for (int lcv = 1; lcv < pros.size(); lcv++) {
+                if (pros.get(lcv).getPro() > pros.get(prohi).getPro()) {
+                    prohi = lcv;
+                }
+            }
+            highpro = pros.get(prohi).getCoun();
+            int hisna = 0;
+            for (int lcv = 1; lcv < pros.size(); lcv++) {
+                if (mo.get(lcv).getSnun() > mo.get(hisna).getSnun()) {
+                    hisna = lcv;
+                }
+            }
+            regmostsnacks = mo.get(hisna).getReg();
         }
 
-        private int numdays(int point) {
+        private boolean numdays(int point) {
             int num = 0;
             fdate orddate = stuff.get(point).getOrderDate();
             fdate shidate = stuff.get(point).getShipDate();
             if (orddate.getYear() == shidate.getYear()) {
                 if (orddate.getMonth() == shidate.getMonth()) {
                     num = shidate.getDay()-orddate.getDay();
+                    if (num < 4) {return true;}
+                    return false;
                 } else if (shidate.getMonth()-orddate.getMonth() == 1) {
                     num = (30+shidate.getDay()) - orddate.getDay();
+                    if (num < 4) {return true;}
+                    return false;
                 }
             } else if (shidate.getYear()-orddate.getYear() == 1) {
-
-            }
-            return num;
-        }
-
-        public int salesteuro() {
-            int numssales = 0;
-            for (int lcv = 0; lcv < stuff.size(); lcv++) {
-                if (stuff.get(lcv).getRegion().equals("Europe")) {
-                    numssales += stuff.get(lcv).getUnitsSold();
-                }
-            }
-            return numssales;
-        }
-
-        public int cerealbyCam() {
-            int numscer = 0;
-            for (int lcv = 0; lcv < stuff.size(); lcv++) {
-                if (stuff.get(lcv).getCountry().equals("Cambodia")) {
-                    if (stuff.get(lcv).getItemType().equals("Cereal")) {
-                        numscer += stuff.get(lcv).getUnitsSold();
+                if (orddate.getMonth() == 12 && shidate.getMonth() == 1) {
+                    if ((30+shidate.getDay())-orddate.getDay() <= 3) {
+                        return true;
                     }
-
                 }
             }
-            return numscer;
+            return false;
         }
 
-        public double meatmoney() {
-            int numeat = 0;
-            for (int lcv = 0; lcv < stuff.size(); lcv++) {
-                if (stuff.get(lcv).getItemType().equals("Meat")) {
-                    numeat += stuff.get(lcv).getUnitsSold();
-                }
-            }
-            return numeat;
+        public int getSalesteurope() {
+            return salesteurope;
+        }
+
+        public int getCerealtcam() {
+            return cerealtcam;
+        }
+
+        public double getMeatpro() {
+            return meatpro;
+        }
+
+        public double getHighprio() {
+            return highprio;
+        }
+
+        public double getFruitloss2012() {
+            return fruitloss2012;
+        }
+
+        public int getNumpriolate() {
+            return numpriolate;
+        }
+
+        public String getHighpro() {
+            return highpro;
+        }
+
+        public String getRegmostsnacks() {
+            return regmostsnacks;
+        }
+    }
+    public static class mosna {
+        private String reg;
+        private int snun;
+
+        public mosna(String region, int snackunit) {
+            reg = region;
+            snun = snackunit;
+        }
+
+        public void setSnun(int snun) {
+            this.snun = this.snun + snun;
+        }
+
+        public String getReg() {
+            return reg;
+        }
+
+        public int getSnun() {
+            return snun;
+        }
+    }
+    public static class counpro {
+        private String coun;
+        private double pro;
+
+        public counpro(String coun, double pro) {
+            this.coun = coun;
+            this.pro = pro;
+        }
+
+        public String getCoun() {
+            return coun;
+        }
+
+        public double getPro() {
+            return pro;
+        }
+
+        public void setPro(double pro) {
+            this.pro = this.pro+ pro;
         }
     }
 
@@ -230,7 +332,15 @@ public class prog1050a {
                         Double.parseDouble(strs[11]), Double.parseDouble(strs[12]),
                         Double.parseDouble(strs[13])));
             }
-
+            calculationStuff calcs = new calculationStuff(all);
+            System.out.println("Sales to Europe: " + calcs.getSalesteurope());
+            System.out.println("Cereal bought by Cambodia: " + calcs.getCerealtcam());
+            System.out.println("Total profit on Meat: " + calcs.getMeatpro());
+            System.out.printf("High priority sales percentage: %.2f %%", calcs.getHighprio());
+            System.out.printf("\nFruits profit lost in 2012: %.2f %%", calcs.getFruitloss2012());
+            System.out.println("\nHigh priority sales shipped more than 3 days late: " + calcs.getNumpriolate());
+            System.out.println("Country with highest profit on Personal Care: " + calcs.getHighpro());
+            System.out.println("Region that bought the most Snacks: " + calcs.getRegmostsnacks());
 
 
 
