@@ -323,6 +323,7 @@ public class prog1050a {
             Scanner s = new Scanner(new File("Langdat/lang1050.csv"));
             String[] strs = new String[14];
             ArrayList<keep> all =  new ArrayList<>();
+            String place = s.nextLine();
             while (s.hasNext()) {
                 strs = s.nextLine().split(",");
 
