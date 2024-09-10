@@ -31,11 +31,12 @@ public class prog1050aincl {
         var records = loadSalesData("Langdat/Lang1050.csv");
         if (records != null) {
             var moneyformat = new DecimalFormat("$#,###.00");
-            System.out.println("Sales to Europe: " + computeCountdec(records, 0, "Europe"));
+            System.out.println("Sales to Europe: " + computeCount(records, 0, "Europe"));
             System.out.println("Cereal bought by Cambodia: " + computeUnitsSold(records, 1, "Cambodia", 2, "Cereal"));
             System.out.println("Total profit on meat: " + moneyformat.format(computeSum(records, 2, "Meat", 13)));
             System.out.println("High priority sales percentage: " + computePercentage(records, 4, "H") + "%");
-            System.out.println("Fruit loss in 2012: " + moneyformat.format(ComputeProfitLost(records, "Fruit")));
+            System.out.println("Fruit loss in 2012: " + moneyformat.format(computeProfitLostIn2012(records, "Fruits")));
+
         }
     }
 
@@ -90,21 +91,33 @@ public class prog1050aincl {
         double  sum= 0;
         for (var record : records) {
             if (record.fields[fIndex].equalsIgnoreCase(value)) {
-
+                sum++;
             }
         }
-        return sum;
+        return sum/5000;
     }
 
-    public static double ComputeProfitLost(List<SalesRecord> records, String itemType) {
+//    public static double ComputeProfitLost(List<SalesRecord> records, String itemType) {
+//        double lostProfit = 0;
+//
+//        for (var record : records) {
+//            if (record.fields[2].equalsIgnoreCase(itemType) &&
+//                record.fields[5].endsWith("2012")) {
+//                lostProfit += Double.parseDouble(record.fields[13]);
+//
+//            }
+//        }
+//        return lostProfit;
+//    }
+    public static double computeProfitLostIn2012(List<SalesRecord> records, String itemType) {
         double lostProfit = 0;
         for (var record : records) {
             if (record.fields[2].equalsIgnoreCase(itemType) &&
-                record.fields[5].endsWith("2012")) {
+                    record.fields[5].endsWith("2012"))
                 lostProfit += Double.parseDouble(record.fields[13]);
-            }
         }
         return lostProfit;
+
     }
 }
 

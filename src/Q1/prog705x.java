@@ -25,15 +25,15 @@ public class prog705x {
                     hi = ho%100;
                 }
             }
-            if (poem.size() < hi) {
-                for (int lcv = 0; lcv < hi - poem.size(); lcv++) {
-                    if (lcv > poem.size()) {
-                        poem.add(poem.get(lcv%poem.size()));
-                    } else {
-                        poem.add(poem.get(lcv));
-                    }
-                }
-            }
+//            if (poem.size() < hi) {
+//                for (int lcv = 0; lcv <= hi - poem.size(); lcv++) {
+//                    if (lcv > poem.size()) {
+//                        poem.add(poem.get(lcv%poem.size()));
+//                    } else {
+//                        poem.add(poem.get(lcv));
+//                    }
+//                }
+//            }
             ArrayList<Integer> line = new ArrayList<>();
             ArrayList<Integer> word = new ArrayList<>();
             ArrayList<Integer> pos = new ArrayList<>();
@@ -46,9 +46,9 @@ public class prog705x {
             }
             String putto = "";
             for (int lcv = 0; lcv < spe.size(); lcv++) {
-                String lie = poem.get(line.get(lcv));
+                String lie = poem.get(line.get(lcv)-1);
 
-                for (int l = 0; l < word.get(lcv); l++) {
+                for (int l = 0; l < word.get(lcv)-1; l++) {
                     lie = lie.substring(lie.indexOf(" ")+1);
                 }
                 putto += lie.substring(pos.get(lcv)-1, pos.get(lcv));
@@ -63,3 +63,4 @@ public class prog705x {
         }
     }
 }
+//The word is coolbeans
