@@ -138,7 +138,7 @@ public class prog1050a {
             double fruloss = 0;
             for (int lcv = 0; lcv < stuff.size(); lcv++) {
                 if (stuff.get(lcv).getRegion().equals("Europe")) {
-                    numssales += stuff.get(lcv).getUnitsSold();
+                    numssales ++;
                 }
                 if (stuff.get(lcv).getCountry().equals("Cambodia") &&
                         stuff.get(lcv).getItemType().equals("Cereal")) {
@@ -186,7 +186,7 @@ public class prog1050a {
                                 stuff.get(lcv).getUnitsSold()));
                     }
                     boolean yes = false;
-                    for (int lv = 0; lv < pros.size(); lv++) {
+                    for (int lv = 0; lv < mo.size(); lv++) {
                         if (mo.get(lv).getReg().equals(stuff.get(lcv).getRegion())) {
                             mo.get(lv).setSnun(stuff.get(lcv).getUnitsSold());
                             yes = true;
@@ -201,7 +201,7 @@ public class prog1050a {
             salesteurope = numssales;
             cerealtcam = certcam;
             meatpro = meatprofit;
-            highprio = high/(high+med+low);
+            highprio = Math.round(((double) high)/(double)(high+med+low)) * 100.0;
             fruitloss2012 = fruloss;
             int prohi = 0;
             for (int lcv = 1; lcv < pros.size(); lcv++) {
@@ -211,7 +211,7 @@ public class prog1050a {
             }
             highpro = pros.get(prohi).getCoun();
             int hisna = 0;
-            for (int lcv = 1; lcv < pros.size(); lcv++) {
+            for (int lcv = 1; lcv < mo.size(); lcv++) {
                 if (mo.get(lcv).getSnun() > mo.get(hisna).getSnun()) {
                     hisna = lcv;
                 }

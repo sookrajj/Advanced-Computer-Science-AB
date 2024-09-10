@@ -2,6 +2,47 @@ package Q1;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+class strgrad {
+    private String f;
+    private String l;
+    private int[] num;
+    private double ave;
+    public strgrad() {
+        f ="";
+        l = "";
+        ave = 0;
+    }
+
+    public strgrad(String first, String last, int[] nums) {
+        f = first;
+        l = last;
+        num = nums;
+        ave = 0;
+        calc();
+    }
+
+    private void calc() {
+        double total = 0;
+        for (int n : num) {
+            total += n;
+        }
+        ave = total/num.length;
+    }
+
+    public String getF() {return f;}
+
+    public String getL() {
+        return l;
+    }
+
+    public double getAve() {
+        return ave;
+    }
+
+    public int[] getNum() {
+        return num;
+    }
+}
 
 public class prog505b {
 //  public class prog505bcl {
@@ -23,47 +64,7 @@ public class prog505b {
 //
 //    public double getAve() {return ave;}
 //  }
-  public static class strgrad {
-      private String f;
-      private String l;
-      private int[] num;
-      private double ave;
-      public strgrad() {
-          f ="";
-          l = "";
-          ave = 0;
-      }
 
-      public strgrad(String first, String last, int[] nums) {
-          f = first;
-          l = last;
-          num = nums;
-          ave = 0;
-          calc();
-      }
-
-      private void calc() {
-          double total = 0;
-          for (int n : num) {
-              total += n;
-          }
-          ave = total/num.length;
-      }
-
-      public String getF() {return f;}
-
-      public String getL() {
-          return l;
-      }
-
-      public double getAve() {
-          return ave;
-      }
-
-      public int[] getNum() {
-          return num;
-      }
-  }
 
   public static void main(String[] args) {
     try {
@@ -81,6 +82,7 @@ public class prog505b {
             nums[2] = s.nextInt();
             nums[3] = s.nextInt();
             nums[4] = s.nextInt();
+            System.out.println(nums[0]);
             str = new strgrad(f, l, nums);
             peps.add(str);
         }
