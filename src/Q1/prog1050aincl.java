@@ -10,6 +10,7 @@ class SalesRecord {
     public double getUnitsSold() {return Double.parseDouble(fields[8]); }
 }
 public class prog1050aincl {
+    public static double proloss = 0;
     public static List<SalesRecord> loadSalesData(String filepath) {
         var records = new ArrayList<SalesRecord>();
         try {
@@ -40,7 +41,10 @@ public class prog1050aincl {
             System.out.println("Country with highest profit on Personal Care: " + computeHighestProfit(records, 2, "Personal Care"));
             System.out.println("Region that bought the most snacks: " + computeMaxByField(records, 2, "Snacks", 0));
             System.out.println("Sales to Africa: " + computeCount(records, 0, "Sub-Saharan Africa"));
-
+            removeKuwait(records);
+            limitUganda(records);
+            ridAfricalowprio(records);
+            System.out.println("Profit lost in trade war: " + moneyformat.format(proloss));
         }
     }
 
@@ -205,6 +209,7 @@ public class prog1050aincl {
 
         for (int lcv = 0 ; lcv < records.size(); lcv++) {
             if (records.get(lcv).fields[1].equalsIgnoreCase("Kuwait")) {
+                proloss += Double.parseDouble(records.get(lcv).fields[13]);
                 records.remove(lcv);
                 lcv--;
             }
@@ -215,20 +220,51 @@ public class prog1050aincl {
 
         for (int lcv = 0; lcv < records.size(); lcv++) {
             if (records.get(lcv).fields[1].equalsIgnoreCase("Uganda")) {
+                proloss += Double.parseDouble(records.get(lcv).fields[13]);
                 String reg = records.get(lcv).fields[0];
-                String cou = records.get(lcv).fields[0];
-                String type = records.get(lcv).fields[0];
-                String sales = records.get(lcv).fields[0];
-                String ordp = records.get(lcv).fields[0];
-                String od = records.get(lcv).fields[0];
-                String oID = records.get(lcv).fields[0];
-                String sd = records.get(lcv).fields[0];
-                int units = 100;
-                String rege = records.get(lcv).fields[0];
+                String cou = records.get(lcv).fields[1];
+                String type = records.get(lcv).fields[2];
+                String sales = records.get(lcv).fields[3];
+                String ordp = records.get(lcv).fields[4];
+                String od = records.get(lcv).fields[5];
+                String oID = records.get(lcv).fields[6];
+                String sd = records.get(lcv).fields[7];
+                String u = "100";
+                String up = records.get(lcv).fields[9];
+                String uc = records.get(lcv).fields[10];
+                String ac = records.get(lcv).fields[11];
+                String am = records.get(lcv).fields[12];
+                String ap = records.get(lcv).fields[13];
+                double newtr = 100 * Double.parseDouble(up);
+                double newtc = (100 * Double.parseDouble(uc));
+                double newtp = newtr - newtc;
+                proloss -= newtp;
+                String[] newrec = new String[] {reg, cou, type, sales, ordp, od, oID, sd, u, uc, up, String.valueOf(newtr), String.valueOf(newtc), String.valueOf(newtp)};
+                records.set(lcv, new SalesRecord(newrec));
+            }
+        }
+    }
 
-                double cost = Double.parseDouble(records.get(lcv).fields[10]);
+    public static void ridAfricalowprio(List<SalesRecord> records) {
+        for (int lcv = 0; lcv < records.size(); lcv++) {
+            if (records.get(lcv).fields[0].equalsIgnoreCase("Sub-Saharan Africa")) {
+                if (records.get(lcv).fields[4].equalsIgnoreCase("L")) {
+                    proloss += Double.parseDouble(records.get(lcv).fields[13]);
+                    records.remove(lcv);
+                    lcv--;
+                }
             }
         }
     }
 }
 
+//Sales to Europe: 129286
+//Cereal bought by Cambodia: 1164596
+//Total profit on meat: $11,933,838,488.00
+//High priority sales percentage: 24.9974%
+//Fruit loss in 2012: $67,345,418.37
+//High priority sales shipped more than 3 days late: 115166
+//Country with highest profit on Personal Care: Iceland
+//Region that bought the most snacks: Sub-Saharan Africa
+//Sales to Africa: 130422
+//Profit lost in trade war: $14,641,080,493.77
