@@ -1,4 +1,4 @@
-package Q1.pelicanSort;
+package Q1.pelican;
 
 public class sortTester {
     public static void main(String[] args) {
