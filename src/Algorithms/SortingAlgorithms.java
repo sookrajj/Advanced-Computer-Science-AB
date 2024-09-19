@@ -27,8 +27,10 @@ public class SortingAlgorithms {
             T key  = arr[i];
             int j = i-1;
             while (j >= 0 && arr[j].compareTo(key) > 0) {
-
+                arr[j+1] = arr[j];
+                j -= 1;
             }
+            arr[j+1] = key;
         }
     }
     //procedure InsertionSort(A)
@@ -42,11 +44,11 @@ public class SortingAlgorithms {
     //A[j + 1] ← key
     //end for
     //end procedure
-    private static <T extends Comparable<T>> void selectionSort(T[] arr) {
+    public static <T extends Comparable<T>> void selectionSort(T[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int low = i;
             for (int j = i+1; j < arr.length; j++) {
-                if (arr[j].compareTo(arr[i]) < 0) low =  j;
+                if (arr[j].compareTo(arr[low]) < 0) low =  j;
             }
             T temp = arr[i];
             arr[i] = arr[low];
@@ -54,8 +56,22 @@ public class SortingAlgorithms {
         }
     }
 
-    private static <T extends Comparable<T>> void shellSort(T[] arr) {
-        //TODO
+    public static <T extends Comparable<T>> void shellSort(T[] arr) {
+        int n = arr.length;
+        int gap = n/2;
+        while (gap > 0) {
+            for (int i = gap; i < n; i++) {
+                T temp = arr[i];
+                int j = i;
+                while (j >= gap && arr[j-gap].compareTo(temp) > 0) {
+                    arr[j] = arr[j-gap];
+                    j = j - gap;
+
+                }
+                arr[j] = temp;
+            }
+            gap /= 2;
+        }
     }
 //procedure ShellSort(A)
 //n ← length(A)

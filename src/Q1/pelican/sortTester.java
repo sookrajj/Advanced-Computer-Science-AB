@@ -4,7 +4,7 @@ import Algorithms.SortingAlgorithms;
 public class sortTester {
     public static void main(String[] args) {
         Integer[] theArray = {4,2,5,1,3,18,0,9,6};
-        SortingAlgorithms.insertionSort(theArray);
+        SortingAlgorithms.shellSort(theArray);
         for(int j = 0; j < theArray.length; j++) {
             System.out.print(theArray[j] + " ");
         }
