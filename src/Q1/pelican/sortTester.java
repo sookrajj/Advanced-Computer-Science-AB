@@ -1,10 +1,11 @@
 package Q1.pelican;
 import Algorithms.SortingAlgorithms;
+import Algorithms.noncomparisonSorting;
 
 public class sortTester {
     public static void main(String[] args) {
         Integer[] theArray = {4,2,5,1,3,18,0,9,6};
-        SortingAlgorithms.shellSort(theArray);
+        noncomparisonSorting.radixSort(theArray);
         for(int j = 0; j < theArray.length; j++) {
             System.out.print(theArray[j] + " ");
         }
