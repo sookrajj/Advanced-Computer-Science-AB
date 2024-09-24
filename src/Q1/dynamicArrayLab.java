@@ -25,7 +25,6 @@ public class dynamicArrayLab {
         end = System.nanoTime();
         System.out.println("Dynamic Array add: " + (end-start)/1e6 + " ms");
 
-        //TODO: check against ArrayList
         System.out.println("============== ArrayList ===============");
         var rray = new ArrayList<Integer>();
         start = System.nanoTime();
