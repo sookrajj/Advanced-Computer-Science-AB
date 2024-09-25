@@ -4,7 +4,7 @@ import java.util.Iterator;
 import Algorithms.SearchAlgorithms;
 import Algorithms.SortingAlgorithms;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes", "unused"})
 public class dynamicArray<T extends Comparable<T>> implements Iterable<T> {
     private T[] array;
     private int size;
@@ -47,6 +47,7 @@ public class dynamicArray<T extends Comparable<T>> implements Iterable<T> {
     public boolean contains(T element) {return indexof(element) != -1;}
     public void sort() {SortingAlgorithms.insertionSort(array, size);}  // TODO: replace w/ quicksort
     public String toString() {return Arrays.toString(Arrays.copyOf(array, size));}
+    public Comparable[] toArray() {return Arrays.copyOf(array, size);}
     public Iterator<T> iterator() {
         return new Iterator<>() {
             private int index = 0;
@@ -54,4 +55,5 @@ public class dynamicArray<T extends Comparable<T>> implements Iterable<T> {
             public T next() {return array[index++];}
         };
     }
+
 }
