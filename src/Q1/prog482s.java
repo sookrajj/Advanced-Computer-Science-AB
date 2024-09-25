@@ -26,7 +26,7 @@ public class prog482s {
             for (Integer num : array) {
                 System.out.print(num + " ");
             }
-            SortingAlgorithms.bubbleSort(array);
+            SortingAlgorithms.bubbleSortincl(array);
             System.out.println();
             System.out.println("Sorted: ");
             for (Integer num : array) {

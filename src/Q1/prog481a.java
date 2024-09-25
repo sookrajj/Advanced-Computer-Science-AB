@@ -25,5 +25,6 @@ public class prog481a {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
