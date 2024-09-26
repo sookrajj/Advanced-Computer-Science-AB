@@ -28,7 +28,7 @@ public class prog482s {
             }
             SortingAlgorithms.bubbleSortincl(array);
             System.out.println();
-            System.out.println("Sorted: ");
+            System.out.println("Bubble Sorted: ");
             for (Integer num : array) {
                 System.out.print(num + " ");
             }
@@ -51,13 +51,9 @@ public class prog482s {
             for (int i = 0; i < sum.size(); i++) {
                 array[i] = sum.get(i);
             }
-            System.out.println("Original: ");
-            for (Integer num : array) {
-                System.out.print(num + " ");
-            }
             SortingAlgorithms.selectionSort(array);
             System.out.println();
-            System.out.println("Sorted: ");
+            System.out.println("Selection Sorted: ");
             for (Integer num : array) {
                 System.out.print(num + " ");
             }
@@ -81,13 +77,9 @@ public class prog482s {
             for (int i = 0; i < sum.size(); i++) {
                 array[i] = sum.get(i);
             }
-            System.out.println("Original: ");
-            for (Integer num : array) {
-                System.out.print(num + " ");
-            }
             SortingAlgorithms.insertionSort(array);
             System.out.println();
-            System.out.println("Sorted: ");
+            System.out.println("Insertion Sorted: ");
             for (Integer num : array) {
                 System.out.print(num + " ");
             }
@@ -112,13 +104,9 @@ public class prog482s {
             for (int i = 0; i < sum.size(); i++) {
                 array[i] = sum.get(i);
             }
-            System.out.println("Original: ");
-            for (Integer num : array) {
-                System.out.print(num + " ");
-            }
             SortingAlgorithms.shellSort(array);
             System.out.println();
-            System.out.println("Sorted: ");
+            System.out.println("Shell Sorted: ");
             for (Integer num : array) {
                 System.out.print(num + " ");
             }
@@ -129,7 +117,32 @@ public class prog482s {
             System.out.println("No data file found.");
         }
     }
-
+    @Test
+    public void testQuick() {
+        try {
+            var input = new Scanner(new File("Langdat/numsort.dat"));
+            ArrayList<Integer> sum = new ArrayList<>();
+            while (input.hasNext()) {
+                sum.add(input.nextInt());
+            }
+            input.close();
+            Integer[] array = new Integer[sum.size()];
+            for (int i = 0; i < sum.size(); i++) {
+                array[i] = sum.get(i);
+            }
+            SortingAlgorithms.quickSort(array, 1, array.length-1);
+            System.out.println();
+            System.out.println("Quick Sorted: ");
+            for (Integer num : array) {
+                System.out.print(num + " ");
+            }
+            for (int i = 0; i < BASE_CASE.length; i++) {
+                Assertions.assertEquals(BASE_CASE[i], array[i], "Failed at index " + i);
+            }
+        } catch (IOException e) {
+            System.out.println("No data file found.");
+        }
+    }
 //    public static void main(String[] args) {
 //        test482h();
 //        System.out.println();

@@ -86,20 +86,69 @@ public class SortingAlgorithms {
             gap /= 2;
         }
     }
-//procedure ShellSort(A)
-//n ← length(A)
-//gap ← n/2
-//while gap > 0 do
-//for i ← gap to n − 1 do
-//temp ← A[i]
-//j ← i
-//while j >= gap and A[j − gap] > temp do
-//A[j] ← A[j − gap]
-//j ← j − gap
-//end while
-//A[j] ← temp
-//end for
-//gap ← gap/2
-//end while
-//end procedure
+
+//    public static <T extends Comparable<T>> void quickSort(T[] arr, int left, int right) {
+//        if (left >= right) return;
+//        int k = left;
+//        int j = right;
+//        var pivotValue = arr[(left+right)/2];
+//        while (k < j) {
+//            while (arr[k].compareTo(pivotValue) < 0) {
+//                k++;
+//            }
+//            while (arr[j].compareTo(pivotValue) > 0) {
+//                j--;
+//            }
+//            if (k <= j) {
+//                T temp = arr[k];
+//                arr[k] = arr[j];
+//                arr[j] = temp;
+//                k++;
+//                j--;
+//            }
+//        }
+//        quickSort(arr, left, j);
+//        quickSort(arr, k, right);
+//    }
+    public static <T extends Comparable<T>> void quickSort(T[] arr, int low, int high) {
+        if (low < high) {
+            int pivot = Partition(arr, low, high);
+            quickSort(arr, low, pivot-1);
+            quickSort(arr, pivot+1, high);
+        }
+    }
+    //procedure Quicksort(A, low, high)
+    //if low < high then
+    //pivot ← Partition(A, low, high)
+    //Quicksort(A, low, pivot − 1)
+    //Quicksort(A, pivot + 1, high)
+    //end if
+    //end procedure
+    public static <T extends Comparable<T>> int Partition(T[] arr, int low, int high) {
+        T pivot = arr[high];
+        int i = low-1;
+        for (int j = low; j < high-1; j++) {
+            if (arr[j].compareTo(pivot) > 0) {
+                T temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        T temp = arr[i+1];
+        arr[i+1] = arr[high];
+        arr[high] = temp;
+        return i+1;
+    }
+    //procedure Partition(A, low, high)
+    //pivot ← A[high]
+    //i ← low − 1
+    //for j ← low to high − 1 do
+    //if A[j] < pivot then
+    //i ← i + 1
+    //Swap A[i] and A[j]
+    //end if
+    //end for
+    //Swap A[i + 1] and A[high]
+    //return i + 1
+    //end procedure
 }
