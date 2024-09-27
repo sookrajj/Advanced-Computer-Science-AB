@@ -2,7 +2,6 @@ package Q1;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
 import Algorithms.SortingAlgorithms;
 import Algorithms.SortingAlgorithms.*;
 import org.junit.Test;
@@ -60,6 +59,7 @@ public class prog482s {
             for (int i = 0; i < BASE_CASE.length; i++) {
                 Assertions.assertEquals(BASE_CASE[i], array[i], "Failed at index " + i);
             }
+
         } catch (IOException e) {
             System.out.println("No data file found.");
         }
@@ -130,7 +130,7 @@ public class prog482s {
             for (int i = 0; i < sum.size(); i++) {
                 array[i] = sum.get(i);
             }
-            SortingAlgorithms.quickSort(array, 1, array.length-1);
+            SortingAlgorithms.quickSort(array, 0, array.length-1);
             System.out.println();
             System.out.println("Quick Sorted: ");
             for (Integer num : array) {
