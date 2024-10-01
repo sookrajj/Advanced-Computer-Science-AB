@@ -59,14 +59,29 @@ public class intLinkedList implements Iterable<Integer>{
     public boolean add(int num, int spot) {
         if (head == null) {return false;}
         var current = head;
-        while (current != null && num != 0) {
+        spot--;
+        while (current != null && spot != 0) {
             current = current.next;
-            num--;
+            spot--;
+        }
+        var next = current.next;
+        if (current != null) {
+            Node node = new Node(num);
+            current.next = node;
+            node.next = next;
+            return true;
         }
         return false;
     }
-    public boolean isEmpty() {return false;}
-    public boolean isThere(int n) {return false;}
+    public boolean isEmpty() {return head != null;}
+    public boolean isThere(int n) {
+        var current = head;
+        while (current != null) {
+            if (current.data == n) return true;
+            current = current.next;
+        }
+        return false;
+    }
     public int getFirst() {return -1;}
     public int getLast() {return -1;}
     public int getSpot(int spot) {return -1;}
