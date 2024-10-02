@@ -137,6 +137,7 @@ public class intLinkedList implements Iterable<Integer>{
             current = current.next;
             num--;
         }
+        if (current == head) {head = head.next;}
         current.next = current.next.next;
     }
     public void clear() {
@@ -255,17 +256,51 @@ public class intLinkedList implements Iterable<Integer>{
     public int lose58() {
         if (head == null) {return false;}
         var current = head;
-        if (current.data == 58) {
-            
+        var num = 0;
+        while (head == current) {
+            if (current.data == 58) {
+                current = current.next;
+                head = current;
+                num++;
+            }
         }
         while (current != null) {
             current = current.next;
-            num--;
+            if (current.data == 58) {
+                current.next = current.next.next;
+                num++;
+            }
         }
-        current.next = current.next.next;
+        return num;
     }
-    public int getEvenCount() {return -1;}
-    public void killOdds() {}
+    public int getEvenCount() {
+        if (head == null) {return false;}
+        var current = head;
+        var num = 0;
+        if (current.data % 2 == 0) num++;
+        while (current != null) {
+            current = current.next;
+            if (current.data % 2 == 0) num++;
+        }
+        return num;
+    }
+    public void killOdds() {
+        if (head == null) {return false;}
+        var current = head;
+        var num = 0;
+        while (head == current) {
+            if (current.data % 2 == 1) {
+                current = current.next;
+                head = current;
+            }
+        }
+        while (current != null) {
+            current = current.next;
+            if (current.data % 2 == 1) {
+                current.next = current.next.next;
+            }
+        }
+    }
     public Node getNode(int spot) {
         if (head == null) {return false;}
         var current = head;
