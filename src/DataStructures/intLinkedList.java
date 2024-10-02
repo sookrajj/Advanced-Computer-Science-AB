@@ -253,7 +253,16 @@ public class intLinkedList implements Iterable<Integer>{
         }
     }
     public int lose58() {
-        return -1;
+        if (head == null) {return false;}
+        var current = head;
+        if (current.data == 58) {
+            
+        }
+        while (current != null) {
+            current = current.next;
+            num--;
+        }
+        current.next = current.next.next;
     }
     public int getEvenCount() {return -1;}
     public void killOdds() {}
