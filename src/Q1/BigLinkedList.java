@@ -12,6 +12,9 @@ public class BigLinkedList {
             System.out.print(iter.next() + " ");
         }
         System.out.println();
+        list.addLast(58);
         System.out.println(list.getCount());
+        list.add(68, 58);
+        System.out.println("Is list empty: " + list.isEmpty());
     }
 }
