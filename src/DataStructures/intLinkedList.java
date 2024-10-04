@@ -38,7 +38,7 @@ public class intLinkedList implements Iterable<Integer>{
     public void printList() {
         if (head == null) {return;}
         Node current = head;
-        while (current.next != null) {
+        while (current != null) {
             System.out.print(current.data + " ");
             current = current.next;
         }
@@ -59,10 +59,10 @@ public class intLinkedList implements Iterable<Integer>{
     public boolean add(int num, int spot) {
         if (head == null) {return false;}
         var current = head;
-        spot--;
-        while (current.next != null && spot != 0) {
+        var count = 2;
+        while (current.next != null && count != spot) {
             current = current.next;
-            spot--;
+            count++;
         }
         var next = current.next;
         if (current.next != null) {
@@ -89,6 +89,7 @@ public class intLinkedList implements Iterable<Integer>{
         while (current.next != null) {
             current = current.next;
         }
+        System.out.println("let");
         return current.data;
     }
     private Node getLastpri() {
@@ -102,12 +103,10 @@ public class intLinkedList implements Iterable<Integer>{
     public int getSpot(int pos) {
         if (head == null) {return -1;}
         var current = head;
-        var pose = 1;
-        if (current.data == pos) return pose;
+        if (current.data == pos) return current.data;
         while (current.next != null) {
             current = current.next;
-            pose++;
-            if (current.data == pos) return pose;
+            if (current.data == pos) return current.data;
         }
         return -1;
     }
@@ -125,10 +124,10 @@ public class intLinkedList implements Iterable<Integer>{
 //            oneback = oneback.next;
 //        }
 //        oneback.next = null;
-        while (current.next != null) {
+        while (current.next.next != null) {
             current = current.next;
         }
-        current = null;
+        current.next = null;
     }
     public int countLess10() {
         if (head == null) {return -1;}
@@ -145,12 +144,16 @@ public class intLinkedList implements Iterable<Integer>{
         if (head == null) {return;}
         var current = head;
         num--;
-        while (current.next != null && num != 0) {
+        while (current.next.next != null && num != 0) {
             current = current.next;
             num--;
         }
         if (current == head) {head = head.next;}
-        current.next = current.next.next;
+        if (current.next.next == null) current.next = null;
+        else {
+            current.next = current.next.next;
+        }
+
     }
     public void clear() {
         head = null;
@@ -166,15 +169,20 @@ public class intLinkedList implements Iterable<Integer>{
         return false;
     }
     public intLinkedList getReverse() {
-        var list = new intLinkedList();
-        list.addFront(getLast());
+        var newlist = new intLinkedList();
+        System.out.println(getLast());
+        System.out.println(getSpot(getLast()));
+        newlist.addFront(getLast());
         removeLast();
         System.out.println("hi");
         while (head.next != null) {
-            list.addFront(getLast());
+            newlist.addFront(getLast());
+            System.out.println(getLast());
             removeLast();
+
         }
-        return list;
+        System.out.println("hi");
+        return newlist;
     }
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
@@ -230,17 +238,18 @@ public class intLinkedList implements Iterable<Integer>{
         if (head == null) {return -1;}
         var current = head;
         var max = max();
-        var index = -1;
+        var index = 0;
         if (current.data == max) {
             index = 1;
             return index;
         }
+        index++;
         while (current.next != null) {
             current = current.next;
             index++;
-            if (current.data == max) return index;
+            if (current.data == max) return index + 1;
         }
-        return index;
+        return -1;
     }
     public int findSpotMaxLast()  {
         if (head == null) {return -1;}
