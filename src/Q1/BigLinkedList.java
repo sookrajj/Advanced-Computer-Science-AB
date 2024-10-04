@@ -16,5 +16,12 @@ public class BigLinkedList {
         System.out.println(list.getCount());
         list.add(68, 58);
         System.out.println("Is list empty: " + list.isEmpty());
+        for (Node node : list) {
+            System.out.print(node.data + " ");
+        }
+        System.out.println();
+        System.out.println(list.getFirst());
+        System.out.println(list.getLast());
+        System.out.println(list.getSlot(74));
     }
 }
