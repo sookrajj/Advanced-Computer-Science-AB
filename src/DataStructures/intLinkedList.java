@@ -38,7 +38,7 @@ public class intLinkedList implements Iterable<Integer>{
     public void printList() {
         if (head == null) {return;}
         Node current = head;
-        while (current != null) {
+        while (current.next != null) {
             System.out.print(current.data + " ");
             current = current.next;
         }
@@ -50,7 +50,7 @@ public class intLinkedList implements Iterable<Integer>{
         }
         int nums = 1;
         var current = head;
-        while (current != null) {
+        while (current.next != null) {
             nums++;
             current = current.next;
         }
@@ -60,12 +60,12 @@ public class intLinkedList implements Iterable<Integer>{
         if (head == null) {return false;}
         var current = head;
         spot--;
-        while (current != null && spot != 0) {
+        while (current.next != null && spot != 0) {
             current = current.next;
             spot--;
         }
         var next = current.next;
-        if (current != null) {
+        if (current.next != null) {
             Node node = new Node(num);
             current.next = node;
             node.next = next;
@@ -76,7 +76,7 @@ public class intLinkedList implements Iterable<Integer>{
     public boolean isEmpty() {return head != null;}
     public boolean isThere(int n) {
         var current = head;
-        while (current != null) {
+        while (current.next != null) {
             if (current.data == n) return true;
             current = current.next;
         }
@@ -84,22 +84,30 @@ public class intLinkedList implements Iterable<Integer>{
     }
     public int getFirst() {return head.data;}
     public int getLast() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
         }
         return current.data;
     }
+    private Node getLastpri() {
+        if (head == null) {return null;}
+        var current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        return current;
+    }
     public int getSpot(int pos) {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var pose = 1;
-        if (current.data = pos) return pose;
-        while (current != null) {
+        if (current.data == pos) return pose;
+        while (current.next != null) {
             current = current.next;
             pose++;
-            if (current.data = pos) return pose;
+            if (current.data == pos) return pose;
         }
         return -1;
     }
@@ -107,33 +115,37 @@ public class intLinkedList implements Iterable<Integer>{
         head = head.next;
     }
     public void removeLast() {
-        if (head == null) {return false;}
+        if (head == null) {return;}
         var current = head;
-        while (current != null) {
+//        while (current != null) {
+//            current = current.next;
+//        }
+//        var oneback = head;
+//        while (oneback.next != current) {
+//            oneback = oneback.next;
+//        }
+//        oneback.next = null;
+        while (current.next != null) {
             current = current.next;
         }
-        var oneback = head;
-        while (oneback != current) {
-            oneback = oneback.next;
-        }
-        oneback.next = null;
+        current = null;
     }
     public int countLess10() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var num = 0;
         var current = head;
         if (current.data < 10) num++;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data < 10) num++;
         }
         return num;
     }
     public void removeSpot(int num) {
-        if (head == null) {return false;}
+        if (head == null) {return;}
         var current = head;
         num--;
-        while (current != null && num != 0) {
+        while (current.next != null && num != 0) {
             current = current.next;
             num--;
         }
@@ -147,22 +159,22 @@ public class intLinkedList implements Iterable<Integer>{
         if (head == null) {return false;}
         var current = head;
         if (current.data == n) return true;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data == n) return true;
         }
         return false;
     }
     public intLinkedList getReverse() {
-        var newhead = getLast();
+        var list = new intLinkedList();
+        list.addFront(getLast());
         removeLast();
-        var current = newhead;
-        while (head != null) {
-            current.next = getLast();
+        System.out.println("hi");
+        while (head.next != null) {
+            list.addFront(getLast());
             removeLast();
         }
-        head = newhead;
-        return newhead;
+        return list;
     }
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
@@ -183,11 +195,11 @@ public class intLinkedList implements Iterable<Integer>{
         };
     }
     public double avg() {
-        if (head == null) {return false;}
+        if (head == null) {return 0;}
         var current = head;
         var total = current.data;
         var nums = 1;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             total += current.data;
             nums++;
@@ -195,27 +207,27 @@ public class intLinkedList implements Iterable<Integer>{
         return (double) total/ (double) nums;
     }
     public int min() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var min = current.data;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data < min) min = current.data;
         }
         return min;
     }
     public int max() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var max = current.data;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data > max) max = current.data;
         }
         return max;
     }
     public int findSpotMaxFirst() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var max = max();
         var index = -1;
@@ -223,7 +235,7 @@ public class intLinkedList implements Iterable<Integer>{
             index = 1;
             return index;
         }
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             index++;
             if (current.data == max) return index;
@@ -231,13 +243,13 @@ public class intLinkedList implements Iterable<Integer>{
         return index;
     }
     public int findSpotMaxLast()  {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var max = max();
         var index = 1;
         var last = -1;
         if (current.data == max) last = index;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             index++;
             if (current.data == max) last = index;
@@ -245,7 +257,7 @@ public class intLinkedList implements Iterable<Integer>{
         return last;
     }
     public void sort() {
-        if (head == null) {return false;}
+        if (head == null) {return;}
         var current = head;
         var min = min();
         var index = getSpot(min);
@@ -254,14 +266,14 @@ public class intLinkedList implements Iterable<Integer>{
         removeSpot(index);
         var nums = getCount();
         for (int lcv = 0; lcv < nums; lcv++) {
-            var min = min();
-            var index = getSpot(min);
+            min = min();
+            index = getSpot(min);
             newList.next = getNode(index);
             removeSpot(index);
         }
     }
     public int lose58() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var num = 0;
         while (head == current) {
@@ -269,9 +281,11 @@ public class intLinkedList implements Iterable<Integer>{
                 current = current.next;
                 head = current;
                 num++;
+            } else {
+                current = current.next;
             }
         }
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data == 58) {
                 current.next = current.next.next;
@@ -281,18 +295,18 @@ public class intLinkedList implements Iterable<Integer>{
         return num;
     }
     public int getEvenCount() {
-        if (head == null) {return false;}
+        if (head == null) {return -1;}
         var current = head;
         var num = 0;
         if (current.data % 2 == 0) num++;
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data % 2 == 0) num++;
         }
         return num;
     }
     public void killOdds() {
-        if (head == null) {return false;}
+        if (head == null) {return;}
         var current = head;
         var num = 0;
         while (head == current) {
@@ -301,7 +315,7 @@ public class intLinkedList implements Iterable<Integer>{
                 head = current;
             }
         }
-        while (current != null) {
+        while (current.next != null) {
             current = current.next;
             if (current.data % 2 == 1) {
                 current.next = current.next.next;
@@ -309,7 +323,7 @@ public class intLinkedList implements Iterable<Integer>{
         }
     }
     public Node getNode(int spot) {
-        if (head == null) {return false;}
+        if (head == null) {return null;}
         var current = head;
         for (int lcv = 0; lcv < spot; lcv++) {
             current = current.next;
