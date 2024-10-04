@@ -154,8 +154,15 @@ public class intLinkedList implements Iterable<Integer>{
         return false;
     }
     public intLinkedList getReverse() {
-
-        return null;
+        var newhead = getLast();
+        removeLast();
+        var current = newhead;
+        while (head != null) {
+            current.next = getLast();
+            removeLast();
+        }
+        head = newhead;
+        return newhead;
     }
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
@@ -207,7 +214,7 @@ public class intLinkedList implements Iterable<Integer>{
         }
         return max;
     }
-    public int findSlotMaxFirst() {
+    public int findSpotMaxFirst() {
         if (head == null) {return false;}
         var current = head;
         var max = max();
@@ -223,7 +230,7 @@ public class intLinkedList implements Iterable<Integer>{
         }
         return index;
     }
-    public int findSlotMaxLast()  {
+    public int findSpotMaxLast()  {
         if (head == null) {return false;}
         var current = head;
         var max = max();
