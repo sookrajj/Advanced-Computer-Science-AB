@@ -89,7 +89,6 @@ public class intLinkedList implements Iterable<Integer>{
         while (current.next != null) {
             current = current.next;
         }
-        System.out.println("let");
         return current.data;
     }
     private Node getLastpri() {
@@ -170,18 +169,14 @@ public class intLinkedList implements Iterable<Integer>{
     }
     public intLinkedList getReverse() {
         var newlist = new intLinkedList();
-        System.out.println(getLast());
-        System.out.println(getSpot(getLast()));
-        newlist.addFront(getLast());
+        newlist.addLast(getLast());
         removeLast();
-        System.out.println("hi");
         while (head.next != null) {
-            newlist.addFront(getLast());
-            System.out.println(getLast());
+            newlist.addLast(getLast());
             removeLast();
-
         }
-        System.out.println("hi");
+        newlist.addLast(getLast());
+        head = newlist.head;
         return newlist;
     }
     public Iterator<Integer> iterator() {
@@ -334,8 +329,10 @@ public class intLinkedList implements Iterable<Integer>{
     public Node getNode(int spot) {
         if (head == null) {return null;}
         var current = head;
-        for (int lcv = 0; lcv < spot; lcv++) {
+        spot--;
+        while (current != null && spot != 0) {
             current = current.next;
+            spot--;
         }
         return current;
     }
