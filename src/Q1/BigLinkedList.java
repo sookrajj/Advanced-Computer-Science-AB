@@ -31,6 +31,7 @@ public class BigLinkedList {
         for (int lcv = 0; lcv < 200; lcv++) {
             list.addFront((int) (Math.random()*100 + 1));
         }
+        list.printList();
         list = list.getReverse();
         list.printList();
         System.out.print("The average is: " + Math.round(list.avg() * 100)/100);
@@ -40,10 +41,12 @@ public class BigLinkedList {
         System.out.println(list.findSpotMaxFirst());
         System.out.println(list.findSpotMaxLast());
         list.sort();
-        System.out.println("hi");
+        list.printList();
         var num = list.lose58();
+        System.out.println("ley");
         System.out.println("The amount of 58s lost: " + num);
-        System.out.println("The amount of 58s lost: " + list.getEvenCount());
+        System.out.println("ley");
+        System.out.println("The amount of 2s: " + list.getEvenCount());
         list.killOdds();
         list.printList();
     }

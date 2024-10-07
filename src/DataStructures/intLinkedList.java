@@ -141,7 +141,12 @@ public class intLinkedList implements Iterable<Integer>{
     }
     public void removeSpot(int num) {
         if (head == null) {return;}
+
         var current = head;
+        if (current.next == null) {
+
+            return;
+        }
         num--;
         while (current.next.next != null && num != 0) {
             current = current.next;
@@ -242,7 +247,7 @@ public class intLinkedList implements Iterable<Integer>{
         while (current.next != null) {
             current = current.next;
             index++;
-            if (current.data == max) return index + 1;
+            if (current.data == max) return index;
         }
         return -1;
     }
@@ -277,25 +282,35 @@ public class intLinkedList implements Iterable<Integer>{
         }
     }
     public int lose58() {
+        System.out.println("ley");
         if (head == null) {return -1;}
         var current = head;
         var num = 0;
+        System.out.println(num);
         while (head == current) {
+            System.out.println("ley");
             if (current.data == 58) {
                 current = current.next;
                 head = current;
                 num++;
             } else {
                 current = current.next;
+                break;
             }
         }
+        System.out.println(current.data + " " + current.next);
+        System.out.println("ley");
+        System.out.print("hi ");
         while (current.next != null) {
+            System.out.println("ley");
             current = current.next;
             if (current.data == 58) {
                 current.next = current.next.next;
                 num++;
             }
+            System.out.print("hi ");
         }
+        num = 0;
         return num;
     }
     public int getEvenCount() {
