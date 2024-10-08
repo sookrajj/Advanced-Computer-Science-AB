@@ -99,14 +99,18 @@ public class intLinkedList implements Iterable<Integer>{
         }
         return current;
     }
-    public int getSpot(int pos) {
+    public int getSpot(int num) {
         if (head == null) {return -1;}
         var current = head;
-        if (current.data == pos) return current.data;
+        var index  = 1;
+        if (current.data == num) return index;
         while (current.next != null) {
             current = current.next;
-            if (current.data == pos) return current.data;
+            index++;
+            if (current.data == num) return index;
+
         }
+        System.out.print("hi ");
         return -1;
     }
     public void removeFirst() {
@@ -147,7 +151,6 @@ public class intLinkedList implements Iterable<Integer>{
 
             return;
         }
-        num--;
         while (current.next.next != null && num != 0) {
             current = current.next;
             num--;
@@ -267,26 +270,34 @@ public class intLinkedList implements Iterable<Integer>{
     }
     public void sort() {
         if (head == null) {return;}
-        var current = head;
-        var min = min();
-        var index = getSpot(min);
-        var newList = getNode(index);
-        head = newList;
+        var max = max();
+        var index = findSpotMaxFirst();
+        var newList = new Node(max);
+        var temp = newList;
         removeSpot(index);
         var nums = getCount();
         for (int lcv = 0; lcv < nums; lcv++) {
-            min = min();
-            index = getSpot(min);
-            newList.next = getNode(index);
+            max = max();
+            index = findSpotMaxFirst();
+            newList.next = new Node(max);
+            newList = newList.next;
             removeSpot(index);
         }
+//        while (current.next != null) {
+//            min = min();
+//            index = getSpot(min);
+//            newList.next = getNode(index);
+//            removeSpot(index);
+//            System.out.print("hi ");
+//        }
+        System.out.println("hi ");
+        head = temp;
+        System.out.println(head.data + " " + newList.data + " " + head.next.data);
     }
     public int lose58() {
-        System.out.println("ley");
         if (head == null) {return -1;}
         var current = head;
         var num = 0;
-        System.out.println(num);
         while (head == current) {
             System.out.println("ley");
             if (current.data == 58) {
@@ -299,16 +310,12 @@ public class intLinkedList implements Iterable<Integer>{
             }
         }
         System.out.println(current.data + " " + current.next);
-        System.out.println("ley");
-        System.out.print("hi ");
         while (current.next != null) {
-            System.out.println("ley");
             current = current.next;
             if (current.data == 58) {
                 current.next = current.next.next;
                 num++;
             }
-            System.out.print("hi ");
         }
         num = 0;
         return num;
@@ -344,7 +351,6 @@ public class intLinkedList implements Iterable<Integer>{
     public Node getNode(int spot) {
         if (head == null) {return null;}
         var current = head;
-        spot--;
         while (current != null && spot != 0) {
             current = current.next;
             spot--;
