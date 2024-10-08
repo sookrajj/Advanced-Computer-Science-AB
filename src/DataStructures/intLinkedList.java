@@ -102,7 +102,7 @@ public class intLinkedList implements Iterable<Integer>{
     public int getSpot(int num) {
         if (head == null) {return -1;}
         var current = head;
-        var index  = 1;
+        var index  = 0;
         if (current.data == num) return index;
         while (current.next != null) {
             current = current.next;
@@ -110,7 +110,6 @@ public class intLinkedList implements Iterable<Integer>{
             if (current.data == num) return index;
 
         }
-        System.out.print("hi ");
         return -1;
     }
     public void removeFirst() {
@@ -154,6 +153,7 @@ public class intLinkedList implements Iterable<Integer>{
         while (current.next.next != null && num != 0) {
             current = current.next;
             num--;
+            System.out.println(num);
         }
         if (current == head) {head = head.next;}
         if (current.next.next == null) current.next = null;
@@ -243,10 +243,8 @@ public class intLinkedList implements Iterable<Integer>{
         var max = max();
         var index = 0;
         if (current.data == max) {
-            index = 1;
             return index;
         }
-        index++;
         while (current.next != null) {
             current = current.next;
             index++;
@@ -281,6 +279,11 @@ public class intLinkedList implements Iterable<Integer>{
             index = findSpotMaxFirst();
             newList.next = new Node(max);
             newList = newList.next;
+            if (index == getSpot(max)) {
+                System.out.println("yes " + index + " " + getSpot(max));
+            } else {
+                System.out.println("no" + index + " " + getSpot(max));
+            }
             removeSpot(index);
         }
 //        while (current.next != null) {
@@ -290,8 +293,11 @@ public class intLinkedList implements Iterable<Integer>{
 //            removeSpot(index);
 //            System.out.print("hi ");
 //        }
+
         System.out.println("hi ");
         head = temp;
+        var rever = getReverse();
+        head = rever.head;
         System.out.println(head.data + " " + newList.data + " " + head.next.data);
     }
     public int lose58() {
@@ -299,7 +305,6 @@ public class intLinkedList implements Iterable<Integer>{
         var current = head;
         var num = 0;
         while (head == current) {
-            System.out.println("ley");
             if (current.data == 58) {
                 current = current.next;
                 head = current;
@@ -309,7 +314,6 @@ public class intLinkedList implements Iterable<Integer>{
                 break;
             }
         }
-        System.out.println(current.data + " " + current.next);
         while (current.next != null) {
             current = current.next;
             if (current.data == 58) {

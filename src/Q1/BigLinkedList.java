@@ -43,10 +43,8 @@ public class BigLinkedList {
         list.sort();
         list.printList();
         var num = list.lose58();
-        System.out.println("ley");
         System.out.println("The amount of 58s lost: " + num);
-        System.out.println("ley");
-        System.out.println("The amount of 2s: " + list.getEvenCount());
+        System.out.println("The amount of evens: " + list.getEvenCount());
         list.killOdds();
         list.printList();
     }
