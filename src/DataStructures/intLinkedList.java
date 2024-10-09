@@ -150,10 +150,10 @@ public class intLinkedList implements Iterable<Integer>{
 
             return;
         }
-        while (current.next.next != null && num != 0) {
+        num--;
+        while (current.next.next != null && num > 0) {
             current = current.next;
             num--;
-            System.out.println(num);
         }
         if (current == head) {head = head.next;}
         if (current.next.next == null) current.next = null;
@@ -270,20 +270,15 @@ public class intLinkedList implements Iterable<Integer>{
         if (head == null) {return;}
         var max = max();
         var index = findSpotMaxFirst();
-        var newList = new Node(max);
-        var temp = newList;
+        var newList = new intLinkedList();
+        newList.addFront(getNode(index).data);
+        var temp = newList.head;
         removeSpot(index);
         var nums = getCount();
         for (int lcv = 0; lcv < nums; lcv++) {
             max = max();
             index = findSpotMaxFirst();
-            newList.next = new Node(max);
-            newList = newList.next;
-            if (index == getSpot(max)) {
-                System.out.println("yes " + index + " " + getSpot(max));
-            } else {
-                System.out.println("no" + index + " " + getSpot(max));
-            }
+            newList.addFront(getNode(index).data);
             removeSpot(index);
         }
 //        while (current.next != null) {
@@ -294,11 +289,7 @@ public class intLinkedList implements Iterable<Integer>{
 //            System.out.print("hi ");
 //        }
 
-        System.out.println("hi ");
-        head = temp;
-        var rever = getReverse();
-        head = rever.head;
-        System.out.println(head.data + " " + newList.data + " " + head.next.data);
+        head = newList.head;
     }
     public int lose58() {
         if (head == null) {return -1;}
@@ -317,11 +308,11 @@ public class intLinkedList implements Iterable<Integer>{
         while (current.next != null) {
             current = current.next;
             if (current.data == 58) {
+                System.out.println("ley");
                 current.next = current.next.next;
                 num++;
             }
         }
-        num = 0;
         return num;
     }
     public int getEvenCount() {
