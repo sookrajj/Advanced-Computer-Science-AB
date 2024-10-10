@@ -32,7 +32,7 @@ public class BigLinkedList {
             list.addFront((int) (Math.random()*100 + 1));
         }
         list.printList();
-        list = list.getReverse();
+        list.getReverse();
         list.printList();
         System.out.print("The average is: " + Math.round(list.avg() * 100)/100);
         System.out.println();

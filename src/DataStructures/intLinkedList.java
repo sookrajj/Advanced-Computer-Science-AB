@@ -175,17 +175,28 @@ public class intLinkedList implements Iterable<Integer>{
         }
         return false;
     }
-    public intLinkedList getReverse() {
-        var newlist = new intLinkedList();
-        newlist.addLast(getLast());
-        removeLast();
-        while (head.next != null) {
-            newlist.addLast(getLast());
-            removeLast();
+    public void getReverse() {
+//        var newlist = new intLinkedList();
+//        newlist.addLast(getLast());
+//        removeLast();
+//        while (head.next != null) {
+//            newlist.addLast(getLast());
+//            removeLast();
+//        }
+//        newlist.addLast(getLast());
+//        head = newlist.head;
+//        return newlist;
+        Node node1 = null;
+        Node node2 = head;
+        Node temp = null;
+        for (int lcv = 0; lcv < getCount()-1; lcv++) {
+            node1 = node2.next;
+            node2.next = temp;
+            temp = node2;
+            node2 = node1;
         }
-        newlist.addLast(getLast());
-        head = newlist.head;
-        return newlist;
+        head = node2;
+
     }
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
