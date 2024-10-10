@@ -334,12 +334,16 @@ public class intLinkedList implements Iterable<Integer>{
             if (current.data % 2 == 1) {
                 current = current.next;
                 head = current;
+            } else {
+               current = current.next;
             }
+
         }
         while (current.next != null) {
-            current = current.next;
-            if (current.data % 2 == 1) {
+            if (current.next.data % 2 == 1) {
                 current.next = current.next.next;
+            } else {
+                current = current.next;
             }
         }
     }

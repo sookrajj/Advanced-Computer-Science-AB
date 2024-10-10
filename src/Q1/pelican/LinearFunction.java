@@ -26,7 +26,13 @@ public class LinearFunction {
     }
 
     public double getRoot() {
-        var root = 1;
-        return root;
+        return (-1*y)/slope;
+    }
+    public double getYvalue(double x) {
+        return slope*x + y;
+    }
+
+    public double getXvalue(double y) {
+        return (y-this.y)/slope;
     }
 }
