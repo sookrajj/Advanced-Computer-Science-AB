@@ -186,15 +186,16 @@ public class intLinkedList implements Iterable<Integer>{
 //        newlist.addLast(getLast());
 //        head = newlist.head;
 //        return newlist;
-        Node node1 = null;
         Node node2 = head;
         Node temp = null;
-        for (int lcv = 0; lcv < getCount()-1; lcv++) {
-            node1 = node2.next;
+        while (node2.next != null) {
+            var node1 = node2.next;
             node2.next = temp;
             temp = node2;
             node2 = node1;
+
         }
+        node2.next = temp;
         head = node2;
 
     }
