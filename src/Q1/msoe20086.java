@@ -1,0 +1,19 @@
+package Q1;
+import java.util.*;
+
+public msoe20086 {
+  public static void main(String args[]) {
+    var input = new Scanner(System.in);
+    System.out.print("First string: ");
+    var fir = input.nextLine();
+    System.out.print("Second string: ");
+    var sec = input.nextLine();
+    var num = 0;
+    for (int lcv = 0; lcv < fir.length()-sec.length(); lcv++) {
+      if (fir.substring(lcv, lcv+sec.length()).equals(sec)) {
+        num++;
+      }
+    }
+    System.out.println("The second string was in the first string " + num);
+  }
+}
