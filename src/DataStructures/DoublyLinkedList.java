@@ -59,6 +59,7 @@ public class DoublyLinkedList<T extends Comparable<T>>{
             if (temp.compareTo(current) <= 0) {
                 current.prev = temp;
                 temp.next = current;
+                head = temp;
                 added = true;
             }
             while (current.next != null && !added) {
@@ -94,6 +95,32 @@ public class DoublyLinkedList<T extends Comparable<T>>{
             var ne = current.next;
             pre.next = pre.next.next;
             ne.prev = ne.prev.prev;
+        }
+    }
+
+    public void remove(T element) {
+        if (element.equals("")) {
+            throw new IndexOutOfBoundsException();
+        } else if (tail.data.equals(element)) {
+            var current = tail.prev;
+            current.next = null;
+            tail = current;
+        } else {
+            var current = head;
+            while (current.next.next != null) {
+                if (current.next.data.equals(element)) {
+                    var ne = current.next.next;
+                    ne.prev = current;
+                    current.next = ne;
+                    break;
+                }
+                current = current.next;
+            }
+            if (head.data.equals(element)) {
+                current = head.next;
+                current.prev = null;
+                head = current;
+            }
         }
     }
 
