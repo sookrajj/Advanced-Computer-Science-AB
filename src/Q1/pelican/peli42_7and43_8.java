@@ -32,6 +32,7 @@ public class peli42_7and43_8 {
 
     public static void main(String[] args) {
         String name;
+        NumberFormat form = new DecimalFormat("$#,###.##");
         ArrayList<bankAccount> bank = new ArrayList<>();
         do {
             Scanner input = new Scanner(System.in);
@@ -48,11 +49,7 @@ public class peli42_7and43_8 {
             }
         }while(!name.equalsIgnoreCase("EXIT"));
         ListIterator<bankAccount> iter = bank.listIterator();
-        bankAccount bf = null;
-        while (iter.hasNext()) {
-            bf = iter.next();
-        }
-        iter = bank.listIterator();
+        bankAccount bf = iter.next();
         double maxba = bf.getBalan();
         String maxna = bf.getName();
         while (iter.hasNext()) {
@@ -63,7 +60,7 @@ public class peli42_7and43_8 {
             }
         }
         System.out.println("The account with the largest balance belongs to " + maxna + ".");
-        System.out.println("The amount is $" + maxba);
+        System.out.println("The amount is " + form.format(maxba));
     }
 }
 //Pleases enter the name to whom the account belongs. ("Exit" to abort)
@@ -114,4 +111,4 @@ public class peli42_7and43_8 {
 //Pleases enter the name to whom the account belongs. ("Exit" to abort)
 //exit
 //The account with the largest balance belongs to Helen Hunt.
-//The amount is $1034.02
+//The amount is $1,034.02

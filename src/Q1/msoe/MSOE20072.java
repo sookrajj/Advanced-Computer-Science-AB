@@ -1,4 +1,4 @@
-package Q1;
+package Q1.msoe;
 import java.util.*;
 
 public class MSOE20072 {
