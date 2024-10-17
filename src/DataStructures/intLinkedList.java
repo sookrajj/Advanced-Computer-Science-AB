@@ -293,14 +293,6 @@ public class intLinkedList implements Iterable<Integer>{
             newList.addFront(getNode(index).data);
             removeSpot(index);
         }
-//        while (current.next != null) {
-//            min = min();
-//            index = getSpot(min);
-//            newList.next = getNode(index);
-//            removeSpot(index);
-//            System.out.print("hi ");
-//        }
-
         head = newList.head;
     }
     public int lose58() {
