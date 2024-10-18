@@ -5,7 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-// find java processing
+// find java processing for images
 
 public class Pong {
     private JLabel playerPadel;
@@ -13,6 +13,7 @@ public class Pong {
     private JLabel Pong;
 
     public Pong() {
+        System.out.println("hello");
         playerPadel.setText("Player");
         playerPadel.addMouseMotionListener(new MouseMotionListener() {
             @Override
