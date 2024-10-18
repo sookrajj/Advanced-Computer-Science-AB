@@ -9,7 +9,7 @@ public class msoe20141 {
     str.toLowerCase();
     var num = 0;
     for (int lcv = 0; lcv < str.length()-1; lcv++) {
-      if (str.charAt(lcv).equals(str.charAt(lcv+1))) {
+      if (str.charAt(lcv) == str.charAt(lcv+1)) {
         num++;
       }
     }
