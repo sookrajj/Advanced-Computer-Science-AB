@@ -1,6 +1,7 @@
 def doublelets():
   str = Input(print("Enter a word"))
   num = 0
+  str.Lower()
   for lcv in range(0, len(str)-1):
     if str[lcv] == str[lcv+1]:
       num += 1
