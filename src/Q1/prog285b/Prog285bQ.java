@@ -3,13 +3,14 @@ package Q1.prog285b;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.Stack;
+import DataStructures.Queue;
 
-public class prog285bstack {
+
+public class Prog285bQ {
     public static void main(String[] args) {
         try {
             var input = new Scanner(new File("Langdat/prog285b.dat"));
-            var stack = new Stack<Cl285b>();
+            var queue = new Queue<Cl285b>();
 
             System.out.println("Id\tCode\tSales\tCommission");
             while (input.hasNext()) {
@@ -18,12 +19,12 @@ public class prog285bstack {
                 var sales = input.nextDouble();
 
                 var fred = new Cl285b(id, code, sales);
-                stack.push(fred);
+                queue.enqueue(fred);
             }
             input.close();
 
-            while (!stack.isEmpty()) {
-                var fred = stack.pop();
+            while (!queue.isEmpty()) {
+                var fred = queue.dequeue();
                 System.out.println(fred);
             }
         } catch (IOException e) {
@@ -32,15 +33,15 @@ public class prog285bstack {
     }
 }
 //Id	Code	Sales	Commission
-//291	17	$750.00	$71.25
-//264	17	$4150.00	$410.50
-//235	5	$5250.00	$393.75
-//218	5	$5000.00	$375.00
-//203	8	$3250.00	$243.75
-//192	8	$8125.00	$609.38
-//138	17	$6375.00	$677.50
-//125	5	$6500.00	$487.50
-//118	8	$7350.00	$551.25
-//117	3	$7350.00	$0.00
-//103	5	$4000.00	$300.00
 //101	17	$2250.00	$213.75
+//103	5	$4000.00	$300.00
+//117	3	$7350.00	$0.00
+//118	8	$7350.00	$551.25
+//125	5	$6500.00	$487.50
+//138	17	$6375.00	$677.50
+//192	8	$8125.00	$609.38
+//203	8	$3250.00	$243.75
+//218	5	$5000.00	$375.00
+//235	5	$5250.00	$393.75
+//264	17	$4150.00	$410.50
+//291	17	$750.00	$71.25
