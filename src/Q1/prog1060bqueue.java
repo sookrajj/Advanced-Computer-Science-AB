@@ -42,3 +42,46 @@ public class prog1060bqueue {
         System.out.println();
     }
 }
+//Enter task A)dd, D)elete, E)xit A
+//Enter Number 10
+//This is the List:
+//10
+//Enter task A)dd, D)elete, E)xit A
+//Enter Number 15
+//This is the List:
+//10 15
+//Enter task A)dd, D)elete, E)xit A
+//Enter Number 2
+//This is the List:
+//2 15 10
+//Enter task A)dd, D)elete, E)xit D
+//Enter Number 10
+//This is the List:
+//2 15
+//Enter task A)dd, D)elete, E)xit D
+//Enter Number 2
+//This is the List:
+//15
+//Enter task A)dd, D)elete, E)xit D
+//Enter Number 15
+//This is the List:
+//
+//Enter task A)dd, D)elete, E)xit A
+//Enter Number 7
+//This is the List:
+//7
+//Enter task A)dd, D)elete, E)xit D
+//Enter Number 8
+//This is the List:
+//7
+//Enter task A)dd, D)elete, E)xit A
+//Enter Number 12
+//This is the List:
+//7 12
+//Enter task A)dd, D)elete, E)xit D
+//Enter Number 12
+//This is the List:
+//7
+//Enter task A)dd, D)elete, E)xit E
+//This is the Ending List:
+//7
