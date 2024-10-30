@@ -78,17 +78,19 @@ public class prog1071h {
                 var val = value.pop();
                 var tot = num*val;
                 boolean did = true;
+                var place = 0;
                 var templist = list;
                 for (int lcv = 0; lcv < list.size(); lcv++) {
                     if (templist.peek().getType().equalsIgnoreCase(ty)) {
                         did = !did;
-                        var temp = list.pop();
+                        var temp = templist.pop();
                         var nn = temp.getCode() + num;
                         var nv = val + temp.getValue();
                         tot = temp.getTotal();
                         list.push(new filler(temp.getType(), nv, nn, tot));
                     } else {
                         templist.pop();
+                        place++;
                     }
                 }
                 if (did) {
