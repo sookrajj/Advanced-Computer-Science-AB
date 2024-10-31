@@ -1,6 +1,9 @@
 package Q1;
 
+import DataStructures.Queue;
 import DataStructures.QueueStack;
+import DataStructures.Stack;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -40,49 +43,84 @@ public class newprog1071h {
     }
     public static void main(String[] args) {
         try {
-            var file = new Scanner(new File("Langdat/bginvtry.dat"));
-            var file2 = new Scanner(new File("Langdat/bginvtry.dat"));
-            var queue = new QueueStack<filler>();
+            var file = new Scanner(new File("Langdat/bginvtry.txt"));
+            var file2 = new Scanner(new File("Langdat/buysell.txt"));
+            var stack = new Stack<filler>();
             while (file.hasNext()) {
                 var type = file.nextInt();
                 var units = file.nextInt();
                 var cost = file.nextDouble();
                 var totalcost = units*cost;
-                queue.push(new filler(type, units, cost, totalcost));
+                stack.push(new filler(type, units, cost, totalcost));
+                System.out.println(type + " " + units + " " + cost);
             }
             file.close();
-
+            var temp = new QueueStack<filler>();
             while (file2.hasNext()) {
                 var let = file2.next();
                 if (let.equalsIgnoreCase("B")) {
                     var type = file2.nextInt();
                     var units = file2.nextInt();
-                    var cost = file.nextDouble();
+                    var cost = file2.nextDouble();
                     var total = units*cost;
-                    var temp = queue;
-                    var check = 0;
                     newprog1071h.filler fill = null;
-                    for (int l = 0; l < queue.size(); l++) {
-                        var t = temp.pop();
+                    for (int l = 0; l < stack.; l++) {
+                        var t = stack.pop();
                         if (t.getType() == type) {
                             fill = new filler(type, t.getUnits()+units, t.getCost()+cost, t.getTotal()+total);
-                            System.out.println(check + " " + fill);
-                            temp.push(fill);
-                        } else {
-                            temp.pop();
+                            System.out.println("hi " + fill);
 
+                            stack.push(fill);
+                            System.out.println(stack.size());
+                        } else {
+                            temp.push(t);
                         }
-                        check++;
+                        System.out.println("ley");
                     }
-                    for (int lcv = check; lcv < queue.size(); lcv++) {
-                        temp.push(queue.pop());
-                    }
-                    queue = temp;
+                    while (!temp.isEmpty()) stack.push(temp.pop());
+                    System.out.println(stack.size());
                 } else if (let.equalsIgnoreCase("S")){
                     var type = file2.nextInt();
                     var units = file2.nextInt();
+                    temp = stack;
+                    newprog1071h.filler fill = null;
+                    for (int l = 0; l < stack.size(); l++) {
+                        var t = stack.pop();
+                        if (t.getType() == type) {
+                            fill = new filler(type, t.getUnits()-units, t.getCost(), t.getTotal());
+                            System.out.println("hi " + fill);
+                            stack.push(fill);
+                        } else {
+                            temp.push(stack.pop());
+
+                        }
+                    }
+                    while (!temp.isEmpty()) stack.push(temp.pop());
+                    System.out.println(stack.size());
                 }
             }
+
+            filler[] print = new filler[10];
+            temp = null;
+            for (int lcv = 0; lcv < stack.size(); lcv++) {
+                var t = stack.pop();
+                for (int lc = 0; lc < 10; lc++) {
+                    if (t.getType() == lcv+1) {
+                        print[lcv] = t;
+                        break;
+                    } else {
+                        temp.push(t);
+                        t = temp.pop();
+                    }
+
+                }
+                while (!temp.isEmpty()) stack.push(temp.pop());
+            }
+            System.out.println(print[0]);
+            for (filler l : print) {
+                System.out.println(l.getType() + " " + l.getUnits() + " " + l.getCost() + " " + l.getTotal());
+            }
+
         } catch (IOException e) {
             System.out.println("No data file found.");
         }
