@@ -18,7 +18,7 @@ public class Queue<T extends Comparable<T>>{
     }
 
     public void enqueue(T element) {
-        if(size == capacity) resize(2*capacity);
+        if(size >= capacity) resize(2*capacity);
         queue[rear] = element;
         rear = (rear +1) % capacity;
         size++;
@@ -28,7 +28,7 @@ public class Queue<T extends Comparable<T>>{
         var element = queue[front];
         front = (front + 1)%capacity;
         size--;
-        if (size == capacity/4) resize((capacity/2));
+        if (size == capacity/4) resize((int)Math.ceil(capacity/2.0));
         return element;
     }
     public T peek() {return queue[front];}

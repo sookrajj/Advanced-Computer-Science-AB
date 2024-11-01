@@ -45,64 +45,80 @@ public class newprog1071h {
         try {
             var file = new Scanner(new File("Langdat/bginvtry.txt"));
             var file2 = new Scanner(new File("Langdat/buysell.txt"));
-            var stack = new Stack<filler>();
+            var stack = new QueueStack<filler>();
+            var size = 0;
             while (file.hasNext()) {
                 var type = file.nextInt();
                 var units = file.nextInt();
                 var cost = file.nextDouble();
                 var totalcost = units*cost;
                 stack.push(new filler(type, units, cost, totalcost));
+                size++;
                 System.out.println(type + " " + units + " " + cost);
             }
             file.close();
+            System.out.println(stack);
+            var num = 0;
             var temp = new QueueStack<filler>();
             while (file2.hasNext()) {
                 var let = file2.next();
+                System.out.println(num);
                 if (let.equalsIgnoreCase("B")) {
                     var type = file2.nextInt();
                     var units = file2.nextInt();
                     var cost = file2.nextDouble();
                     var total = units*cost;
                     newprog1071h.filler fill = null;
-                    for (int l = 0; l < stack.; l++) {
+                    while (stack.isEmpty()) {
                         var t = stack.pop();
+                        System.out.println(t);
                         if (t.getType() == type) {
                             fill = new filler(type, t.getUnits()+units, t.getCost()+cost, t.getTotal()+total);
                             System.out.println("hi " + fill);
-
                             stack.push(fill);
-                            System.out.println(stack.size());
+                            System.out.println(stack.isEmpty());
+                            break;
                         } else {
                             temp.push(t);
                         }
+                        System.out.println(stack.isEmpty());
                         System.out.println("ley");
                     }
-                    while (!temp.isEmpty()) stack.push(temp.pop());
-                    System.out.println(stack.size());
+                    while (!temp.isEmpty()) {
+                        var t = temp.pop();
+                        stack.push(t);
+                        System.out.println("while " + t.getType());
+                    }
+                    System.out.println();
                 } else if (let.equalsIgnoreCase("S")){
                     var type = file2.nextInt();
                     var units = file2.nextInt();
-                    temp = stack;
                     newprog1071h.filler fill = null;
-                    for (int l = 0; l < stack.size(); l++) {
+                    while (stack.isEmpty()) {
                         var t = stack.pop();
                         if (t.getType() == type) {
                             fill = new filler(type, t.getUnits()-units, t.getCost(), t.getTotal());
-                            System.out.println("hi " + fill);
+                            System.out.println("hi " + fill.getType());
                             stack.push(fill);
+                            System.out.println(stack);
+                            break;
                         } else {
                             temp.push(stack.pop());
 
                         }
                     }
-                    while (!temp.isEmpty()) stack.push(temp.pop());
-                    System.out.println(stack.size());
+                    System.out.println(stack + " " + temp);
+                    while (!temp.isEmpty()) {
+                        stack.push(temp.pop());
+                    }
+                    System.out.println(size);
                 }
+                num++;
             }
 
             filler[] print = new filler[10];
-            temp = null;
-            for (int lcv = 0; lcv < stack.size(); lcv++) {
+            temp = new QueueStack<filler>();
+            for (int lcv = 0; lcv < size; lcv++) {
                 var t = stack.pop();
                 for (int lc = 0; lc < 10; lc++) {
                     if (t.getType() == lcv+1) {
@@ -114,7 +130,7 @@ public class newprog1071h {
                     }
 
                 }
-                while (!temp.isEmpty()) stack.push(temp.pop());
+
             }
             System.out.println(print[0]);
             for (filler l : print) {

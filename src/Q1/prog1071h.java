@@ -72,6 +72,7 @@ public class prog1071h {
             var tep = value.pop();
             var tem = number.pop();
             list.push(new filler(type.pop(), tep, tem, (tep*tem)));
+            int lsize = 0;
             while (!type.isEmpty()) {
                 var ty = type.pop();
                 var num = number.pop();
@@ -80,27 +81,27 @@ public class prog1071h {
                 boolean did = true;
                 var place = 0;
                 var templist = list;
-                for (int lcv = 0; lcv < list.size(); lcv++) {
-                    if (templist.peek().getType().equalsIgnoreCase(ty)) {
-                        did = !did;
-                        var temp = templist.pop();
-                        var nn = temp.getCode() + num;
-                        var nv = val + temp.getValue();
-                        tot = temp.getTotal();
-                        list.push(new filler(temp.getType(), nv, nn, tot));
-                    } else {
-                        templist.pop();
-                        place++;
-                    }
-                }
-                if (did) {
-                    list.push(new filler(ty, val, num, tot));
-                }
-            }
-            for (int lcv = 0; lcv < list.size(); lcv++) {
-                var temp = list.pop();
-                System.out.print(temp.getType() + " " + temp.getValue() + " " + temp.getCode() + " " + temp.getTotal());
-                System.out.println();
+//                for (int lcv = 0; lcv < list.size(); lcv++) {
+//                    if (templist.peek().getType().equalsIgnoreCase(ty)) {
+//                        did = !did;
+//                        var temp = templist.pop();
+//                        var nn = temp.getCode() + num;
+//                        var nv = val + temp.getValue();
+//                        tot = temp.getTotal();
+//                        list.push(new filler(temp.getType(), nv, nn, tot));
+//                    } else {
+//                        templist.pop();
+//                        place++;
+//                    }
+//                }
+//                if (did) {
+//                    list.push(new filler(ty, val, num, tot));
+//                }
+//            }
+//            for (int lcv = 0; lcv < list.size(); lcv++) {
+//                var temp = list.pop();
+//                System.out.print(temp.getType() + " " + temp.getValue() + " " + temp.getCode() + " " + temp.getTotal());
+//                System.out.println();
             }
         } catch (IOException e) {
             System.out.println("No data file found.");

@@ -8,9 +8,12 @@ public class QueueStack<T extends Comparable<T>> {
     public void push(T element) {stack.enqueue(element);}
     public T pop() {
         var temp = new Queue<T>();
-        while (!stack.isEmpty()) temp.enqueue(stack.dequeue());
+        while (stack.isEmpty()) temp.enqueue(stack.dequeue());
         var ret = temp.dequeue();
-        while (!temp.isEmpty()) stack.enqueue(temp.dequeue());
+        while (temp.isEmpty()) {
+            var t = temp.dequeue();
+            stack.enqueue(t);
+        }
         return ret;
     }
     public T peek() {
