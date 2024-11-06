@@ -57,12 +57,11 @@ public class newprog1071h {
                 System.out.println(type + " " + units + " " + cost);
             }
             file.close();
-            System.out.println(stack);
+            System.out.println();
             var num = 0;
             var temp = new QueueStack<filler>();
             while (file2.hasNext()) {
                 var let = file2.next();
-                System.out.println(num);
                 if (let.equalsIgnoreCase("B")) {
                     var type = file2.nextInt();
                     var units = file2.nextInt();
@@ -71,25 +70,20 @@ public class newprog1071h {
                     newprog1071h.filler fill = null;
                     while (stack.isEmpty()) {
                         var t = stack.pop();
-                        System.out.println(t);
-                        if (t.getType() == type) {
+                        if (t.getCost() == cost) {
                             fill = new filler(type, t.getUnits()+units, t.getCost()+cost, t.getTotal()+total);
-                            System.out.println("hi " + fill);
+
                             stack.push(fill);
-                            System.out.println(stack.isEmpty());
                             break;
                         } else {
                             temp.push(t);
                         }
-                        System.out.println(stack.isEmpty());
-                        System.out.println("ley");
                     }
                     while (!temp.isEmpty()) {
                         var t = temp.pop();
                         stack.push(t);
-                        System.out.println("while " + t.getType());
+
                     }
-                    System.out.println();
                 } else if (let.equalsIgnoreCase("S")){
                     var type = file2.nextInt();
                     var units = file2.nextInt();
@@ -98,41 +92,31 @@ public class newprog1071h {
                         var t = stack.pop();
                         if (t.getType() == type) {
                             fill = new filler(type, t.getUnits()-units, t.getCost(), t.getTotal());
-                            System.out.println("hi " + fill.getType());
                             stack.push(fill);
-                            System.out.println(stack);
                             break;
                         } else {
-                            temp.push(stack.pop());
+                            temp.push(t);
 
                         }
                     }
-                    System.out.println(stack + " " + temp);
                     while (!temp.isEmpty()) {
                         stack.push(temp.pop());
                     }
-                    System.out.println(size);
                 }
                 num++;
             }
-
             filler[] print = new filler[10];
             temp = new QueueStack<filler>();
             for (int lcv = 0; lcv < size; lcv++) {
                 var t = stack.pop();
                 for (int lc = 0; lc < 10; lc++) {
-                    if (t.getType() == lcv+1) {
-                        print[lcv] = t;
+                    if (t.getType() == lc+1) {
+                        print[lc] = t;
                         break;
-                    } else {
-                        temp.push(t);
-                        t = temp.pop();
                     }
 
                 }
-
             }
-            System.out.println(print[0]);
             for (filler l : print) {
                 System.out.println(l.getType() + " " + l.getUnits() + " " + l.getCost() + " " + l.getTotal());
             }
@@ -142,3 +126,46 @@ public class newprog1071h {
         }
     }
 }
+//Stack
+//1 50 1298.0
+//2 50 107.5
+//3 100 248.85
+//4 5000 1.07
+//5 20 489.75
+//6 5 586.24
+//7 30 84.23
+//8 600 24.73
+//9 1500 19.99
+//10 15 238.99
+//1 50 1298.0 64900.0
+//2 50 107.5 5375.0
+//3 100 248.85 24885.0
+//4 5000 1.07 5350.0
+//5 20 489.75 9795.0
+//6 5 586.24 2931.2
+//7 30 84.23 2526.9
+//8 600 24.73 14838.0
+//9 1500 19.99 29984.999999999996
+//10 15 238.99 3584.8500000000004
+
+//QueueStack
+//1 50 1298.0
+//2 50 107.5
+//3 100 248.85
+//4 5000 1.07
+//5 20 489.75
+//6 5 586.24
+//7 30 84.23
+//8 600 24.73
+//9 1500 19.99
+//10 15 238.99
+//1 50 1298.0 64900.0
+//2 50 107.5 5375.0
+//3 100 248.85 24885.0
+//4 5000 1.07 5350.0
+//5 20 489.75 9795.0
+//6 5 586.24 2931.2
+//7 30 84.23 2526.9
+//8 600 24.73 14838.0
+//9 1500 19.99 29984.999999999996
+//10 15 238.99 3584.8500000000004

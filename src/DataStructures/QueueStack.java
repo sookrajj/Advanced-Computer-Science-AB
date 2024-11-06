@@ -1,5 +1,7 @@
 package DataStructures;
 
+import java.util.ArrayList;
+
 public class QueueStack<T extends Comparable<T>> {
     private Queue<T> stack;
 
@@ -7,20 +9,25 @@ public class QueueStack<T extends Comparable<T>> {
 
     public void push(T element) {stack.enqueue(element);}
     public T pop() {
-        var temp = new Queue<T>();
-        while (stack.isEmpty()) temp.enqueue(stack.dequeue());
-        var ret = temp.dequeue();
-        while (temp.isEmpty()) {
-            var t = temp.dequeue();
-            stack.enqueue(t);
+        var temp = new ArrayList<T>();
+        while (!stack.isEmpty()) {
+            temp.add(stack.dequeue());
+        }
+        var ret = temp.remove(temp.size()-1);
+        for (int lcv = temp.size()-1; lcv >= 0; lcv--) {
+            stack.enqueue(temp.remove(lcv));
         }
         return ret;
     }
     public T peek() {
-        var temp = new Queue<T>();
-        while (!stack.isEmpty()) temp.enqueue(stack.dequeue());
-        var ret = temp.dequeue();
-        while (!temp.isEmpty()) stack.enqueue(temp.dequeue());
+        var temp = new ArrayList<T>();
+        while (!stack.isEmpty()) {
+            temp.add(stack.dequeue());
+        }
+        var ret = temp.remove(temp.size()-1);
+        for (int lcv = temp.size()-1; lcv > 0; lcv--) {
+            stack.enqueue(temp.remove(lcv));
+        }
         stack.enqueue(ret);
         return ret;
     }
