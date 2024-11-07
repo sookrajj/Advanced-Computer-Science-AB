@@ -7,11 +7,15 @@ public class queuestacktest {
     public static void main(String[] args) {
         QueueStack<Integer> hi = new QueueStack<>();
         Stack<Integer> h = new Stack<>();
-        hi.push(1);
-        hi.push(2);
-        h.push(1);
-        h.push(2);
-        System.out.println(hi.pop());
-        System.out.println(h.pop());
+        for (int i = 0; i < 20; i++) {
+            hi.push(i);
+            h.push(i);
+        }
+//        System.out.println(hi.peek() + " che");
+//        System.out.println(h.peak() + " che");
+        for (int i = 0; i < 14; i++) {
+            System.out.println(hi.pop() + " hi");
+            System.out.println(h.pop() + " h");
+        }
     }
 }

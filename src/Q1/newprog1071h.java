@@ -58,7 +58,6 @@ public class newprog1071h {
             }
             file.close();
             System.out.println();
-            var num = 0;
             var temp = new QueueStack<filler>();
             while (file2.hasNext()) {
                 var let = file2.next();
@@ -67,17 +66,23 @@ public class newprog1071h {
                     var units = file2.nextInt();
                     var cost = file2.nextDouble();
                     var total = units*cost;
-                    newprog1071h.filler fill = null;
+                    var did = true;
+                    newprog1071h.filler fill = new filler(type, units, cost, total);
+//                    stack.push(fill);
                     while (stack.isEmpty()) {
                         var t = stack.pop();
                         if (t.getCost() == cost) {
-                            fill = new filler(type, t.getUnits()+units, t.getCost()+cost, t.getTotal()+total);
-
+                            fill = new filler(type, t.getUnits()+units, t.getCost(), t.getTotal()+total);
+                            did = false;
                             stack.push(fill);
                             break;
                         } else {
                             temp.push(t);
                         }
+                    }
+                    if (did) {
+                        var t = new filler(type, units, cost, total);
+                        temp.push(t);
                     }
                     while (!temp.isEmpty()) {
                         var t = temp.pop();
@@ -91,9 +96,13 @@ public class newprog1071h {
                     while (stack.isEmpty()) {
                         var t = stack.pop();
                         if (t.getType() == type) {
-                            fill = new filler(type, t.getUnits()-units, t.getCost(), t.getTotal());
-                            stack.push(fill);
-                            break;
+                            if (t.getUnits()-units <= 0) {
+                                units -= t.getUnits();
+                            } else {
+                                fill = new filler(type, t.getUnits() - units, t.getCost(), t.getTotal());
+                                stack.push(fill);
+                                break;
+                            }
                         } else {
                             temp.push(t);
 
@@ -102,8 +111,9 @@ public class newprog1071h {
                     while (!temp.isEmpty()) {
                         stack.push(temp.pop());
                     }
+
                 }
-                num++;
+//                System.out.println(stack.getSize());
             }
             filler[] print = new filler[10];
             temp = new QueueStack<filler>();
@@ -116,6 +126,9 @@ public class newprog1071h {
                     }
 
                 }
+            }
+            for (int q = 0; q < print.length; q++) {
+                System.out.println(print[q]);
             }
             for (filler l : print) {
                 System.out.println(l.getType() + " " + l.getUnits() + " " + l.getCost() + " " + l.getTotal());

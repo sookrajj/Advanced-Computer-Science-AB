@@ -14,8 +14,9 @@ public class QueueStack<T extends Comparable<T>> {
             temp.add(stack.dequeue());
         }
         var ret = temp.remove(temp.size()-1);
-        for (int lcv = temp.size()-1; lcv >= 0; lcv--) {
+        for (int lcv =0; lcv < temp.size(); lcv++) {
             stack.enqueue(temp.remove(lcv));
+            lcv--;
         }
         return ret;
     }
