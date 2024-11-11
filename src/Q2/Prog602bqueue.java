@@ -30,7 +30,7 @@ public class Prog602bqueue {
     public static void main(String[] args) {
         try {
             var input = new Scanner(new File("Langdat/prog602b.dat"));
-            var queue = new Queue<filler>();
+            Queue<filler> queue = new PriorityQueue<>();
             while (input.hasNext()) {
                 filler temp = new filler(input.nextInt(), input.nextDouble(), input.nextInt());
                 queue.add(temp);
