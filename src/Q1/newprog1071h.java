@@ -6,6 +6,7 @@ import DataStructures.Stack;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class newprog1071h {
@@ -93,7 +94,7 @@ public class newprog1071h {
                     var type = file2.nextInt();
                     var units = file2.nextInt();
                     newprog1071h.filler fill = null;
-                    while (stack.isEmpty()) {
+                    while (!stack.isEmpty()) {
                         var t = stack.pop();
                         if (t.getType() == type) {
                             if (t.getUnits()-units <= 0) {
@@ -105,7 +106,6 @@ public class newprog1071h {
                             }
                         } else {
                             temp.push(t);
-
                         }
                     }
                     while (!temp.isEmpty()) {
@@ -116,22 +116,15 @@ public class newprog1071h {
 //                System.out.println(stack.getSize());
             }
             filler[] print = new filler[10];
-            temp = new QueueStack<filler>();
-            for (int lcv = 0; lcv < size; lcv++) {
-                var t = stack.pop();
-                for (int lc = 0; lc < 10; lc++) {
-                    if (t.getType() == lc+1) {
-                        print[lc] = t;
-                        break;
-                    }
-
-                }
+            var tem = new ArrayList<filler>();
+            System.out.println("Ending Merchandise: ");
+            while (!stack.isEmpty()) {
+                var l = stack.pop();
+                tem.add(l);
             }
-            for (int q = 0; q < print.length; q++) {
-                System.out.println(print[q]);
-            }
-            for (filler l : print) {
-                System.out.println(l.getType() + " " + l.getUnits() + " " + l.getCost() + " " + l.getTotal());
+            for (int lcv = 0; lcv < tem.size(); lcv++) {
+                var l = tem.get(tem.size()-lcv-1);
+                System.out.println(l.getType() + " " + l.getUnits() + " " + l.getCost());
             }
 
         } catch (IOException e) {
@@ -139,7 +132,6 @@ public class newprog1071h {
         }
     }
 }
-//Stack
 //1 50 1298.0
 //2 50 107.5
 //3 100 248.85
@@ -150,35 +142,21 @@ public class newprog1071h {
 //8 600 24.73
 //9 1500 19.99
 //10 15 238.99
-//1 50 1298.0 64900.0
-//2 50 107.5 5375.0
-//3 100 248.85 24885.0
-//4 5000 1.07 5350.0
-//5 20 489.75 9795.0
-//6 5 586.24 2931.2
-//7 30 84.23 2526.9
-//8 600 24.73 14838.0
-//9 1500 19.99 29984.999999999996
-//10 15 238.99 3584.8500000000004
-
-//QueueStack
-//1 50 1298.0
-//2 50 107.5
-//3 100 248.85
+//
+//Ending Merchandise:
+//1 13 1298.0
+//3 72 248.85
 //4 5000 1.07
-//5 20 489.75
-//6 5 586.24
+//5 2 489.75
+//6 4 586.24
 //7 30 84.23
 //8 600 24.73
-//9 1500 19.99
-//10 15 238.99
-//1 50 1298.0 64900.0
-//2 50 107.5 5375.0
-//3 100 248.85 24885.0
-//4 5000 1.07 5350.0
-//5 20 489.75 9795.0
-//6 5 586.24 2931.2
-//7 30 84.23 2526.9
-//8 600 24.73 14838.0
-//9 1500 19.99 29984.999999999996
-//10 15 238.99 3584.8500000000004
+//9 1000 19.99
+//10 9 238.99
+//10 15 250.0
+//5 20 510.25
+//3 15 275.55
+//9 10 21.25
+//2 2 111.25
+//7 10 87.5
+//4 750 1.1

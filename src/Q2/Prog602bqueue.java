@@ -39,11 +39,10 @@ public class Prog602bqueue {
             while (input.hasNext()) {
                 filler temp = new filler(input.nextInt(), input.nextDouble(), input.nextInt());
                 queue.add(temp);
-                System.out.println(queue.size());
             }
             input.close();
             var size = queue.size();
-            var temp = new PriorityQueue<filler>();
+//            var temp = new PriorityQueue<filler>();
             System.out.println("Account Number\tHours Used\tPriority code\tAmount Due");
             for (int lcv = 0; lcv < size; lcv++) {
                 var l = queue.remove();
@@ -63,8 +62,7 @@ public class Prog602bqueue {
                 } else if (code == 2) {
                     amd += 150.0;
                 }
-                temp.add(l);
-//                System.out.println(acc + "\t\t\t" + hours + "\t\t\t" + code + "\t\t\t" + amd);
+                System.out.println(acc + "\t\t\t" + hours + "\t\t\t" + code + "\t\t\t" + amd);
             }
 
 //            while (!temp.isEmpty()) {
@@ -93,3 +91,13 @@ public class Prog602bqueue {
         }
     }
 }
+//Account Number	Hours Used	Priority code	Amount Due
+//29118			15.02			0			550.6
+//23051			1.55			2			350.0
+//22841			27.9			2			1087.0
+//21352			5.84			0			242.0
+//20045			5.0			1			250.0
+//19111			12.0			2			700.0
+//17185			7.93			1			396.5
+//14063			17.06			1			661.8
+//1825			3.25			0			200.0

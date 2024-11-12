@@ -45,12 +45,13 @@ public class prog1071h {
             var type = new QueueStack<String>();
             var number = new QueueStack<Integer>();
             var value = new QueueStack<Double>();
-
+            var size = 0;
             while (input.hasNext()) {
                 type.push(input.next());
                 number.push(input.nextInt());
                 value.push(input.nextDouble());
-                System.out.println();
+                size++;
+                System.out.println(type.peek() + " " + number.peek() + " " + value.peek());
             }
             input.close();
 
@@ -61,10 +62,12 @@ public class prog1071h {
                     type.push(input.next());
                     number.push(-1*input.nextInt());
                     value.push(0.0);
+                    size++;
                 } else if (let.equals("B")) {
                     type.push(input.next());
                     number.push(input.nextInt());
                     value.push(input.nextDouble());
+                    size++;
                 }
             }
             input.close();
@@ -72,7 +75,7 @@ public class prog1071h {
             var tep = value.pop();
             var tem = number.pop();
             list.push(new filler(type.pop(), tep, tem, (tep*tem)));
-            int lsize = 0;
+            int lsize = 1;
             while (!type.isEmpty()) {
                 var ty = type.pop();
                 var num = number.pop();
@@ -80,28 +83,37 @@ public class prog1071h {
                 var tot = num*val;
                 boolean did = true;
                 var place = 0;
-                var templist = list;
-//                for (int lcv = 0; lcv < list.size(); lcv++) {
-//                    if (templist.peek().getType().equalsIgnoreCase(ty)) {
-//                        did = !did;
-//                        var temp = templist.pop();
-//                        var nn = temp.getCode() + num;
-//                        var nv = val + temp.getValue();
-//                        tot = temp.getTotal();
-//                        list.push(new filler(temp.getType(), nv, nn, tot));
-//                    } else {
-//                        templist.pop();
-//                        place++;
-//                    }
-//                }
-//                if (did) {
-//                    list.push(new filler(ty, val, num, tot));
-//                }
-//            }
-//            for (int lcv = 0; lcv < list.size(); lcv++) {
-//                var temp = list.pop();
-//                System.out.print(temp.getType() + " " + temp.getValue() + " " + temp.getCode() + " " + temp.getTotal());
-//                System.out.println();
+                var hold = new QueueStack<filler>();
+                for (int lcv = 0; lcv < lsize; lcv++) {
+                    if (list.peek().getType().equalsIgnoreCase(ty)) {
+                        did = !did;
+                        var temp = list.pop();
+                        lsize--;
+                        var nn = temp.getCode() + num;
+                        var nv = val + temp.getValue();
+                        tot = temp.getTotal();
+                        hold.push(new filler(temp.getType(), nv, nn, tot));
+                    } else {
+                        var temp = list.pop();
+                        lsize--;
+                        hold.push(temp);
+                        place++;
+                    }
+                }
+                if (did) {
+                    list.push(new filler(ty, val, num, tot));
+                    lsize++;
+                    size++;
+                }
+                while (hold.isEmpty()) {
+                    list.push(hold.pop());
+                    lsize++;
+                }
+            }
+            for (int lcv = 0; lcv < lsize; lcv++) {
+                var temp = list.pop();
+                System.out.print(temp.getType() + " " + temp.getValue() + " " + temp.getCode() + " " + temp.getTotal());
+                System.out.println();
             }
         } catch (IOException e) {
             System.out.println("No data file found.");
