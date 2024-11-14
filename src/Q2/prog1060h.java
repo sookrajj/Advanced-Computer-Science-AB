@@ -99,8 +99,12 @@ public class prog1060h {
             var rented = new PriorityQueue<carcomp>();
             while (f3.hasNext()) {
                 var str = f3.next();
-                var cpd = Double.parseDouble(str.substring(1));
-                var type = str.substring(1);
+                var type = "";
+                var cpd = 0.0;
+                if (str.length() > 1) {
+                    cpd = Double.parseDouble(str.substring(1));
+                    type = str.substring(1);
+                }
                 str = str.substring(0, 1);
                 if (str.equalsIgnoreCase("L")) {
                     if (type.equalsIgnoreCase("S")) {
@@ -167,24 +171,37 @@ public class prog1060h {
                 } else if (str.equalsIgnoreCase("R")) {
                     if (type.equalsIgnoreCase("S")) {
                         var q = que.get(0);
-                        var qe = new PriorityQueue<carcomp>();
-                        while (!q.isEmpty()) {
-                            var temp = q.remove();
-                            System.out.println(temp.car);
-                            qe.add(temp);
-                        }
-                        while (!qe.isEmpty()) {
-                            var temp = qe.remove();
-                            q.add(temp);
-                        }
+                        rented.add(q.remove());
                     } else if (type.equalsIgnoreCase("C")) {
-
+                        var q = que.get(1);
+                        rented.add(q.remove());
                     } else if (type.equalsIgnoreCase("M")) {
-
+                        var q = que.get(2);
+                        rented.add(q.remove());
                     } else if (type.equalsIgnoreCase("W")) {
-
+                        var q = que.get(3);
+                        rented.add(q.remove());
                     } else if (type.equalsIgnoreCase("L")) {
+                        var q = que.get(4);
+                        rented.add(q.remove());
+                    }
+                } else if (str.equalsIgnoreCase("A")) {
+                    var days = f3.nextInt();
+                    var mileage = f3.nextDouble();
+                    if (type.equalsIgnoreCase("S")) {
 
+                    } else if (type.equalsIgnoreCase("C")) {
+                        var q = que.get(1);
+                        rented.add(q.remove());
+                    } else if (type.equalsIgnoreCase("M")) {
+                        var q = que.get(2);
+                        rented.add(q.remove());
+                    } else if (type.equalsIgnoreCase("W")) {
+                        var q = que.get(3);
+                        rented.add(q.remove());
+                    } else if (type.equalsIgnoreCase("L")) {
+                        var q = que.get(4);
+                        rented.add(q.remove());
                     }
                 }
             }
