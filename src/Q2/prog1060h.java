@@ -7,24 +7,29 @@ import java.util.*;
 
 public class prog1060h {
 
-    public static class carcomp {
+    public static class carcomp implements Comparable<carcomp> {
         private String car;
-        private double cost;
+        private double miles;
 
         public carcomp(String car, double cost) {
             this.car = car;
-            this.cost = cost;
+            this.miles = cost;
         }
 
         public String getcar() {
             return car;
         }
 
-        public double getcost() {
-            return cost;
+        public double getmiles() {
+            return miles;
+        }
+
+        @Override
+        public int compareTo(carcomp o) {
+            return 0;
         }
     }
-    public static class carcost {
+    public static class carcost implements Comparable<carcost> {
         private double day;
         private double mile;
 
@@ -39,6 +44,11 @@ public class prog1060h {
 
         public double getmile() {
             return mile;
+        }
+
+        @Override
+        public int compareTo(carcost o) {
+            return 0;
         }
     }
     public static void main(String[] args) {
@@ -56,7 +66,6 @@ public class prog1060h {
                 var str = f1.next();
                 var cost = f1.nextDouble();
                 var type = str.substring(0, 1);
-                str = str.substring(1);
                 if (type.equalsIgnoreCase("S")) {
                     sc.add(new carcomp(str, cost));
                 } else if (type.equalsIgnoreCase("C")) {
@@ -71,12 +80,12 @@ public class prog1060h {
             }
             f1.close();
             que.add(sc); que.add(cc); que.add(mc); que.add(wc); que.add(lc);
-            ArrayList<Queue<carcost>> quee = new ArrayList<>();
-            Queue<carcost> scc = new PriorityQueue<>();
-            Queue<carcost> ccc = new PriorityQueue<>();
-            Queue<carcost> mcc = new PriorityQueue<>();
-            Queue<carcost> wcc = new PriorityQueue<>();
-            Queue<carcost> lcc = new PriorityQueue<>();
+            ArrayList<carcost> quee = new ArrayList<>();
+            carcost scc = null;
+            carcost ccc = null;
+            carcost mcc = null;
+            carcost wcc = null;
+            carcost lcc = null;
             while (f2.hasNext()) {
                 var str = f2.next();
                 var cpd = Double.parseDouble(str.substring(1));
@@ -84,15 +93,15 @@ public class prog1060h {
                 var type = str.substring(0, 1);
                 str = str.substring(1);
                 if (type.equalsIgnoreCase("S")) {
-                    scc.add(new carcost(cpd, costpmile));
+                    scc = new carcost(cpd, costpmile);
                 } else if (type.equalsIgnoreCase("C")) {
-                    ccc.add(new carcost(cpd, costpmile));
+                    ccc = new carcost(cpd, costpmile);
                 } else if (type.equalsIgnoreCase("M")) {
-                    mcc.add(new carcost(cpd, costpmile));
+                    mcc = new carcost(cpd, costpmile);
                 } else if (type.equalsIgnoreCase("W")) {
-                    wcc.add(new carcost(cpd, costpmile));
+                    wcc = new carcost(cpd, costpmile);
                 } else if (type.equalsIgnoreCase("L")) {
-                    lcc.add(new carcost(cpd, costpmile));
+                    lcc = new carcost(cpd, costpmile);
                 }
             }
             quee.add(scc); quee.add(ccc); quee.add(mcc); quee.add(wcc); quee.add(lcc);
@@ -102,8 +111,11 @@ public class prog1060h {
                 var type = "";
                 var cpd = 0.0;
                 if (str.length() > 1) {
-                    cpd = Double.parseDouble(str.substring(1));
+
                     type = str.substring(1);
+                }
+                if (str.length() > 3) {
+                    cpd = Double.parseDouble(f3.next());
                 }
                 str = str.substring(0, 1);
                 if (str.equalsIgnoreCase("L")) {
@@ -112,7 +124,7 @@ public class prog1060h {
                         var qe = new PriorityQueue<carcomp>();
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car);
+                            System.out.println(temp.car.substring(1));
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -124,7 +136,7 @@ public class prog1060h {
                         var qe = new PriorityQueue<carcomp>();
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car);
+                            System.out.println(temp.car.substring(1));
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -136,7 +148,7 @@ public class prog1060h {
                         var qe = new PriorityQueue<carcomp>();
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car);
+                            System.out.println(temp.car.substring(1));
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -148,7 +160,7 @@ public class prog1060h {
                         var qe = new PriorityQueue<carcomp>();
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car);
+                            System.out.println(temp.car.substring(1));
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -160,7 +172,7 @@ public class prog1060h {
                         var qe = new PriorityQueue<carcomp>();
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car);
+                            System.out.println(temp.car.substring(1));
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -188,20 +200,148 @@ public class prog1060h {
                 } else if (str.equalsIgnoreCase("A")) {
                     var days = f3.nextInt();
                     var mileage = f3.nextDouble();
+                    var carname = f3.next();
+                    var unrent = new PriorityQueue<carcomp>();
                     if (type.equalsIgnoreCase("S")) {
+                        while (rented.isEmpty()) {
+                            var car = rented.remove();
+                            if (car.getcar().substring(1).equals(carname)) {
+                                System.out.println("Car " + car.getcar().substring(1));
+                                System.out.println("Beginning mileage: " + car.getmiles());
+                                System.out.println("Ending mileage: " + mileage);
+                                var dif = mileage- car.getmiles();
+                                var cost = quee.get(0).day;
+                                var cosm = quee.get(0).mile;
+                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                var total = (dif*cosm) + (days*cost);
+                                System.out.println("Car type Sub Compact");
+                                System.out.println("Total = $" + total);
+                                car.miles = mileage;
+                                break;
+                            } else {
+                                unrent.add(car);
+                            }
+                        }
+
+                        while (unrent.isEmpty()) {
+                            rented.add(unrent.remove());
+                        }
 
                     } else if (type.equalsIgnoreCase("C")) {
-                        var q = que.get(1);
-                        rented.add(q.remove());
+                        while (rented.isEmpty()) {
+                            var car = rented.remove();
+                            if (car.getcar().substring(1).equals(carname)) {
+                                System.out.println("Car " + car.getcar().substring(1));
+                                System.out.println("Beginning mileage: " + car.getmiles());
+                                System.out.println("Ending mileage: " + mileage);
+                                var dif = mileage- car.getmiles();
+                                var cost = quee.get(1).day;
+                                var cosm = quee.get(1).mile;
+                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                var total = (dif*cosm) + (days*cost);
+                                System.out.println("Car type Compact");
+                                System.out.println("Total = $" + total);
+                                car.miles = mileage;
+                                break;
+                            } else {
+                                unrent.add(car);
+                            }
+                        }
+
+                        while (unrent.isEmpty()) {
+                            rented.add(unrent.remove());
+                        }
+
                     } else if (type.equalsIgnoreCase("M")) {
-                        var q = que.get(2);
-                        rented.add(q.remove());
+                        while (rented.isEmpty()) {
+                            var car = rented.remove();
+                            if (car.getcar().substring(1).equals(carname)) {
+                                System.out.println("Car " + car.getcar().substring(1));
+                                System.out.println("Beginning mileage: " + car.getmiles());
+                                System.out.println("Ending mileage: " + mileage);
+                                var dif = mileage- car.getmiles();
+                                var cost = quee.get(2).day;
+                                var cosm = quee.get(2).mile;
+                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                var total = (dif*cosm) + (days*cost);
+                                System.out.println("Car type Midsized");
+                                System.out.println("Total = $" + total);
+                                car.miles = mileage;
+                                break;
+                            } else {
+                                unrent.add(car);
+                            }
+                        }
+
+                        while (unrent.isEmpty()) {
+                            rented.add(unrent.remove());
+                        }
+
                     } else if (type.equalsIgnoreCase("W")) {
-                        var q = que.get(3);
-                        rented.add(q.remove());
+                        while (rented.isEmpty()) {
+                            var car = rented.remove();
+                            if (car.getcar().substring(1).equals(carname)) {
+                                System.out.println("Car " + car.getcar().substring(1));
+                                System.out.println("Beginning mileage: " + car.getmiles());
+                                System.out.println("Ending mileage: " + mileage);
+                                var dif = mileage- car.getmiles();
+                                var cost = quee.get(3).day;
+                                var cosm = quee.get(3).mile;
+                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                var total = (dif*cosm) + (days*cost);
+                                System.out.println("Car type Wagon");
+                                System.out.println("Total = $" + total);
+                                car.miles = mileage;
+                                break;
+                            } else {
+                                unrent.add(car);
+                            }
+                        }
+
+                        while (unrent.isEmpty()) {
+                            rented.add(unrent.remove());
+                        }
+
                     } else if (type.equalsIgnoreCase("L")) {
-                        var q = que.get(4);
-                        rented.add(q.remove());
+                        while (rented.isEmpty()) {
+                            var car = rented.remove();
+                            if (car.getcar().substring(1).equals(carname)) {
+                                System.out.println("Car " + car.getcar().substring(1));
+                                System.out.println("Beginning mileage: " + car.getmiles());
+                                System.out.println("Ending mileage: " + mileage);
+                                var dif = mileage- car.getmiles();
+                                var cost = quee.get(4).day;
+                                var cosm = quee.get(4).mile;
+                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                var total = (dif*cosm) + (days*cost);
+                                System.out.println("Car type Luxury");
+                                System.out.println("Total = $" + total);
+                                car.miles = mileage;
+                                break;
+                            } else {
+                                unrent.add(car);
+                            }
+                        }
+
+                        while (unrent.isEmpty()) {
+                            rented.add(unrent.remove());
+                        }
+                    }
+                } else {
+                    var unrent = new PriorityQueue<carcomp>();
+                    System.out.println("Rented");
+                    while (rented.isEmpty()) {
+                        var temp = rented.remove();
+                        System.out.println("\t" + temp.car.substring(1) + "\t" + temp.miles);
+                        unrent.add(temp);
+                    }
+                    while (unrent.isEmpty()) {
+                        rented.add(unrent.remove());
                     }
                 }
             }
