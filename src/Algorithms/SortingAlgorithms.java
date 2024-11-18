@@ -87,6 +87,91 @@ public class SortingAlgorithms {
         }
     }
 
+    public static <T extends Comparable<T>> void mergeSort(T[] arr) {
+        recurmerge(arr);
+    }
+
+    public static <T extends Comparable<T>> void recurmerge(T[] arr) {
+        if (arr.length > 1) {
+            var middle  = arr.length / 2;
+            var L  = arr.clone();
+            for (int l = 0; l < middle-1; l++) {
+                L[l] = arr[l];
+            }
+            var R  = arr.clone();
+            for (int l = middle; l < arr.length; l++) {
+                R[l] = arr[l];
+            }
+            recurmerge(L);
+            recurmerge(R);
+            merge(arr, L, R);
+        }
+    }
+
+    public static <T extends Comparable<T>> void merge(T[] arr, T[] L, T[] R) {
+        var i = 0;
+        var j = 0;
+        var k = 0;
+        while (i < L.length && j < R.length) {
+            if (L[i].compareTo(R[j]) < 0) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < L.length) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+        while (i < R.length) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    //while i < length(L) do ▷ Copy remaining elements of L
+    //A[k] ← L[i]
+    //i ← i + 1
+    //k ← k + 1
+    //end while
+    //while j < length(R) do ▷ Copy remaining elements of R
+    //A[k] ← R[j]
+    //j ← j + 1
+    //k ← k + 1
+    //end while
+    //end procedure
+
+
+    public static <T extends Comparable<T>> void quickSort(T[] arr) {
+        quickSort(arr, 0, arr.length-1);
+    }
+
+    public static <T extends Comparable<T>> void quickSort(T[] arr, int low, int high) {
+        if (low < high) {
+            int pivot = partition(arr, low, high);
+            quickSort(arr, low, pivot-1);
+            quickSort(arr, pivot+1, high);
+        }
+    }
+
+    public static <T extends Comparable<T>> int partition(T[] arr, int low, int high) {
+        T pivot = arr[high];
+        int i = low-1;
+        for (int j = low; j < high; j++) {
+            if (arr[j].compareTo(pivot) < 0) {
+                i = i+1;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i+1, high);
+        return i+1;
+    }
+
 //    public static <T extends Comparable<T>> void quickSort(T[] arr, int left, int right) {
 //        if (left >= right) return;
 //        int k = left;
@@ -110,46 +195,27 @@ public class SortingAlgorithms {
 //        quickSort(arr, left, j);
 //        quickSort(arr, k, right);
 //    }
-    public static <T extends Comparable<T>> void quickSort(T[] arr, int low, int high) {
-        if (low < high) {
-            int pivot = Partition(arr, low, high);
-            quickSort(arr, low, pivot-1);
-            quickSort(arr, pivot+1, high);
-        }
-    }
-    //procedure Quicksort(A, low, high)
-    //if low < high then
-    //pivot ← Partition(A, low, high)
-    //Quicksort(A, low, pivot − 1)
-    //Quicksort(A, pivot + 1, high)
-    //end if
-    //end procedure
-    public static <T extends Comparable<T>> int Partition(T[] arr, int low, int high) {
-        T pivot = arr[high];
-        int i = low-1;
-        for (int j = low; j <= high-1; j++) {
-            if (arr[j].compareTo(pivot) < 0) {
-                i = i+1;
-                T temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-        T temp = arr[i+1];
-        arr[i+1] = arr[high];
-        arr[high] = temp;
-        return i+1;
-    }
-    //procedure Partition(A, low, high)
-    //pivot ← A[high]
-    //i ← low − 1
-    //for j ← low to high − 1 do
-    //if A[j] < pivot then
-    //i ← i + 1
-    //Swap A[i] and A[j]
-    //end if
-    //end for
-    //Swap A[i + 1] and A[high]
-    //return i + 1
-    //end procedure
+//    public static <T extends Comparable<T>> void quickSort(T[] arr, int low, int high) {
+//        if (low < high) {
+//            int pivot = Partition(arr, low, high);
+//            quickSort(arr, low, pivot-1);
+//            quickSort(arr, pivot+1, high);
+//        }
+//    }
+//    public static <T extends Comparable<T>> int Partition(T[] arr, int low, int high) {
+//        T pivot = arr[high];
+//        int i = low-1;
+//        for (int j = low; j <= high-1; j++) {
+//            if (arr[j].compareTo(pivot) < 0) {
+//                i = i+1;
+//                T temp = arr[i];
+//                arr[i] = arr[j];
+//                arr[j] = temp;
+//            }
+//        }
+//        T temp = arr[i+1];
+//        arr[i+1] = arr[high];
+//        arr[high] = temp;
+//        return i+1;
+//    }
 }
