@@ -87,20 +87,17 @@ public class SortingAlgorithms {
         }
     }
 
-    public static <T extends Comparable<T>> void mergeSort(T[] arr) {
-        recurmerge(arr);
-    }
 
     public static <T extends Comparable<T>> void recurmerge(T[] arr) {
         if (arr.length > 1) {
             var middle  = arr.length / 2;
-            var L  = arr.clone();
+            var L  = (T[]) new Comparable[middle-1];
             for (int l = 0; l < middle-1; l++) {
                 L[l] = arr[l];
             }
-            var R  = arr.clone();
-            for (int l = middle; l < arr.length; l++) {
-                R[l] = arr[l];
+            var R  = (T[]) new Comparable[middle];
+            for (int l = middle; l < arr.length-1; l++) {
+                R[l-middle] = arr[l];
             }
             recurmerge(L);
             recurmerge(R);
@@ -127,7 +124,7 @@ public class SortingAlgorithms {
             i++;
             k++;
         }
-        while (i < R.length) {
+        while (j < R.length) {
             arr[k] = R[j];
             j++;
             k++;
