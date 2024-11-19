@@ -157,9 +157,11 @@ public class prog482s {
             for (int i = 0; i < sum.size(); i++) {
                 array[i] = sum.get(i);
             }
+            System.out.println();
+            System.out.println(array.length + " hi");
             SortingAlgorithms.recurmerge(array);
             System.out.println();
-            System.out.println("Quick Sorted: ");
+            System.out.println("Merge Sorted: ");
             for (Integer num : array) {
                 System.out.print(num + " ");
             }
