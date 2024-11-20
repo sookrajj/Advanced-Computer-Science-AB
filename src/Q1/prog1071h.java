@@ -105,7 +105,7 @@ public class prog1071h {
                     lsize++;
                     size++;
                 }
-                while (hold.isEmpty()) {
+                while (!hold.isEmpty()) {
                     list.push(hold.pop());
                     lsize++;
                 }

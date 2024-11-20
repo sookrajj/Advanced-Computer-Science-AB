@@ -95,15 +95,11 @@ public class SortingAlgorithms {
             var L  = (T[]) new Comparable[middle];
             for (int l = 0; l < middle; l++) {
                 L[l] = arr[l];
-                System.out.print(arr[l] + " ");
             }
-            System.out.println();
-            var R  = (T[]) new Comparable[arr.length-middle-1];
-            for (int l = middle; l < arr.length-1; l++) {
+            var R  = (T[]) new Comparable[arr.length-middle];
+            for (int l = middle; l < arr.length; l++) {
                 R[l-middle] = arr[l];
-                System.out.print(arr[l] + " ");
             }
-            System.out.println(L.length + " " + R.length + " hill");
             recurmerge(L);
             recurmerge(R);
             merge(arr, L, R);
@@ -115,7 +111,6 @@ public class SortingAlgorithms {
         var j = 0;
         var k = 0;
         while (i < L.length && j < R.length) {
-            System.out.println(L.length + " while " + R.length);
             if (L[i].compareTo(R[j]) <= 0) {
                 arr[k] = L[i];
                 i++;

@@ -110,21 +110,26 @@ public class prog1060h {
                 var str = f3.next();
                 var type = "";
                 var cpd = 0.0;
+                var days = 0;
                 if (str.length() > 1) {
 
-                    type = str.substring(1);
+                    type = str.substring(1, 2);
                 }
-                if (str.length() > 3) {
-                    cpd = Double.parseDouble(f3.next());
+                if (str.length() > 2) {
+                    days = Integer.parseInt(str.substring(2));
                 }
+//                if (str.length() > 3) {
+//                    cpd = Double.parseDouble(f3.next());
+//                }
                 str = str.substring(0, 1);
                 if (str.equalsIgnoreCase("L")) {
                     if (type.equalsIgnoreCase("S")) {
                         var q = que.get(0);
                         var qe = new PriorityQueue<carcomp>();
+                        System.out.println("Listing of Subcompact cars: ");
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car.substring(1));
+                            System.out.println(temp.car.substring(1) + " " + temp.miles);
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -134,9 +139,10 @@ public class prog1060h {
                     } else if (type.equalsIgnoreCase("C")) {
                         var q = que.get(1);
                         var qe = new PriorityQueue<carcomp>();
+                        System.out.println("Listing of Compact cars: ");
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car.substring(1));
+                            System.out.println(temp.car.substring(1) + " " + temp.miles);
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -146,9 +152,10 @@ public class prog1060h {
                     } else if (type.equalsIgnoreCase("M")) {
                         var q = que.get(2);
                         var qe = new PriorityQueue<carcomp>();
+                        System.out.println("Listing of Midsize cars: ");
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car.substring(1));
+                            System.out.println(temp.car.substring(1) + " " + temp.miles);
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -158,9 +165,10 @@ public class prog1060h {
                     } else if (type.equalsIgnoreCase("W")) {
                         var q = que.get(3);
                         var qe = new PriorityQueue<carcomp>();
+                        System.out.println("Listing of Wagon cars: ");
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car.substring(1));
+                            System.out.println(temp.car.substring(1) + " " + temp.miles);
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -170,9 +178,10 @@ public class prog1060h {
                     } else if (type.equalsIgnoreCase("L")) {
                         var q = que.get(4);
                         var qe = new PriorityQueue<carcomp>();
+                        System.out.println("Listing of Luxury cars: ");
                         while (!q.isEmpty()) {
                             var temp = q.remove();
-                            System.out.println(temp.car.substring(1));
+                            System.out.println(temp.car.substring(1) + " " + temp.miles);
                             qe.add(temp);
                         }
                         while (!qe.isEmpty()) {
@@ -180,10 +189,19 @@ public class prog1060h {
                             q.add(temp);
                         }
                     }
+                    System.out.println();
+                    System.out.println();
                 } else if (str.equalsIgnoreCase("R")) {
                     if (type.equalsIgnoreCase("S")) {
                         var q = que.get(0);
-                        rented.add(q.remove());
+                        if (!q.isEmpty()) rented.add(q.remove());
+                        else if (!que.get(1).isEmpty()) rented.add(que.get(1).remove());
+                        else if (!que.get(2).isEmpty()) rented.add(que.get(2).remove());
+                        else if (!que.get(3).isEmpty()) rented.add(que.get(3).remove());
+                        else if (!que.get(4).isEmpty()) rented.add(que.get(4).remove());
+                        else {
+                            System.out.println("Sorry we are out of cars");
+                        }
                     } else if (type.equalsIgnoreCase("C")) {
                         var q = que.get(1);
                         rented.add(q.remove());
@@ -198,12 +216,12 @@ public class prog1060h {
                         rented.add(q.remove());
                     }
                 } else if (str.equalsIgnoreCase("A")) {
-                    var days = f3.nextInt();
+
                     var mileage = f3.nextDouble();
                     var carname = f3.next();
                     var unrent = new PriorityQueue<carcomp>();
                     if (type.equalsIgnoreCase("S")) {
-                        while (rented.isEmpty()) {
+                        while (!rented.isEmpty()) {
                             var car = rented.remove();
                             if (car.getcar().substring(1).equals(carname)) {
                                 System.out.println("Car " + car.getcar().substring(1));
@@ -224,12 +242,12 @@ public class prog1060h {
                             }
                         }
 
-                        while (unrent.isEmpty()) {
+                        while (!unrent.isEmpty()) {
                             rented.add(unrent.remove());
                         }
 
                     } else if (type.equalsIgnoreCase("C")) {
-                        while (rented.isEmpty()) {
+                        while (!rented.isEmpty()) {
                             var car = rented.remove();
                             if (car.getcar().substring(1).equals(carname)) {
                                 System.out.println("Car " + car.getcar().substring(1));
@@ -250,7 +268,7 @@ public class prog1060h {
                             }
                         }
 
-                        while (unrent.isEmpty()) {
+                        while (!unrent.isEmpty()) {
                             rented.add(unrent.remove());
                         }
 
@@ -307,7 +325,7 @@ public class prog1060h {
                         }
 
                     } else if (type.equalsIgnoreCase("L")) {
-                        while (rented.isEmpty()) {
+                        while (!rented.isEmpty()) {
                             var car = rented.remove();
                             if (car.getcar().substring(1).equals(carname)) {
                                 System.out.println("Car " + car.getcar().substring(1));
@@ -328,19 +346,21 @@ public class prog1060h {
                             }
                         }
 
-                        while (unrent.isEmpty()) {
+                        while (!unrent.isEmpty()) {
                             rented.add(unrent.remove());
                         }
                     }
                 } else {
                     var unrent = new PriorityQueue<carcomp>();
                     System.out.println("Rented");
-                    while (rented.isEmpty()) {
+                    while (!rented.isEmpty()) {
+//                        System.out.println("the boushwazi was the middle class of russia that revolted against the rulers for increasing prices that they did not like, they were able to kill the king and queen at the time and became the soviet union");
                         var temp = rented.remove();
-                        System.out.println("\t" + temp.car.substring(1) + "\t" + temp.miles);
+                        System.out.println("" + temp.car.substring(1) + "\t" + temp.miles);
                         unrent.add(temp);
+
                     }
-                    while (unrent.isEmpty()) {
+                    while (!unrent.isEmpty()) {
                         rented.add(unrent.remove());
                     }
                 }

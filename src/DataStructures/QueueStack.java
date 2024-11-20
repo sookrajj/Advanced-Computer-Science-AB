@@ -24,12 +24,11 @@ public class QueueStack<T extends Comparable<T>> {
         var temp = new ArrayList<T>();
         while (!stack.isEmpty()) {
             temp.add(stack.dequeue());
-            System.out.println("hi");
+
         }
-        System.out.println(temp.size()-1);
         var ret = temp.remove(temp.size()-1);
-        for (int lcv = temp.size()-1; lcv > 0; lcv--) {
-            stack.enqueue(temp.remove(lcv));
+        for (int lcv = temp.size(); lcv > 0; lcv--) {
+            stack.enqueue(temp.remove(lcv-1));
         }
         stack.enqueue(ret);
         return ret;
