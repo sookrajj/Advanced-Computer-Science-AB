@@ -190,7 +190,6 @@ public class prog1060h {
                         }
                     }
                     System.out.println();
-                    System.out.println();
                 } else if (str.equalsIgnoreCase("R")) {
                     if (type.equalsIgnoreCase("S")) {
                         var q = que.get(0);
@@ -216,7 +215,8 @@ public class prog1060h {
                         rented.add(q.remove());
                     }
                 } else if (str.equalsIgnoreCase("A")) {
-
+                    System.out.println("Wrent a wreck invoice");
+                    System.out.println();
                     var mileage = f3.nextDouble();
                     var carname = f3.next();
                     var unrent = new PriorityQueue<carcomp>();
@@ -230,12 +230,13 @@ public class prog1060h {
                                 var dif = mileage- car.getmiles();
                                 var cost = quee.get(0).day;
                                 var cosm = quee.get(0).mile;
-                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
-                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                System.out.println("Miles driven " + Math.round(dif * 100.0)/100.0 + " @ " + cosm + " = " + Math.round(dif * cosm * 100.0)/100.0);
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + Math.round(days * cost * 100.0)/100.0);
                                 var total = (dif*cosm) + (days*cost);
                                 System.out.println("Car type Sub Compact");
                                 System.out.println("Total = $" + total);
                                 car.miles = mileage;
+                                que.get(0).add(car);
                                 break;
                             } else {
                                 unrent.add(car);
@@ -256,12 +257,13 @@ public class prog1060h {
                                 var dif = mileage- car.getmiles();
                                 var cost = quee.get(1).day;
                                 var cosm = quee.get(1).mile;
-                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
-                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                System.out.println("Miles driven " + Math.round(dif * 100.0)/100.0 + " @ " + cosm + " = " + Math.round(dif * cosm * 100.0)/100.0);
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + Math.round(days * cost * 100.0)/100.0);
                                 var total = (dif*cosm) + (days*cost);
                                 System.out.println("Car type Compact");
                                 System.out.println("Total = $" + total);
                                 car.miles = mileage;
+                                que.get(1).add(car);
                                 break;
                             } else {
                                 unrent.add(car);
@@ -282,12 +284,13 @@ public class prog1060h {
                                 var dif = mileage- car.getmiles();
                                 var cost = quee.get(2).day;
                                 var cosm = quee.get(2).mile;
-                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
-                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                System.out.println("Miles driven " + Math.round(dif * 100.0)/100.0 + " @ " + cosm + " = " + Math.round(dif * cosm * 100.0)/100.0);
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + Math.round(days * cost * 100.0)/100.0);
                                 var total = (dif*cosm) + (days*cost);
                                 System.out.println("Car type Midsized");
                                 System.out.println("Total = $" + total);
                                 car.miles = mileage;
+                                que.get(2).add(car);
                                 break;
                             } else {
                                 unrent.add(car);
@@ -308,12 +311,13 @@ public class prog1060h {
                                 var dif = mileage- car.getmiles();
                                 var cost = quee.get(3).day;
                                 var cosm = quee.get(3).mile;
-                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
-                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                System.out.println("Miles driven " + Math.round(dif * 100.0)/100.0 + " @ " + cosm + " = " + Math.round(dif * cosm * 100.0)/100.0);
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + Math.round(days * cost * 100.0)/100.0);
                                 var total = (dif*cosm) + (days*cost);
                                 System.out.println("Car type Wagon");
                                 System.out.println("Total = $" + total);
                                 car.miles = mileage;
+                                que.get(3).add(car);
                                 break;
                             } else {
                                 unrent.add(car);
@@ -334,12 +338,13 @@ public class prog1060h {
                                 var dif = mileage- car.getmiles();
                                 var cost = quee.get(4).day;
                                 var cosm = quee.get(4).mile;
-                                System.out.println("Miles driven " + dif + " @ " + cosm + " = " + (dif*cosm));
-                                System.out.println("Days driven " + days + " @ " + cost + " = " + (days*cost));
+                                System.out.println("Miles driven " + Math.round(dif * 100.0)/100.0 + " @ " + cosm + " = " + Math.round(dif * cosm * 100.0)/100.0);
+                                System.out.println("Days driven " + days + " @ " + cost + " = " + Math.round(days * cost * 100.0)/100.0);
                                 var total = (dif*cosm) + (days*cost);
                                 System.out.println("Car type Luxury");
                                 System.out.println("Total = $" + total);
                                 car.miles = mileage;
+                                que.get(4).add(car);
                                 break;
                             } else {
                                 unrent.add(car);
@@ -350,6 +355,7 @@ public class prog1060h {
                             rented.add(unrent.remove());
                         }
                     }
+                    System.out.println();
                 } else {
                     var unrent = new PriorityQueue<carcomp>();
                     System.out.println("Rented");
@@ -363,6 +369,7 @@ public class prog1060h {
                     while (!unrent.isEmpty()) {
                         rented.add(unrent.remove());
                     }
+                    System.out.println();
                 }
             }
 
@@ -371,3 +378,105 @@ public class prog1060h {
         }
     }
 }
+//Listing of Subcompact cars:
+//Yugo 3456.3
+//Sentra 3007.0
+//RX7 4002.1
+//Chevette 1710.1
+//
+//Listing of Compact cars:
+//Shadow 831.2
+//Fiero 1541.4
+//Contour 1091.7
+//Topaz 412.5
+//
+//Listing of Midsize cars:
+//Cutlass 930.7
+//Cougar 1442.2
+//LaBaron 831.2
+//Mystique 117.4
+//
+//Listing of Wagon cars:
+//Delta88 2417.7
+//Bonneville 5100.0
+//Caprice 4522.8
+//
+//Listing of Luxury cars:
+//Cadillac 1234.5
+//Corvette 10341.7
+//Lincoln 8400.2
+//
+//Rented
+//Yugo	3456.3
+//LaBaron	831.2
+//Cadillac	1234.5
+//Delta88	2417.7
+//Cougar	1442.2
+//Cutlass	930.7
+//Topaz	412.5
+//Contour	1091.7
+//Fiero	1541.4
+//Shadow	831.2
+//Chevette	1710.1
+//RX7	4002.1
+//Sentra	3007.0
+//
+//Wrent a wreck invoice
+//
+//Car Yugo
+//Beginning mileage: 3456.3
+//Ending mileage: 3640.0
+//Miles driven 183.7 @ 0.22 = 40.41
+//Days driven 2 @ 18.0 = 36.0
+//Car type Sub Compact
+//Total = $76.41399999999996
+//
+//Wrent a wreck invoice
+//
+//Car Cadillac
+//Beginning mileage: 1234.5
+//Ending mileage: 2801.2
+//Miles driven 1566.7 @ 0.37 = 579.68
+//Days driven 2 @ 34.0 = 68.0
+//Car type Luxury
+//Total = $647.679
+//
+//Wrent a wreck invoice
+//
+//Car Contour
+//Beginning mileage: 1091.7
+//Ending mileage: 2031.7
+//Miles driven 940.0 @ 0.25 = 235.0
+//Days driven 3 @ 20.5 = 61.5
+//Car type Compact
+//Total = $296.5
+//
+//Listing of Subcompact cars:
+//Yugo 3640.0
+//
+//Listing of Compact cars:
+//Contour 2031.7
+//
+//Listing of Midsize cars:
+//Mystique 117.4
+//
+//Listing of Wagon cars:
+//Bonneville 5100.0
+//Caprice 4522.8
+//
+//Listing of Luxury cars:
+//Corvette 10341.7
+//Cadillac 2801.2
+//Lincoln 8400.2
+//
+//Rented
+//Fiero	1541.4
+//LaBaron	831.2
+//Cougar	1442.2
+//Cutlass	930.7
+//Topaz	412.5
+//Delta88	2417.7
+//Shadow	831.2
+//Chevette	1710.1
+//RX7	4002.1
+//Sentra	3007.0
