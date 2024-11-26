@@ -24,6 +24,7 @@ public class prog285bBinaryTree {
             }
             input.close();
 
+
             tree.printInOrder();
         } catch (IOException e) {
             System.out.println("No data file found.");

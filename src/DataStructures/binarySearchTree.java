@@ -17,7 +17,7 @@ public class binarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    protected Node root;
+    public Node root;
 
 
     public binarySearchTree() {
@@ -53,5 +53,17 @@ public class binarySearchTree<T extends Comparable<T>> {
     }
 
 
+    public boolean find(Node node, T element) {
+        if (node == null) {
+            return false;
+        }
+        if (node.data.compareTo(element) == 0) return true;
+        if (element.compareTo(node.data) < 0) {
+            node.left = insert(node.left, element);
+        } else if (element.compareTo(node.data) > 0) {
+            node.right = insert(node.right, element);
+        }
+        return false;
+    }
 
 }
