@@ -13,7 +13,6 @@ public class msoe20248 {
         while (!dw.equals("")) {
             dw = input.nextLine();
             dictionary.add(dw);
-            System.out.println("hi " + dw);
         }
 
         var varw = new ArrayList<String>();
@@ -22,25 +21,25 @@ public class msoe20248 {
                 var w = word.substring(lcv, l);
                 if (!w.equals(word)) {
                     varw.add(w);
-                    System.out.println(w);
+//                    System.out.println(w);
                 }
             }
         }
-
+        var p = 0;
         var bin = new ArrayList<Integer>();
-        while (dictionary.isEmpty()) {
-            dw = dictionary.removeFirst();
-            var p = 0;
+        for (int l = 0; l < dictionary.size(); l++) {
+            dw = dictionary.get(l);
+
             for  (int lcv = 0; lcv < dw.length(); lcv++) {
-                for (int l = lcv+1; l < dw.length()+1; l++) {
+                for (int li = lcv+1; li < dw.length()+1; li++) {
                     for (int y = 0; y < varw.size(); y++) {
-                        if (dw.substring(lcv, l).equalsIgnoreCase(varw.get(y))) {
+                        if (dw.substring(lcv, li).equalsIgnoreCase(varw.get(y))) {
                             if (bin.size() > p) {
                                 if (bin.get(p) < varw.get(y).length()) {
-                                    bin.set(p, varw.get(y).length());
+                                    bin.set(p, varw.get(y).length()+1);
                                 }
                             } else {
-                                bin.add(p, varw.get(y).length());
+                                bin.add(p, varw.get(y).length()+1);
                             }
                         }
                     }
@@ -52,10 +51,56 @@ public class msoe20248 {
             p++;
         }
         int max = bin.get(0);
-        int index = 0;
-
         for (int l = 0; l < bin.size(); l++) {
             var num = bin.get(l);
+            if (num > max && num != word.length()) {
+                max = num;
+            }
+        }
+
+        for (int i = 0; i < bin.size(); i++) {
+            if (bin.get(i) == max && !dictionary.get(i).contains(word)) {
+                System.out.println(dictionary.get(i));
+            }
         }
     }
 }
+/*
+grand
+are
+bandersnatch
+bangle
+branch
+breakfast
+grandfather
+great
+hand
+plant
+ */
+/*
+fien
+friend
+foe
+fie
+foe
+fum
+
+friend
+fie
+ */
+/*
+grand
+are
+bandersnatch
+bangle
+branch
+breakfast
+grandfather
+great
+hand
+plant
+
+bandersnatch
+branch
+hand
+ */
