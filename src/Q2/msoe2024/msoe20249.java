@@ -1,5 +1,7 @@
 package Q2.msoe2024;
 
+import org.junit.Ignore;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -7,17 +9,96 @@ import java.util.logging.ErrorManager;
 
 public class msoe20249 {
 
-    public int recur(String[][] mat, int r, int c) {
-        if (mat[r][c].equalsIgnoreCase("f")) return 0;
-        try {
-            if (mat[r-1][c-1].equals("-")) return recur(mat, r-1, c-1);
-            if (mat[r-1][c-1].equals("-")) return recur(mat, r-1, c-1) + 1;
-        } catch (IndexOutOfBoundsException e) {
-            return 200000000;
-        }
-        return 1;
-    }
+//    public static int recur(String[][] mat, int r, int c) {
+//        if (r < 0 || r > mat.length - 1 || c > mat[0].length - 1 || c < 0) return 0;
+//        if (r == 0 && c > 0) {
+//            if (mat[r][c].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c].equalsIgnoreCase("f") ||
+//                    mat[r][c - 1].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c - 1].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c + 1].equalsIgnoreCase("f") ||
+//                    mat[r][c + 1].equalsIgnoreCase("f")
+//            ) return 0;
+//            if (mat[r][c - 1].equals("-")) return recur(mat, r, c - 1);
+//            if (mat[r + 1][c - 1].equals("-")) return recur(mat, r + 1, c - 1);
+//            if (mat[r + 1][c].equals("-")) return recur(mat, r + 1, c);
+//            if (mat[r][c + 1].equals("-")) return recur(mat, r, c + 1);
+//            if (mat[r + 1][c + 1].equals("-")) return recur(mat, r + 1, c + 1);
+//            if (mat[r][c - 1].equals("s")) return recur(mat, r, c - 1) + 1;
+//            if (mat[r + 1][c - 1].equals("s")) return recur(mat, r + 1, c - 1) + 1;
+//            if (mat[r][c].equals("s")) return recur(mat, r, c) + 1;
+//            if (mat[r + 1][c].equals("s")) return recur(mat, r + 1, c) + 1;
+//            if (mat[r][c + 1].equals("s")) return recur(mat, r, c + 1) + 1;
+//            if (mat[r + 1][c + 1].equals("s")) return recur(mat, r + 1, c + 1) + 1;
+//        } else if (c == 0 && r > 0) {
+//            if (mat[r][c].equalsIgnoreCase("f") ||
+//                    mat[r - 1][c].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c + 1].equalsIgnoreCase("f") ||
+//                    mat[r][c + 1].equalsIgnoreCase("f") ||
+//                    mat[r - 1][c + 1].equalsIgnoreCase("f")
+//            ) return 0;
+//            if (mat[r - 1][c].equals("-")) return recur(mat, r - 1, c);
+//            if (mat[r + 1][c].equals("-")) return recur(mat, r + 1, c);
+//            if (mat[r][c + 1].equals("-")) return recur(mat, r, c + 1);
+//            if (mat[r - 1][c + 1].equals("-")) return recur(mat, r - 1, c + 1);
+//            if (mat[r + 1][c + 1].equals("-")) return recur(mat, r + 1, c + 1);
+//            if (mat[r][c].equals("s")) return recur(mat, r, c) + 1;
+//            if (mat[r - 1][c].equals("s")) return recur(mat, r - 1, c) + 1;
+//            if (mat[r + 1][c].equals("s")) return recur(mat, r + 1, c) + 1;
+//            if (mat[r][c + 1].equals("s")) return recur(mat, r, c + 1) + 1;
+//            if (mat[r - 1][c + 1].equals("s")) return recur(mat, r - 1, c + 1) + 1;
+//            if (mat[r + 1][c + 1].equals("s")) return recur(mat, r + 1, c + 1) + 1;
+//        } else if (c == 0 && r == 0) {
+//            if (mat[r][c].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c + 1].equalsIgnoreCase("f") ||
+//                    mat[r][c + 1].equalsIgnoreCase("f")
+//            ) return 0;
+//            if (mat[r + 1][c].equals("-")) return recur(mat, r + 1, c);
+//            if (mat[r][c + 1].equals("-")) return recur(mat, r, c + 1);
+//            if (mat[r + 1][c + 1].equals("-")) return recur(mat, r + 1, c + 1);
+//            if (mat[r][c].equals("s")) return recur(mat, r, c) + 1;
+//            if (mat[r + 1][c].equals("s")) return recur(mat, r + 1, c) + 1;
+//            if (mat[r][c + 1].equals("s")) return recur(mat, r, c + 1) + 1;
+//            if (mat[r + 1][c + 1].equals("s")) return recur(mat, r + 1, c + 1) + 1;
+//        }else {
+//            if (mat[r][c].equalsIgnoreCase("f") ||
+//                    mat[r - 1][c].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c].equalsIgnoreCase("f") ||
+//                    mat[r][c - 1].equalsIgnoreCase("f") ||
+//                    mat[r - 1][c - 1].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c - 1].equalsIgnoreCase("f") ||
+//                    mat[r + 1][c + 1].equalsIgnoreCase("f") ||
+//                    mat[r][c + 1].equalsIgnoreCase("f") ||
+//                    mat[r - 1][c + 1].equalsIgnoreCase("f")
+//            ) return 0;
+//            if (mat[r - 1][c - 1].equals("-")) return recur(mat, r - 1, c - 1);
+//            if (mat[r][c - 1].equals("-")) return recur(mat, r, c - 1);
+//            if (mat[r + 1][c - 1].equals("-")) return recur(mat, r + 1, c - 1);
+//            if (mat[r - 1][c].equals("-")) return recur(mat, r - 1, c);
+//            if (mat[r + 1][c].equals("-")) return recur(mat, r + 1, c);
+//            if (mat[r][c + 1].equals("-")) return recur(mat, r, c + 1);
+//            if (mat[r - 1][c + 1].equals("-")) return recur(mat, r - 1, c + 1);
+//            if (mat[r + 1][c + 1].equals("-")) return recur(mat, r + 1, c + 1);
+//            if (mat[r - 1][c - 1].equals("s")) return recur(mat, r - 1, c - 1) + 1;
+//            if (mat[r][c - 1].equals("s")) return recur(mat, r, c - 1) + 1;
+//            if (mat[r + 1][c - 1].equals("s")) return recur(mat, r + 1, c - 1) + 1;
+//            if (mat[r][c].equals("s")) return recur(mat, r, c) + 1;
+//            if (mat[r - 1][c].equals("s")) return recur(mat, r - 1, c) + 1;
+//            if (mat[r + 1][c].equals("s")) return recur(mat, r + 1, c) + 1;
+//            if (mat[r][c + 1].equals("s")) return recur(mat, r, c + 1) + 1;
+//            if (mat[r - 1][c + 1].equals("s")) return recur(mat, r - 1, c + 1) + 1;
+//            if (mat[r + 1][c + 1].equals("s")) return recur(mat, r + 1, c + 1) + 1;
+//        }
+//        return 1;
+//    }
 
+    public static int recur(String[][]mat, int r, int c, int check) {
+        if (check > mat.length * mat[0].length) {return 0;}
+        if (mat[r][c].equalsIgnoreCase("S")) return recur(mat, r+1, c, check+1);
+        return 0;
+    }
 
     public static void main(String[] args) {
         try {
