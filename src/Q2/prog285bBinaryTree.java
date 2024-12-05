@@ -24,6 +24,7 @@ public class prog285bBinaryTree {
             }
             input.close();
 
+            tree.delete(tree.getRoot());
 
             tree.printInOrder();
         } catch (IOException e) {
