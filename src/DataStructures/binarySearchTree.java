@@ -1,5 +1,7 @@
 package DataStructures;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
+
 public class binarySearchTree<T extends Comparable<T>> {
     protected class Node implements Comparable<Node> {
         T data;
@@ -78,7 +80,7 @@ public class binarySearchTree<T extends Comparable<T>> {
     private void inOrder(Node node) {
         if (node == null) return;
         inOrder(node.left);
-        System.out.println(node.data + " ");
+        System.out.print(node.data + " ");
         inOrder(node.right);
     }
 
@@ -100,7 +102,7 @@ public class binarySearchTree<T extends Comparable<T>> {
 
     public void nlr(Node node) {
         if (node == null) return;
-        System.out.println(node.data + " ");
+        System.out.print(node.data + " ");
         inOrder(node.left);
         inOrder(node.right);
     }
@@ -109,16 +111,20 @@ public class binarySearchTree<T extends Comparable<T>> {
         if (node == null) return;
         inOrder(node.left);
         inOrder(node.right);
-        System.out.println(node.data + " ");
+        System.out.print(node.data + " ");
     }
 
-    public int total(Node node, int element) {
+    public int total(Node node) {
         if (node == null) {
-            return element;
+            return 0;
         }
-        if (node.left == null) return total(node.right, element+(int)node.data);
-        if (node.right == null) return total(node.left, element+(int)node.data);
-        return total(node.left, element+(int)node.data) + total(node.right, element+(int)node.data);
+        if (node.left == null) {
+            return (Integer) node.data + total(node.right);
+        }
+        if (node.right == null) {
+            return (Integer) node.data + total(node.left);
+        }
+        return (Integer) node.data + total(node.left) + total(node.right);
     }
 
 
