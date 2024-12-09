@@ -28,5 +28,10 @@ public class bigtree {
         System.out.println();
         System.out.println("total of all numbers: " + bt.total(bt.root));
         System.out.println("Is 32 in the list? " + bt.find(32));
+        System.out.println("Height: " + bt.height());
+        System.out.println("Width: " + bt.width());
+        bt.invert();
+        bt.printInOrder();
+        System.out.println("Average: " + bt.ave());
     }
 }

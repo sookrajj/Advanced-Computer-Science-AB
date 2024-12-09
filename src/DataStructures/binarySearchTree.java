@@ -2,6 +2,7 @@ package DataStructures;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
 
+
 public class binarySearchTree<T extends Comparable<T>> {
     protected class Node implements Comparable<Node> {
         T data;
@@ -93,25 +94,34 @@ public class binarySearchTree<T extends Comparable<T>> {
             return false;
         }
         if (element.compareTo(node.data) < 0) {
-            node.left = insert(node.left, element);
+            find(node.left, element);
         } else if (element.compareTo(node.data) > 0) {
-            node.right = insert(node.right, element);
-        }
+            find(node.right, element);
+        } else if (element.compareTo(node.data) == 0) return true;
         return false;
     }
 
     public void nlr(Node node) {
         if (node == null) return;
         System.out.print(node.data + " ");
-        inOrder(node.left);
-        inOrder(node.right);
+        nlr(node.left);
+        nlr(node.right);
     }
 
     public void lrn(Node node) {
         if (node == null) return;
-        inOrder(node.left);
-        inOrder(node.right);
+        lrn(node.left);
+        lrn(node.right);
         System.out.print(node.data + " ");
+    }
+
+    public double ave() {
+        return (double)total(root) / count(root);
+    }
+
+    private int count(Node node) {
+        if (node == null) return 0;
+        return 1 + count(node.left) + count(node.right);
     }
 
     public int total(Node node) {
@@ -127,5 +137,52 @@ public class binarySearchTree<T extends Comparable<T>> {
         return (Integer) node.data + total(node.left) + total(node.right);
     }
 
+    public void invert() { root = invert(root); }
+    public int height() { return height(root); }
+    public int width() { return width(root); }
 
+    private Node invert(Node node) {
+        if (node == null) return null;
+        Node left = invert(node.left);
+        node.left = invert(node.right);
+        node.right = left;
+        return node;
+    }
+
+    private int height(Node node) {
+        if (node == null) return 0;
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+
+    private int width(Node node) {
+        if (node == null) return 0;
+        Queue<Node> que = new Queue<>();
+        que.enqueue(node);
+        int max = 0;
+        while (!que.isEmpty()) {
+            int count = que.size;
+            max = Math.max(max, count);
+            while (count --> 0) {
+                Node current = que.dequeue();
+                if (current.left != null) que.enqueue(current.left);
+                if (current.right != null) que.enqueue(current.right);
+            }
+        }
+        return max;
+    }
+
+    public void removeclose(T element) {
+        removeclose(root, element);
+    }
+
+    private void removeclose(Node node, T element) {
+        if (node == null) return;
+        if (node.data.compareTo(element) == 0) {
+            delete(node.data);
+        } else if (node.left != null) {
+            if (element.compareTo(node.left.data) < 0) {
+                removeclose(node.left, element);
+            }
+        }
+    }
 }
