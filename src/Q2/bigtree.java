@@ -5,21 +5,20 @@ import DataStructures.binarySearchTree;
 public class bigtree {
     public static void main(String[] args) {
         var bt = new binarySearchTree<Integer>();
-//        for (int i = 0; i < 50; i++) {
-//            Integer n = (int) Math.round(Math.random() * 100);
-//            bt.insert(n);
-//            System.out.print(n + " ");
-//        }
-
-        bt.insert(5);
-        bt.insert(2);
-        bt.insert(8);
-        bt.insert(3);
-        bt.insert(7);
-        bt.insert(4);
-        bt.insert(6);
-        bt.insert(1);
-        bt.insert(9);
+        for (int i = 0; i < 50; i++) {
+            Integer n = (int) Math.round(Math.random() * 100);
+            bt.insert(n);
+            System.out.print(n + " ");
+        }
+//        bt.insert(5);
+//        bt.insert(2);
+//        bt.insert(8);
+//        bt.insert(3);
+//        bt.insert(7);
+//        bt.insert(4);
+//        bt.insert(6);
+//        bt.insert(1);
+//        bt.insert(9);
         System.out.println();
         bt.nlr(bt.root); // 5, 2, 1, 3, 4, 8, 6, 7, 9
         System.out.println();
@@ -33,5 +32,7 @@ public class bigtree {
         bt.invert();
         bt.printInOrder();
         System.out.println("Average: " + bt.ave());
+        System.out.println("Remove close to average " + bt.removeclose((int)bt.ave()));
+        bt.printInOrder();
     }
 }

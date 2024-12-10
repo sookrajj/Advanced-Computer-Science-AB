@@ -171,18 +171,47 @@ public class binarySearchTree<T extends Comparable<T>> {
         return max;
     }
 
-    public void removeclose(T element) {
-        removeclose(root, element);
+    public T removeclose(T element) {
+        return removeclose(root, element);
     }
 
-    private void removeclose(Node node, T element) {
-        if (node == null) return;
+    private T removeclose(Node node, T element) {
+        if (node == null) return null;
         if (node.data.compareTo(element) == 0) {
+            var t = node.data;
             delete(node.data);
+            return t;
+
+        } else if (node.left != null && node.right != null) {
+            if (element.compareTo(node.left.data) > 0 && element.compareTo(node.data) < 0) {
+                var t = node.data;
+                delete(node.data);
+                return t;
+            } else if (element.compareTo(node.right.data) < 0 && element.compareTo(node.data) > 0) {
+                var t = node.data;
+                delete(node.data);
+                return t;
+            } else {
+                removeclose(node.left, element);
+                removeclose(node.right, element);
+            }
         } else if (node.left != null) {
-            if (element.compareTo(node.left.data) < 0) {
+            if (element.compareTo(node.left.data) > 0 && element.compareTo(node.data) < 0) {
+                var t = node.data;
+                delete(node.data);
+                return t;
+            } else {
                 removeclose(node.left, element);
             }
+        } else if (node.right != null) {
+            if (element.compareTo(node.right.data) < 0 && element.compareTo(node.data) > 0) {
+                var t = node.data;
+                delete(node.data);
+                return t;
+            } else {
+                removeclose(node.right, element);
+            }
         }
+        return node.data;
     }
 }
