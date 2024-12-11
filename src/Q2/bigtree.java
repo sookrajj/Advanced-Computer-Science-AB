@@ -2,11 +2,15 @@ package Q2;
 
 import DataStructures.binarySearchTree;
 
+import java.util.*;
+
 public class bigtree {
     public static void main(String[] args) {
         var bt = new binarySearchTree<Integer>();
+        var ran = new Random();
+        ran.setSeed(1);
         for (int i = 0; i < 50; i++) {
-            Integer n = (int) Math.round(Math.random() * 100);
+            Integer n = ran.nextInt(100);
             bt.insert(n);
             System.out.print(n + " ");
         }
@@ -23,16 +27,19 @@ public class bigtree {
         bt.nlr(bt.root); // 5, 2, 1, 3, 4, 8, 6, 7, 9
         System.out.println();
         bt.printInOrder(); // 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+        bt.printInOrder();
         bt.lrn(bt.root); // 1, 4, 3, 2, 6, 7, 9, 8, 5
         System.out.println();
         System.out.println("total of all numbers: " + bt.total(bt.root));
         System.out.println("Is 32 in the list? " + bt.find(32));
         System.out.println("Height: " + bt.height());
         System.out.println("Width: " + bt.width());
-        bt.invert();
-        bt.printInOrder();
         System.out.println("Average: " + bt.ave());
         System.out.println("Remove close to average " + bt.removeclose((int)bt.ave()));
+
+        bt.printInOrder();
+        bt.invert();
         bt.printInOrder();
     }
 }

@@ -180,6 +180,7 @@ public class binarySearchTree<T extends Comparable<T>> {
         if (node.data.compareTo(element) == 0) {
             var t = node.data;
             delete(node.data);
+
             return t;
 
         } else if (node.left != null && node.right != null) {
@@ -213,5 +214,21 @@ public class binarySearchTree<T extends Comparable<T>> {
             }
         }
         return node.data;
+    }
+
+    public Node findclose(Integer num) {
+        var node = root;
+        var close = Math.abs((Integer)node.data-num);
+        Queue<Node> que = new Queue<>();
+        que.enqueue(node);
+        while (!que.isEmpty()) {
+            int count = que.size;
+            while (count --> 0) {
+                Node current = que.dequeue();
+                if (current.left != null) que.enqueue(current.left);
+                if (current.right != null) que.enqueue(current.right);
+            }
+        }
+        return node;
     }
 }
