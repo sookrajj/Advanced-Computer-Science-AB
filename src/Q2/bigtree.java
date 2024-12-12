@@ -36,8 +36,8 @@ public class bigtree {
         System.out.println("Height: " + bt.height());
         System.out.println("Width: " + bt.width());
         System.out.println("Average: " + bt.ave());
-        System.out.println("Remove close to average " + bt.removeclose((int)bt.ave()));
-
+        System.out.println("Remove close to average " + bt.findclose((int)bt.ave()));
+        bt.delete(bt.findclose((int) bt.ave()));
         bt.printInOrder();
         bt.invert();
         bt.printInOrder();

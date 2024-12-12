@@ -2,6 +2,8 @@ package DataStructures;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
 
+import java.util.ArrayList;
+
 
 public class binarySearchTree<T extends Comparable<T>> {
     protected class Node implements Comparable<Node> {
@@ -216,7 +218,7 @@ public class binarySearchTree<T extends Comparable<T>> {
         return node.data;
     }
 
-    public Node findclose(Integer num) {
+    public T findclose(Integer num) {
         var node = root;
         var close = Math.abs((Integer)node.data-num);
         Queue<Node> que = new Queue<>();
@@ -225,10 +227,14 @@ public class binarySearchTree<T extends Comparable<T>> {
             int count = que.size;
             while (count --> 0) {
                 Node current = que.dequeue();
+                if (Math.abs((Integer) current.data-num) < close) {
+                    close = Math.abs((Integer)current.data - num);
+                    node = current;
+                }
                 if (current.left != null) que.enqueue(current.left);
                 if (current.right != null) que.enqueue(current.right);
             }
         }
-        return node;
+        return node.data;
     }
 }
