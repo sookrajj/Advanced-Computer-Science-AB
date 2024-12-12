@@ -94,7 +94,7 @@ public class msoe20249 {
 //        return 1;
 //    }
 
-    public static int recur(String[][]mat, int r, int c, int check, int num) {
+    public static int recur(String[][] mat, int r, int c, int check, int num) {
         if (check > mat.length * mat[0].length) {return 0;}
         if (mat[r][c].equalsIgnoreCase("f")) return num;
         if (mat[r][c].equalsIgnoreCase("S")) num++;
