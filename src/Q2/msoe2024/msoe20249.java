@@ -95,11 +95,15 @@ public class msoe20249 {
 //    }
 
     public static int recur(String[][] mat, int r, int c, int check, int num) {
+        boolean s = false;
         if (c < 0) c = 0;
         if (r < 0) r = 0;
-        if (check > 10) {return 0;}
-        if (mat[r][c].equalsIgnoreCase("f")) return num;
-        if (mat[r][c].equalsIgnoreCase("S")) num++;
+        System.out.println(num);
+        if (check > 10) {return num;}
+        if (mat[r][c].equalsIgnoreCase("f")) {
+            System.out.println("hi");
+            return num;
+        }
         try {
             if (mat[r+1][c].equalsIgnoreCase("f")) return num;
             if (mat[r+1][c+1].equalsIgnoreCase("f")) return num;
@@ -109,7 +113,7 @@ public class msoe20249 {
             if (mat[r-1][c].equalsIgnoreCase("f")) return num;
             if (mat[r-1][c+1].equalsIgnoreCase("f")) return num;
             if (mat[r-1][c-1].equalsIgnoreCase("f")) return num;
-            System.out.println("hi");
+//            System.out.println("hi");
         } catch (IndexOutOfBoundsException e) {
             if (r+1 >= mat.length) {
                 if (c+1 >= mat[0].length) {
@@ -156,129 +160,149 @@ public class msoe20249 {
                     if (mat[r][c+1].equalsIgnoreCase("f")) return num;
                     if (mat[r-1][c].equalsIgnoreCase("f")) return num;
                     if (mat[r-1][c+1].equalsIgnoreCase("f")) return num;
+//                    System.out.println("hill");
                 }
             }
         }
-        try {
-            if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-            if (mat[r+1][c+1].equalsIgnoreCase("-")) recur(mat, r+1, c+1, check+1, num);
-            if (mat[r+1][c-1].equalsIgnoreCase("-")) recur(mat, r+1, c-1, check+1, num);
-            if (mat[r][c+1].equalsIgnoreCase("-")) recur(mat, r, c+1, check+1, num);
-            if (mat[r][c-1].equalsIgnoreCase("-")) recur(mat, r, c-1, check+1, num);
-            if (mat[r-1][c].equalsIgnoreCase("-")) recur(mat, r-1, c, check+1, num);
-            if (mat[r-1][c+1].equalsIgnoreCase("-")) recur(mat, r-1, c+1, check+1, num);
-            if (mat[r-1][c-1].equalsIgnoreCase("-")) recur(mat, r-1, c-1, check+1, num);
-        } catch (IndexOutOfBoundsException e) {
-            if (r+1 >= mat.length) {
-                if (c+1 >= mat[0].length) {
-                    if (mat[r][c-1].equalsIgnoreCase("-")) recur(mat, r, c-1, check+1, num);
-                    if (mat[r-1][c].equalsIgnoreCase("-")) recur(mat, r-1, c, check+1, num);
-                    if (mat[r-1][c-1].equalsIgnoreCase("-")) recur(mat, r-1, c-1, check+1, num);
-                } else if (c - 1 < 0) {
-                    if (mat[r][c+1].equalsIgnoreCase("-")) recur(mat, r, c+1, check+1, num);
-                    if (mat[r-1][c].equalsIgnoreCase("-")) recur(mat, r-1, c, check+1, num);
-                    if (mat[r-1][c+1].equalsIgnoreCase("-")) recur(mat, r-1, c+1, check+1, num);
+            try {
+                if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                if (mat[r + 1][c + 1].equalsIgnoreCase("-")) recur(mat, r + 1, c + 1, check + 1, num);
+                if (mat[r + 1][c - 1].equalsIgnoreCase("-")) recur(mat, r + 1, c - 1, check + 1, num);
+                if (mat[r][c + 1].equalsIgnoreCase("-")) recur(mat, r, c + 1, check + 1, num);
+                if (mat[r][c - 1].equalsIgnoreCase("-")) recur(mat, r, c - 1, check + 1, num);
+                if (mat[r - 1][c].equalsIgnoreCase("-")) recur(mat, r - 1, c, check + 1, num);
+                if (mat[r - 1][c + 1].equalsIgnoreCase("-")) recur(mat, r - 1, c + 1, check + 1, num);
+                if (mat[r - 1][c - 1].equalsIgnoreCase("-")) recur(mat, r - 1, c - 1, check + 1, num);
+                s = true;
+            } catch (IndexOutOfBoundsException e) {
+                if (r + 1 >= mat.length) {
+                    if (c + 1 >= mat[0].length) {
+                        if (mat[r][c - 1].equalsIgnoreCase("-")) recur(mat, r, c - 1, check + 1, num);
+                        if (mat[r - 1][c].equalsIgnoreCase("-")) recur(mat, r - 1, c, check + 1, num);
+                        if (mat[r - 1][c - 1].equalsIgnoreCase("-")) recur(mat, r - 1, c - 1, check + 1, num);
+                        s = true;
+//                        System.out.println(1);
+                    } else if (c - 1 < 0) {
+                        if (mat[r][c + 1].equalsIgnoreCase("-")) recur(mat, r, c + 1, check + 1, num);
+                        if (mat[r - 1][c].equalsIgnoreCase("-")) recur(mat, r - 1, c, check + 1, num);
+                        if (mat[r - 1][c + 1].equalsIgnoreCase("-")) recur(mat, r - 1, c + 1, check + 1, num);
+                        s = true;
+//                        System.out.println(2);
+                    } else {
+                        if (mat[r][c + 1].equalsIgnoreCase("-")) recur(mat, r, c + 1, check + 1, num);
+                        if (mat[r][c - 1].equalsIgnoreCase("-")) recur(mat, r, c - 1, check + 1, num);
+                        if (mat[r - 1][c].equalsIgnoreCase("-")) recur(mat, r - 1, c, check + 1, num);
+                        if (mat[r - 1][c + 1].equalsIgnoreCase("-")) recur(mat, r - 1, c + 1, check + 1, num);
+                        if (mat[r - 1][c - 1].equalsIgnoreCase("-")) recur(mat, r - 1, c - 1, check + 1, num);
+                        s = true;
+//                        System.out.println(3);
+                    }
+                } else if (r - 1 < 0) {
+                    if (c + 1 >= mat[0].length) {
+                        if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                        if (mat[r + 1][c - 1].equalsIgnoreCase("-")) recur(mat, r + 1, c - 1, check + 1, num);
+                        if (mat[r][c - 1].equalsIgnoreCase("-")) recur(mat, r, c - 1, check + 1, num);
+                        s = true;
+//                        System.out.println(4);
+                    } else if (c - 1 < 0) {
+                        if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                        if (mat[r + 1][c + 1].equalsIgnoreCase("-")) recur(mat, r + 1, c + 1, check + 1, num);
+                        if (mat[r][c + 1].equalsIgnoreCase("-")) recur(mat, r, c + 1, check + 1, num);
+                        s = true;
+//                        System.out.println(5);
+                    } else {
+                        if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                        if (mat[r + 1][c + 1].equalsIgnoreCase("-")) recur(mat, r + 1, c + 1, check + 1, num);
+                        if (mat[r + 1][c - 1].equalsIgnoreCase("-")) recur(mat, r + 1, c - 1, check + 1, num);
+                        if (mat[r][c + 1].equalsIgnoreCase("-")) recur(mat, r, c + 1, check + 1, num);
+                        if (mat[r][c - 1].equalsIgnoreCase("-")) recur(mat, r, c - 1, check + 1, num);
+                        s = true;
+//                        System.out.println(6);
+                    }
                 } else {
-                    if (mat[r][c+1].equalsIgnoreCase("-")) recur(mat, r, c+1, check+1, num);
-                    if (mat[r][c-1].equalsIgnoreCase("-")) recur(mat, r, c-1, check+1, num);
-                    if (mat[r-1][c].equalsIgnoreCase("-")) recur(mat, r-1, c, check+1, num);
-                    if (mat[r-1][c+1].equalsIgnoreCase("-")) recur(mat, r-1, c+1, check+1, num);
-                    if (mat[r-1][c-1].equalsIgnoreCase("-")) recur(mat, r-1, c-1, check+1, num);
-                }
-            } else if (r-1 < 0) {
-                if (c+1 >= mat[0].length) {
-                    if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-                    if (mat[r+1][c-1].equalsIgnoreCase("-")) recur(mat, r+1, c-1, check+1, num);
-                    if (mat[r][c-1].equalsIgnoreCase("-")) recur(mat, r, c-1, check+1, num);
-                } else if (c - 1 < 0) {
-                    if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-                    if (mat[r+1][c+1].equalsIgnoreCase("-")) recur(mat, r+1, c+1, check+1, num);
-                    if (mat[r][c+1].equalsIgnoreCase("-")) recur(mat, r, c+1, check+1, num);
-                } else {
-                    if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-                    if (mat[r+1][c+1].equalsIgnoreCase("-")) recur(mat, r+1, c+1, check+1, num);
-                    if (mat[r+1][c-1].equalsIgnoreCase("-")) recur(mat, r+1, c-1, check+1, num);
-                    if (mat[r][c+1].equalsIgnoreCase("-")) recur(mat, r, c+1, check+1, num);
-                    if (mat[r][c-1].equalsIgnoreCase("-")) recur(mat, r, c-1, check+1, num);
-                }
-            } else {
-                if (c+1 >= mat[0].length) {
-                    if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-                    if (mat[r+1][c-1].equalsIgnoreCase("-")) recur(mat, r+1, c-1, check+1, num);
-                    if (mat[r][c-1].equalsIgnoreCase("-")) recur(mat, r, c-1, check+1, num);
-                    if (mat[r-1][c].equalsIgnoreCase("-")) recur(mat, r-1, c, check+1, num);
-                    if (mat[r-1][c-1].equalsIgnoreCase("-")) recur(mat, r-1, c-1, check+1, num);
-                } else if (c - 1 < 0) {
-                    if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-                    if (mat[r+1][c+1].equalsIgnoreCase("-")) recur(mat, r+1, c+1, check+1, num);
-                    if (mat[r][c+1].equalsIgnoreCase("-")) recur(mat, r, c+1, check+1, num);
-                    if (mat[r-1][c].equalsIgnoreCase("-")) recur(mat, r-1, c, check+1, num);
-                    if (mat[r-1][c+1].equalsIgnoreCase("-")) recur(mat, r-1, c+1, check+1, num);
+                    if (c + 1 >= mat[0].length) {
+                        if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                        if (mat[r + 1][c - 1].equalsIgnoreCase("-")) recur(mat, r + 1, c - 1, check + 1, num);
+                        if (mat[r][c - 1].equalsIgnoreCase("-")) recur(mat, r, c - 1, check + 1, num);
+                        if (mat[r - 1][c].equalsIgnoreCase("-")) recur(mat, r - 1, c, check + 1, num);
+                        if (mat[r - 1][c - 1].equalsIgnoreCase("-")) recur(mat, r - 1, c - 1, check + 1, num);
+                        s = true;
+//                        System.out.println(7);
+                    } else if (c - 1 < 0) {
+                        if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                        if (mat[r + 1][c + 1].equalsIgnoreCase("-")) recur(mat, r + 1, c + 1, check + 1, num);
+                        if (mat[r][c + 1].equalsIgnoreCase("-")) recur(mat, r, c + 1, check + 1, num);
+                        if (mat[r - 1][c].equalsIgnoreCase("-")) recur(mat, r - 1, c, check + 1, num);
+                        if (mat[r - 1][c + 1].equalsIgnoreCase("-")) recur(mat, r - 1, c + 1, check + 1, num);
+                        s = true;
+//                        System.out.println(8);
+                    }
                 }
             }
-        }
-        try {
-            if (mat[r+1][c].equalsIgnoreCase("s")) recur(mat, r+1, c, check+1, num+1);
-            if (mat[r+1][c+1].equalsIgnoreCase("s")) recur(mat, r+1, c+1, check+1, num+1);
-            if (mat[r+1][c-1].equalsIgnoreCase("s")) recur(mat, r+1, c-1, check+1, num+1);
-            if (mat[r][c+1].equalsIgnoreCase("s")) recur(mat, r, c+1, check+1, num+1);
-            if (mat[r][c-1].equalsIgnoreCase("s")) recur(mat, r, c-1, check+1, num+1);
-            if (mat[r-1][c].equalsIgnoreCase("s")) recur(mat, r-1, c, check+1, num+1);
-            if (mat[r-1][c+1].equalsIgnoreCase("s")) recur(mat, r-1, c+1, check+1, num+1);
-            if (mat[r-1][c-1].equalsIgnoreCase("s")) recur(mat, r-1, c-1, check+1, num+1);
-            System.out.println("hi");
-        } catch (IndexOutOfBoundsException e) {
 
-            if (r+1 >= mat.length) {
-                if (c+1 >= mat[0].length) {
-                    if (mat[r][c-1].equalsIgnoreCase("s")) recur(mat, r, c-1, check+1, num+1);
-                    if (mat[r-1][c].equalsIgnoreCase("s")) recur(mat, r-1, c, check+1, num+1);
-                    if (mat[r-1][c-1].equalsIgnoreCase("s")) recur(mat, r-1, c-1, check+1, num+1);
-                } else if (c - 1 < 0) {
-                    if (mat[r][c+1].equalsIgnoreCase("s")) recur(mat, r, c+1, check+1, num+1);
-                    if (mat[r-1][c].equalsIgnoreCase("s")) recur(mat, r-1, c, check+1, num+1);
-                    if (mat[r-1][c+1].equalsIgnoreCase("s")) recur(mat, r-1, c+1, check+1, num+1);
-                } else {
-                    if (mat[r][c+1].equalsIgnoreCase("s")) recur(mat, r, c+1, check+1, num+1);
-                    if (mat[r][c-1].equalsIgnoreCase("s")) recur(mat, r, c-1, check+1, num+1);
-                    if (mat[r-1][c].equalsIgnoreCase("s")) recur(mat, r-1, c, check+1, num+1);
-                    if (mat[r-1][c+1].equalsIgnoreCase("s")) recur(mat, r-1, c+1, check+1, num+1);
-                    if (mat[r-1][c-1].equalsIgnoreCase("s")) recur(mat, r-1, c-1, check+1, num+1);
+                try {
+                    if (mat[r + 1][c].equalsIgnoreCase("s")) recur(mat, r + 1, c, check + 1, num + 1);
+                    if (mat[r + 1][c + 1].equalsIgnoreCase("s")) recur(mat, r + 1, c + 1, check + 1, num + 1);
+                    if (mat[r + 1][c - 1].equalsIgnoreCase("s")) recur(mat, r + 1, c - 1, check + 1, num + 1);
+                    if (mat[r][c + 1].equalsIgnoreCase("s")) recur(mat, r, c + 1, check + 1, num + 1);
+                    if (mat[r][c - 1].equalsIgnoreCase("s")) recur(mat, r, c - 1, check + 1, num + 1);
+                    if (mat[r - 1][c].equalsIgnoreCase("s")) recur(mat, r - 1, c, check + 1, num + 1);
+                    if (mat[r - 1][c + 1].equalsIgnoreCase("s")) recur(mat, r - 1, c + 1, check + 1, num + 1);
+                    if (mat[r - 1][c - 1].equalsIgnoreCase("s")) recur(mat, r - 1, c - 1, check + 1, num + 1);
+                    System.out.println("hi");
+                } catch (IndexOutOfBoundsException e) {
+                    if (r + 1 >= mat.length) {
+                        if (c + 1 >= mat[0].length) {
+                            if (mat[r][c - 1].equalsIgnoreCase("s")) recur(mat, r, c - 1, check + 1, num + 1);
+                            if (mat[r - 1][c].equalsIgnoreCase("s")) recur(mat, r - 1, c, check + 1, num + 1);
+                            if (mat[r - 1][c - 1].equalsIgnoreCase("s")) recur(mat, r - 1, c - 1, check + 1, num + 1);
+                        } else if (c - 1 < 0) {
+                            if (mat[r][c + 1].equalsIgnoreCase("s")) recur(mat, r, c + 1, check + 1, num + 1);
+                            if (mat[r - 1][c].equalsIgnoreCase("s")) recur(mat, r - 1, c, check + 1, num + 1);
+                            if (mat[r - 1][c + 1].equalsIgnoreCase("s")) recur(mat, r - 1, c + 1, check + 1, num + 1);
+                        } else {
+                            if (mat[r][c + 1].equalsIgnoreCase("s")) recur(mat, r, c + 1, check + 1, num + 1);
+                            if (mat[r][c - 1].equalsIgnoreCase("s")) recur(mat, r, c - 1, check + 1, num + 1);
+                            if (mat[r - 1][c].equalsIgnoreCase("s")) recur(mat, r - 1, c, check + 1, num + 1);
+                            if (mat[r - 1][c + 1].equalsIgnoreCase("s")) recur(mat, r - 1, c + 1, check + 1, num + 1);
+                            if (mat[r - 1][c - 1].equalsIgnoreCase("s")) recur(mat, r - 1, c - 1, check + 1, num + 1);
+                        }
+                    } else if (r - 1 < 0) {
+                        if (c + 1 >= mat[0].length) {
+                            if (mat[r + 1][c].equalsIgnoreCase("s")) recur(mat, r + 1, c, check + 1, num + 1);
+                            if (mat[r + 1][c - 1].equalsIgnoreCase("s")) recur(mat, r + 1, c - 1, check + 1, num + 1);
+                            if (mat[r][c - 1].equalsIgnoreCase("s")) recur(mat, r, c - 1, check + 1, num + 1);
+                        } else if (c - 1 < 0) {
+                            if (mat[r + 1][c].equalsIgnoreCase("s")) recur(mat, r + 1, c, check + 1, num + 1);
+                            if (mat[r + 1][c + 1].equalsIgnoreCase("s")) recur(mat, r + 1, c + 1, check + 1, num + 1);
+                            if (mat[r][c + 1].equalsIgnoreCase("s")) recur(mat, r, c + 1, check + 1, num + 1);
+                        } else {
+                            if (mat[r + 1][c].equalsIgnoreCase("s")) recur(mat, r + 1, c, check + 1, num + 1);
+                            if (mat[r + 1][c + 1].equalsIgnoreCase("s")) recur(mat, r + 1, c + 1, check + 1, num + 1);
+                            if (mat[r + 1][c - 1].equalsIgnoreCase("s")) recur(mat, r + 1, c - 1, check + 1, num + 1);
+                            if (mat[r][c + 1].equalsIgnoreCase("s")) recur(mat, r, c + 1, check + 1, num + 1);
+                            if (mat[r][c - 1].equalsIgnoreCase("s")) recur(mat, r, c - 1, check + 1, num + 1);
+                        }
+                    } else {
+                        if (c + 1 >= mat[0].length) {
+                            if (mat[r + 1][c].equalsIgnoreCase("s")) recur(mat, r + 1, c, check + 1, num + 1);
+                            if (mat[r + 1][c - 1].equalsIgnoreCase("s")) recur(mat, r + 1, c - 1, check + 1, num + 1);
+                            if (mat[r][c - 1].equalsIgnoreCase("s")) recur(mat, r, c - 1, check + 1, num + 1);
+                            if (mat[r - 1][c].equalsIgnoreCase("s")) recur(mat, r - 1, c, check + 1, num + 1);
+                            if (mat[r - 1][c - 1].equalsIgnoreCase("s")) recur(mat, r - 1, c - 1, check + 1, num + 1);
+                            if (mat[r + 1][c].equalsIgnoreCase("-")) recur(mat, r + 1, c, check + 1, num);
+                            if (mat[r + 1][c - 1].equalsIgnoreCase("-")) recur(mat, r + 1, c - 1, check + 1, num);
+                        } else if (c - 1 < 0) {
+                            if (mat[r + 1][c].equalsIgnoreCase("s")) recur(mat, r + 1, c, check + 1, num + 1);
+                            if (mat[r + 1][c + 1].equalsIgnoreCase("s")) recur(mat, r + 1, c + 1, check + 1, num + 1);
+                            if (mat[r][c + 1].equalsIgnoreCase("s")) recur(mat, r, c + 1, check + 1, num + 1);
+                            if (mat[r - 1][c].equalsIgnoreCase("s")) recur(mat, r - 1, c, check + 1, num + 1);
+                            if (mat[r - 1][c + 1].equalsIgnoreCase("s")) recur(mat, r - 1, c + 1, check + 1, num + 1);
+                        }
+                    }
                 }
-            } else if (r-1 < 0) {
-                if (c+1 >= mat[0].length) {
-                    if (mat[r+1][c].equalsIgnoreCase("s")) recur(mat, r+1, c, check+1, num+1);
-                    if (mat[r+1][c-1].equalsIgnoreCase("s")) recur(mat, r+1, c-1, check+1, num+1);
-                    if (mat[r][c-1].equalsIgnoreCase("s")) recur(mat, r, c-1, check+1, num+1);
-                } else if (c - 1 < 0) {
-                    if (mat[r+1][c].equalsIgnoreCase("s")) recur(mat, r+1, c, check+1, num+1);
-                    if (mat[r+1][c+1].equalsIgnoreCase("s")) recur(mat, r+1, c+1, check+1, num+1);
-                    if (mat[r][c+1].equalsIgnoreCase("s")) recur(mat, r, c+1, check+1, num+1);
-                } else {
-                    if (mat[r+1][c].equalsIgnoreCase("s")) recur(mat, r+1, c, check+1, num+1);
-                    if (mat[r+1][c+1].equalsIgnoreCase("s")) recur(mat, r+1, c+1, check+1, num+1);
-                    if (mat[r+1][c-1].equalsIgnoreCase("s")) recur(mat, r+1, c-1, check+1, num+1);
-                    if (mat[r][c+1].equalsIgnoreCase("s")) recur(mat, r, c+1, check+1, num+1);
-                    if (mat[r][c-1].equalsIgnoreCase("s")) recur(mat, r, c-1, check+1, num+1);
-                }
-            } else {
-                if (c+1 >= mat[0].length) {
-                    if (mat[r+1][c].equalsIgnoreCase("s")) recur(mat, r+1, c, check+1, num+1);
-                    if (mat[r+1][c-1].equalsIgnoreCase("s")) recur(mat, r+1, c-1, check+1, num+1);
-                    if (mat[r][c-1].equalsIgnoreCase("s")) recur(mat, r, c-1, check+1, num+1);
-                    if (mat[r-1][c].equalsIgnoreCase("s")) recur(mat, r-1, c, check+1, num+1);
-                    if (mat[r-1][c-1].equalsIgnoreCase("s")) recur(mat, r-1, c-1, check+1, num+1);
-                    if (mat[r+1][c].equalsIgnoreCase("-")) recur(mat, r+1, c, check+1, num);
-                    if (mat[r+1][c-1].equalsIgnoreCase("-")) recur(mat, r+1, c-1, check+1, num);
-                } else if (c - 1 < 0) {
-                    if (mat[r+1][c].equalsIgnoreCase("s")) recur(mat, r+1, c, check+1, num+1);
-                    if (mat[r+1][c+1].equalsIgnoreCase("s")) recur(mat, r+1, c+1, check+1, num+1);
-                    if (mat[r][c+1].equalsIgnoreCase("s")) recur(mat, r, c+1, check+1, num+1);
-                    if (mat[r-1][c].equalsIgnoreCase("s")) recur(mat, r-1, c, check+1, num+1);
-                    if (mat[r-1][c+1].equalsIgnoreCase("s")) recur(mat, r-1, c+1, check+1, num+1);
-                }
-            }
-        }
+
+
         return num;
     }
 
