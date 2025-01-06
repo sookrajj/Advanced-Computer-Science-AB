@@ -8,7 +8,7 @@ public class shipment {
         this.ships = ships.split(" ");
         for (int i = 0; i < this.ships.length; i++) {
             numshi[i] = Integer.parseInt(this.ships[i].split(":")[1]);
-            this.ships[i] = this.ships[i].split(":")[i]
+            this.ships[i] = this.ships[i].split(":")[i];
         }
     }
 
