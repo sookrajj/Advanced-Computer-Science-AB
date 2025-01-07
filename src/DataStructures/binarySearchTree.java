@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class binarySearchTree<T extends Comparable<T>> {
-    protected class Node implements Comparable<Node> {
+    public class Node implements Comparable<Node> {
         T data;
         Node left;
         Node right;
@@ -15,6 +15,10 @@ public class binarySearchTree<T extends Comparable<T>> {
             data = element;
             left = null;
             right = null;
+        }
+
+        public T getData() {
+            return data;
         }
 
         public int compareTo(Node o) {
@@ -238,16 +242,18 @@ public class binarySearchTree<T extends Comparable<T>> {
         return node.data;
     }
 
-    public void bread() {
+    public Queue<Node> bread() {
         Queue<Node> queue = new Queue<>();
         queue.enqueue(root);
         while (!queue.isEmpty()) {
             Node node = queue.dequeue();
-            System.out.print(node.data + " ");
+            queue.enqueue(node);
+//            System.out.print(node.data + " ");
             if (node.left != null) queue.enqueue(node.left);
             if (node.right != null) queue.enqueue(node.right);
         }
-        System.out.println();
+//        System.out.println();
+        return queue;
     }
 
     public void depthfs() {
@@ -260,6 +266,20 @@ public class binarySearchTree<T extends Comparable<T>> {
             if (node.left != null) stack.push(node.left);
         }
         System.out.println();
+    }
+
+    public T getElement(T element) {
+        return getElement(root, element);
+    }
+
+    private T getElement(Node node, T element) {
+        if (node == null) return null;
+        if (element.compareTo(node.data) < 0)
+            return getElement(node.left, element);
+        else if (element.compareTo(node.data) > 0)
+            return getElement(node.right, element);
+        else
+            return node.data;
     }
 
 }

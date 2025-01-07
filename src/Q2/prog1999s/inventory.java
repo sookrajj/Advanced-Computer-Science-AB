@@ -1,6 +1,6 @@
 package Q2.prog1999s;
 
-public class inventory {
+public class inventory implements Comparable<inventory> {
     private String item;
     private int num;
 
@@ -19,5 +19,10 @@ public class inventory {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    @Override
+    public int compareTo(inventory o) {
+        return 0;
     }
 }
