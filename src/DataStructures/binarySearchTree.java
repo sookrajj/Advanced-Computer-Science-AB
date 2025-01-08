@@ -245,15 +245,16 @@ public class binarySearchTree<T extends Comparable<T>> {
     public Queue<Node> bread() {
         Queue<Node> queue = new Queue<>();
         queue.enqueue(root);
+        Queue<Node> l = new Queue<>();
         while (!queue.isEmpty()) {
             Node node = queue.dequeue();
-            queue.enqueue(node);
+            l.enqueue(node);
 //            System.out.print(node.data + " ");
             if (node.left != null) queue.enqueue(node.left);
             if (node.right != null) queue.enqueue(node.right);
         }
 //        System.out.println();
-        return queue;
+        return l;
     }
 
     public void depthfs() {

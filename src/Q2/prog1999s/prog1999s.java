@@ -66,11 +66,6 @@ public class prog1999s {
                 }
             }
 
-            for (int i = 0; i < ib.size(); i++) {
-                System.out.print(ib.get(i).getItem() + " " + ib.get(i).getNum() + "     ");
-            }
-
-
             num = Integer.parseInt(lines.remove(0));
             Queue<inventory> om = new Queue<>();
             for (int i = 0; i < num; i++) {
@@ -78,8 +73,8 @@ public class prog1999s {
                 var inv = new inventory(line.split(" ")[0], Integer.parseInt(line.split(" ")[1]));
                 om.enqueue(inv);
             }
-
-            for (int i = 0; i < om.size(); i++) {
+            num = om.size();
+            for (int i = 0; i < num; i++) {
                 var ord = om.dequeue();
                 var name = ord.getItem();
                 var n = ord.getNum();
@@ -87,16 +82,89 @@ public class prog1999s {
                 while (!b.isEmpty()) {
                     var or = b.dequeue();
                     if (or.getData().getRec().compareTo(name) == 0) {
-                        var i1 = or.getData().getI1q();
-                        var i2 = or.getData().getI2q();
-                        var i3 = or.getData().getI3q();
+                        var i1 = or.getData().getI1();
+                        var i2 = or.getData().getI2();
+                        var i3 = or.getData().getI3();
+                        var i1q = or.getData().getI1q();
+                        var i2q = or.getData().getI2q();
+                        var i3q = or.getData().getI3q();
+                        for (int p = 0; p < ib.size(); p++) {
+                            if (ib.get(p).getItem().equals(i1)) {
+                                ib.get(p).setNum(ib.get(p).getNum()-i1q * n);
+                            }
+                            if (ib.get(p).getItem().equals(i2)) {
+                                ib.get(p).setNum(ib.get(p).getNum()-i2q * n);
+                            }
+                            if (ib.get(p).getItem().equals(i3)) {
+                                ib.get(p).setNum(ib.get(p).getNum()-i3q * n);
+                            }
+                        }
                     }
                 }
             }
+            System.out.println("Final Inventory:");
+            for (int i = 0; i < ib.size(); i++) {
+                System.out.println(ib.get(i).getItem() + " " + ib.get(i).getNum() + "     ");
+            }
+            System.out.println();
 
+            num = Integer.parseInt(lines.remove(0));
+            Dequeue<String> fm = new Dequeue<>();
+            for (int i = 0; i < num; i++) {
+                var line = lines.remove(0);
+                if (line.split(" ")[0].equals("ADD_FRONT")) {
+                    fm.enqueueFront(line.split(" ")[1]);
+                }
+                if (line.split(" ")[0].equals("ADD_BACK")) {
+                    fm.enqueueRear(line.split(" ")[1]);
+                }
+                if (line.equals("REMOVE_FRONT")) {
+                    fm.dequeueFront();
+                }
+                if (line.equals("REMOVE_BACK")) {
+                    fm.dequeueRear();
+                }
+            }
+            System.out.println("Featured Meals");
+            while (!fm.isEmpty()) {
+                var f = fm.dequeue();
+                System.out.println(f);
+            }
+
+
+            num = Integer.parseInt(lines.remove(0));
+            Stack<String> rv = new Stack<>();
+            for (int i = 0; i < num; i++) {
+                var line = lines.remove(0);
+                if (line.split(" ")[0].equals("VIEW")) {
+                    rv.push(line.split(" ")[1]);
+                }
+            }
+            System.out.println();
+            System.out.println("Top of Recently Viewed");
+            System.out.println(rv.peak());
 
         } catch (IOException e) {
             System.out.println("No data file found.");
         }
     }
 }
+//Final Inventory:
+//Pasta 6
+//Sauce 2
+//Cheese 1
+//Quinoa 2
+//Chickpeas 2
+//Herbs 4
+//Spinach 3
+//Lemons 4
+//Tortillas 4
+//Beans 4
+//Salsa 2
+//
+//Featured Meals
+//VeganBowl
+//SpicyTacos
+//
+//Top of Recently Viewed
+//GrilledSalmon
