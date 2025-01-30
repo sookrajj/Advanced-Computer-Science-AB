@@ -30,15 +30,30 @@ public class msoe20145 {
 
         var num = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         var index = 0;
-        while (number != 0) {
+        while (number != 1) {
             if (number % primes[index] == 0) {
                 num[index] += 1;
-                number++;
+                number /= primes[index];
             } else {
                 index++;
             }
         }
 
+        var total = 1;
+        var s = "";
+        var ns = "";
+        for (int l = 0; l < num.length; l++) {
+            if (num[l] > 0) {
+                var p = primes[l];
+                var pow = num[l];
+                s += p + "^" + pow + " ";
+                ns += p + "^" + (pow-1) + " ";
+                total *= Math.pow(p, pow-1);
+            }
+        }
 
+        System.out.println(s + " -> " + ns + " = " + total);
     }
 }
+//Enter a number: 44100
+//2^2 3^2 5^2 7^2  -> 2^1 3^1 5^1 7^1  = 210
