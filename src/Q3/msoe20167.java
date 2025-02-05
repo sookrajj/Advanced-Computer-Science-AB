@@ -43,6 +43,20 @@ public class msoe20167 {
             }
             fi.close();
 
+
+            helper help = new helper(nums, clues, clunum);
+            if (help.error1()) {
+                System.out.println("Error 1: The same number between 1 and N appears more than once in any row or column.");
+            } else if (help.error2()) {
+                System.out.println("Error 2: There is an empty cell that cannot be filled with a number since all the numbers 1\n" +
+                        "through N already appear in the 2N-2 cells in the same row and column.");
+            } else if (help.error3()) {
+                System.out.println("Error 3: There is a row or column that is completely filled that does not present the number of\n" +
+                        "specified faces.");
+            } else {
+                System.out.println("No obvious errors you are all good to go!");
+            }
+
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -114,12 +128,57 @@ public class msoe20167 {
                 var dir = clues.get(i*3);
                 var pos = clues.get(i*3+1);
                 var bnum = clues.get(i*3+2);
-                boolean[] nu = new boolean[nums.length];
                 if (dir%2 == 0) {
+                    int[] col = new int[nums.length];
+                    for (int l = 0; l < nums.length; l++) {
+                        col[l] = nums[l][pos];
+                    }
+                    if (dir == 2) {
+                        int seen = 0;
+                        for (int l = 1; l < col.length; l++) {
+                            if (col[seen] <= col[l]) {
+                                seen++;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (seen != bnum) {return true; }
+                    } else if (dir == 4) {
+                        int seen = 1;
+                        for (int l = col.length-2; l > 0; l--) {
+                            if (col[col.length-seen] <= col[l]) {
+                                seen++;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (seen != bnum) {return true; }
+                    }
+
 
                 } else {
                     int[] row = nums[pos];
-
+                    if (dir == 1) {
+                        int seen = 0;
+                        for (int l = 1; l < row.length; l++) {
+                            if (row[seen] <= row[l]) {
+                                seen++;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (seen != bnum) {return true; }
+                    } else if (dir == 3) {
+                        int seen = 1;
+                        for (int l = row.length-2; l > 0; l--) {
+                            if (row[row.length-seen] <= row[l]) {
+                                seen++;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (seen != bnum) {return true; }
+                    }
                 }
             }
             return false;
