@@ -170,6 +170,32 @@ public class prog482s {
             System.out.println("No data file found.");
         }
     }
+    @Test
+    public void testHeap() {
+        try {
+            var input = new Scanner(new File("Langdat/numsort.dat"));
+            ArrayList<Integer> sum = new ArrayList<>();
+            while (input.hasNext()) {
+                sum.add(input.nextInt());
+            }
+            input.close();
+            Integer[] array = new Integer[sum.size()];
+            for (int i = 0; i < sum.size(); i++) {
+                array[i] = sum.get(i);
+            }
+            SortingAlgorithms.Heapsort(array);
+            System.out.println();
+            System.out.println("Heap Sorted: ");
+            for (Integer num : array) {
+                System.out.print(num + " ");
+            }
+            for (int i = 0; i < BASE_CASE.length; i++) {
+                Assertions.assertEquals(BASE_CASE[i], array[i], "Failed at index " + i);
+            }
+        } catch (IOException e) {
+            System.out.println("No data file found.");
+        }
+    }
 //    public static void main(String[] args) {
 //        test482h();
 //        System.out.println();
