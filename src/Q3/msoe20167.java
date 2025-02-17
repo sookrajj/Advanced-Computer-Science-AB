@@ -43,7 +43,6 @@ public class msoe20167 {
             }
             fi.close();
 
-
             helper help = new helper(nums, clues, clunum);
             if (help.error1()) {
                 System.out.println("Error 1: The same number between 1 and N appears more than once in any row or column.");
