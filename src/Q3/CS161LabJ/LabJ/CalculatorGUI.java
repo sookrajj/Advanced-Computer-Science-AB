@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import static Utils.Console.print;
 
@@ -55,9 +56,9 @@ public class CalculatorGUI {
         button15.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(snum);
-                var num = t.applyOperation(snum, operator);
-                System.out.println(fnum + " " + snum + " " + operator + " " + num);
+                var str = nums.getText();
+
+                var num = operate(str);
                 nums.setText(String.valueOf(num));
                 operator = 0;
             }
@@ -66,18 +67,14 @@ public class CalculatorGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 decimal = true;
-                nums.setText(String.valueOf(Double.parseDouble(nums.getText())));
+                nums.setText(nums.getText() + ".");
             }
         });
-        if (!decimal) {
-            if (operator == 0) {
+
                 a0Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum % 10 == 0) {
-                            fnum *= 10;
-                        }
-                        System.out.println(operator);
+
                         nums.setText(nums.getText() + 0);
                     }
                 });
@@ -85,12 +82,6 @@ public class CalculatorGUI {
                 a1Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 1;
-                        } else if (fnum % 10 == 0) {
-                            fnum *= 10;
-                            fnum += 1;
-                        }
                         nums.setText(nums.getText() + 1);
                     }
                 });
@@ -98,12 +89,6 @@ public class CalculatorGUI {
                 a2Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 2;
-                        } else {
-                            fnum *= 10;
-                            fnum += 2;
-                        }
                         nums.setText(nums.getText() + 2);
                     }
                 });
@@ -111,12 +96,6 @@ public class CalculatorGUI {
                 a3Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 3;
-                        } else {
-                            fnum *= 10;
-                            fnum += 3;
-                        }
                         nums.setText(nums.getText() + 3);
                     }
                 });
@@ -124,12 +103,6 @@ public class CalculatorGUI {
                 a4Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 4;
-                        } else {
-                            fnum *= 10;
-                            fnum += 4;
-                        }
                         nums.setText(nums.getText() + 4);
                     }
                 });
@@ -137,12 +110,6 @@ public class CalculatorGUI {
                 a5Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 5;
-                        } else if (fnum % 10 == 0) {
-                            fnum *= 10;
-                            fnum += 5;
-                        }
                         nums.setText(nums.getText() + 5);
                     }
                 });
@@ -150,12 +117,6 @@ public class CalculatorGUI {
                 a6Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 6;
-                        } else if (fnum % 10 == 0) {
-                            fnum *= 10;
-                            fnum += 6;
-                        }
                         nums.setText(nums.getText() + 6);
                     }
                 });
@@ -163,12 +124,6 @@ public class CalculatorGUI {
                 a7Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 7;
-                        } else {
-                            fnum *= 10;
-                            fnum += 7;
-                        }
                         nums.setText(nums.getText() + 7);
                     }
                 });
@@ -176,12 +131,6 @@ public class CalculatorGUI {
                 a8Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 8;
-                        } else {
-                            fnum *= 10;
-                            fnum += 8;
-                        }
                         nums.setText(nums.getText() + 8);
                     }
                 });
@@ -189,12 +138,6 @@ public class CalculatorGUI {
                 a9Button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (fnum == 0) {
-                            fnum += 9;
-                        } else {
-                            fnum *= 10;
-                            fnum += 9;
-                        }
                         nums.setText(nums.getText() + 9);
                     }
                 });
@@ -203,422 +146,97 @@ public class CalculatorGUI {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         operator = 4;
-                        t = new Calculator(fnum, operator);
                         System.out.println(operator);
-                        nums.setText(nums.getText() + "/");
+                        nums.setText(nums.getText() + " / ");
                     }
                 });
                 button13.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         operator = 3;
-                        t = new Calculator(fnum, operator);
-                        nums.setText(nums.getText() + "*");
+                        nums.setText(nums.getText() + " * ");
                     }
                 });
                 button16.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         operator = 2;
-                        t = new Calculator(fnum, operator);
-                        nums.setText(nums.getText() + "-");
+                        nums.setText(nums.getText() + " - ");
                     }
                 });
                 button17.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         operator = 1;
-                        t = new Calculator(fnum, operator);
-                        System.out.println(operator);
-                        nums.setText(nums.getText() + "+");
-                    }
-                });
-            } else {
-                a0Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-
-                        } else if (snum % 10 == 0) {
-                            snum *= 10;
-                        }
-                        nums.setText(nums.getText() + 0);
+                        nums.setText(nums.getText() + " + ");
                     }
                 });
 
-                a1Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 1;
-                        } else if (snum % 10 == 0) {
-                            snum *= 10;
-                            snum += 1;
-                        }
-                        System.out.println(snum);
-                        nums.setText(nums.getText() + 1);
-                    }
-                });
 
-                a2Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 2;
-                        } else {
-                            snum *= 10;
-                            snum += 2;
-                        }
-                        System.out.println(snum);
-                        nums.setText(nums.getText() + 2);
-                    }
-                });
+    }
 
-                a3Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 3;
-                        } else {
-                            snum *= 10;
-                            snum += 3;
-                        }
-                        nums.setText(nums.getText() + 3);
-                    }
-                });
-
-                a4Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 4;
-                        } else {
-                            snum *= 10;
-                            snum += 4;
-                        }
-                        nums.setText(nums.getText() + 4);
-                    }
-                });
-
-                a5Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 5;
-                        } else if (snum % 10 == 0) {
-                            snum *= 10;
-                            snum += 5;
-                        }
-                        nums.setText(nums.getText() + 5);
-                    }
-                });
-
-                a6Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 6;
-                        } else if (snum % 10 == 0) {
-                            snum *= 10;
-                            snum += 6;
-                        }
-                        nums.setText(nums.getText() + 6);
-                    }
-                });
-
-                a7Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 7;
-                        } else {
-                            snum *= 10;
-                            snum += 7;
-                        }
-                        nums.setText(nums.getText() + 7);
-                    }
-                });
-
-                a8Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 8;
-                        } else {
-                            snum *= 10;
-                            snum += 8;
-                        }
-                        nums.setText(nums.getText() + 8);
-                    }
-                });
-
-                a9Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (snum == 0) {
-                            snum += 9;
-                        } else {
-                            snum *= 10;
-                            snum += 9;
-                        }
-                        nums.setText(nums.getText() + 9);
-                    }
-                });
-
-                button11.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 4;
-                        nums.setText(nums.getText() + "/");
-                    }
-                });
-                button13.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 3;
-                        nums.setText(nums.getText() + "*");
-                    }
-                });
-                button16.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 2;
-                        nums.setText(nums.getText() + "-");
-                    }
-                });
-                button17.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 1;
-                        nums.setText(nums.getText() + "+");
-                    }
-                });
+    public static double operate(String str) {
+        var symbols = new ArrayList<String>();
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '+') {
+                symbols.add("+");
+                str = str.substring(0, i) + " ? " + str.substring(i+1);
             }
-        } else {
-            if (operator == 0) {
-                a0Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        decilevel++;
-                        nums.setText(nums.getText() + 0);
-                    }
-                });
-
-                a1Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 1;
-                        nums.setText(nums.getText() + 1);
-                    }
-                });
-
-                a2Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 2;
-                        nums.setText(nums.getText() + 2);
-                    }
-                });
-
-                a3Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 3;
-                        nums.setText(nums.getText() + 3);
-                    }
-                });
-
-                a4Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 4;
-                        nums.setText(nums.getText() + 4);
-                    }
-                });
-
-                a5Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 5;
-                        nums.setText(nums.getText() + 5);
-                    }
-                });
-
-                a6Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 6;
-                        nums.setText(nums.getText() + 6);
-                    }
-                });
-
-                a7Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 7;
-                        nums.setText(nums.getText() + 7);
-                    }
-                });
-
-                a8Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 8;
-                        nums.setText(nums.getText() + 8);
-                    }
-                });
-
-                a9Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        fnum += Math.pow(10, -decilevel) * 9;
-                        nums.setText(nums.getText() + 9);
-                    }
-                });
-
-                button11.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 4;
-                        t = new Calculator(fnum, operator);
-                        nums.setText(nums.getText() + "/");
-                    }
-                });
-                button13.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 3;
-                        t = new Calculator(fnum, operator);
-                        nums.setText(nums.getText() + "*");
-                    }
-                });
-                button16.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 2;
-                        t = new Calculator(fnum, operator);
-                        nums.setText(nums.getText() + "-");
-                    }
-                });
-                button17.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 1;
-                        t = new Calculator(fnum, operator);
-                        nums.setText(nums.getText() + "+");
-                    }
-                });
-            } else {
-                a0Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        decilevel++;
-                        nums.setText(nums.getText() + 0);
-                    }
-                });
-
-                a1Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 1;
-                        nums.setText(nums.getText() + 1);
-                    }
-                });
-
-                a2Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 2;
-                        nums.setText(nums.getText() + 2);
-                    }
-                });
-
-                a3Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 3;
-                        nums.setText(nums.getText() + 3);
-                    }
-                });
-
-                a4Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 4;
-                        nums.setText(nums.getText() + 4);
-                    }
-                });
-
-                a5Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 5;
-                        nums.setText(nums.getText() + 5);
-                    }
-                });
-
-                a6Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 6;
-                        nums.setText(nums.getText() + 6);
-                    }
-                });
-
-                a7Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 7;
-                        nums.setText(nums.getText() + 7);
-                    }
-                });
-
-                a8Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 8;
-                        nums.setText(nums.getText() + 8);
-                    }
-                });
-
-                a9Button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        snum += Math.pow(10, -decilevel) * 9;
-                        nums.setText(nums.getText() + 9);
-                    }
-                });
-
-                button11.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 4;
-                        nums.setText(nums.getText() + "/");
-                    }
-                });
-                button13.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 3;
-                        nums.setText(nums.getText() + "*");
-                    }
-                });
-                button16.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 2;
-                        nums.setText(nums.getText() + "-");
-                    }
-                });
-                button17.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        operator = 1;
-                        nums.setText(nums.getText() + "+");
-                    }
-                });
+            if (str.charAt(i) == '-') {
+                symbols.add("-");
+                str = str.substring(0, i) + " ? " + str.substring(i+1);
+            }
+            if (str.charAt(i) == '*') {
+                symbols.add("*");
+                str = str.substring(0, i) + " ? " + str.substring(i+1);
+            }
+            if (str.charAt(i) == '/') {
+                symbols.add("/");
+                str = str.substring(0, i) + " ? " + str.substring(i+1);
             }
         }
+        var spl = str.split(" ? ");
+        var d = new ArrayList<Double>();
+        var t = new Calculator();
+        for (int i = 0; i < spl.length; i++) {
+            if (!spl[i].equals("?")) {
+                d.add(Double.parseDouble(spl[i]));
+            }
+        }
+        for (int i = 0; i < symbols.size(); i++) {
+            var op = symbols.get(i);
+            if (op.equals("/")) {
+                t = new Calculator(d.remove(i), 4);
+                symbols.remove(i);
+                t.divide(d.remove(i));
+                d.add(i, t.getValue());
+                i--;
+            } else if (op.equals("*")) {
+                t = new Calculator(d.remove(i), 3);
+                symbols.remove(i);
+                t.multiply(d.remove(i));
+                d.add(i, t.getValue());
+                i--;
+            }
+        }
+        for (int i = 0; i < symbols.size(); i++) {
+            var op = symbols.get(i);
+            if (op.equals("+")) {
+                t = new Calculator(d.remove(i), 1);
+                symbols.remove(i);
+                t.add(d.remove(i));
+                d.add(i, t.getValue());
+                i--;
+            } else if (op.equals("-")) {
+                t = new Calculator(d.remove(i), 2);
+                symbols.remove(i);
+                t.subtract(d.remove(i));
+                d.add(i, t.getValue());
+                i--;
+            }
+        }
+
+        return d.get(0);
     }
 
     public static void main(String[] args) {
