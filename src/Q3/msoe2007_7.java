@@ -24,21 +24,32 @@ public class msoe2007_7 {
         public void calc() {
             int digits = 0;
             for (int i = 0; i < 10; i++) {
-                if (Math.round(orig / Math.pow(10, i)) != 0) {
+                if (Math.floor(orig / Math.pow(10, i)) != 0) {
                     digits++;
                 }
             }
             int cop = orig;
-            for (int i = 1; i < Math.round(Math.log10(orig)) / 2 + 1; i++) {
-                var ro = Math.floor(cop / Math.pow(10, digits-i));
+            for (int i = 0; i < Math.round(Math.log10(orig)) / 2 + 1; i++) {
+                var ro = Math.floor(cop / Math.pow(10, digits-1));
                 if (cop % 10 < ro) {
-                    dist += (cop / ro - cop % 10) * Math.pow(10, i-1);
+                    dist += (ro - cop % 10) * Math.pow(10, i);
                 } else if (cop % 10 > ro) {
-                    dist += (10 + ro - cop % 10) * Math.pow(10, i-1);
-                    cop += (10 + ro - cop % 10) * Math.pow(10, i-1);
+                    var mult = Math.pow(10, i);
+                    if (i == 0) {
+                        mult = 0;
+                        dist += (10 + ro - cop % 10) + mult;
+                        cop += (10 + ro - cop % 10) + mult;
+                    } else if (digits == 2) {
+                        dist += (10 + ro - cop % 10) * mult + mult;
+                        cop += (10 + ro - cop % 10) * mult + mult;
+                    }else {
+                        dist += (10 + ro - cop % 10) * mult;
+                        cop += (10 + ro - cop % 10);
+                    }
                 }
-                cop %= Math.pow(10, digits-i);
+                cop %= Math.pow(10, digits-1);
                 cop /= 10;
+                digits--;
                 digits--;
             }
 
