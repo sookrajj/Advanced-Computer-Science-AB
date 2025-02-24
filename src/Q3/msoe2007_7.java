@@ -5,31 +5,30 @@ import java.util.Scanner;
 public class msoe2007_7 {
     public static void main(String[] args) {
         var t = new Scanner(System.in);
+        System.out.println("give the number of digits");
+        int digits = t.nextInt();
         System.out.println("give a odometer reading");
         int orig = t.nextInt();
-        helper he = new helper(orig);
+        helper he = new helper(orig, digits);
         System.out.println("The distance to next palindrome is " + he.dist);
 
     }
 
     public static class helper{
         int orig;
+        int digits;
         int dist;
 
-        public helper(int orig) {
+        public helper(int orig, int digits) {
             this.orig = orig;
+            this.digits = digits;
             calc();
         }
 
         public void calc() {
-            int digits = 0;
-            for (int i = 0; i < 10; i++) {
-                if (Math.floor(orig / Math.pow(10, i)) != 0) {
-                    digits++;
-                }
-            }
             int cop = orig;
-            for (int i = 0; i < Math.round(Math.log10(orig)) / 2 + 1; i++) {
+            int dig = digits;
+            for (int i = 0; i < dig / 2 + 1; i++) {
                 var ro = Math.floor(cop / Math.pow(10, digits-1));
                 if (cop % 10 < ro) {
                     dist += (ro - cop % 10) * Math.pow(10, i);
@@ -69,3 +68,9 @@ public class msoe2007_7 {
 //give a odometer reading
 //123321
 //The distance to next palindrome is 0
+
+//give the number of digits
+//4
+//give a odometer reading
+//14
+//The distance to next palindrome is 96
