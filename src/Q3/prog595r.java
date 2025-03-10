@@ -42,9 +42,6 @@ public class prog595r {
                     score <= 7.9 ? "Grades 9-10" : score <= 8.9 ? "Grades 11-12" : score <= 9.9 ? "Grades 13-15 (College)" :
                     "Grades 16 and above (College Graduate)"));
 
-
-
-
         } catch (IOException e) {
             System.out.println("No data file found.");
         }
