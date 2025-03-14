@@ -1,10 +1,6 @@
 package Q3.project3;
 
 import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -12,14 +8,10 @@ import java.util.Map;
 
 public class project3 {
 
-    private JTable table1;
     private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
     private JPanel panel1;
     private JButton addStudentButton;
     private JList<student> list1;
-    private JScrollPane scroll;
     private JLabel Organizer;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
