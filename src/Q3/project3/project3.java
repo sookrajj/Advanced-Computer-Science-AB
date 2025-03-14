@@ -1,6 +1,10 @@
 package Q3.project3;
 
 import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -17,6 +21,8 @@ public class project3 {
     private JList<student> list1;
     private JScrollPane scroll;
     private JLabel Organizer;
+    private JComboBox comboBox1;
+    private JComboBox comboBox2;
     private static Map<String, student> list;
 
     private class student {
@@ -74,19 +80,28 @@ public class project3 {
             gpa = this.calc();
         }
         public String toString() {
-            return "   " + name + "               " + grades[0] + "          " + grades[1] + "             " + grades[2] + "             " + grades[3] + "                        " + gpa;
+            return "   " + name + "               " + grades[0] + "          " + grades[1] + "             " + grades[2] + "             " + grades[3] + "                                       " + gpa;
         }
     }
 
     public project3() {
+        comboBox1.addItem("Math");
+        comboBox1.addItem("English");
+        comboBox1.addItem("Science");
+        comboBox1.addItem("Social Studies");
+        comboBox2.addItem("A");
+        comboBox2.addItem("B");
+        comboBox2.addItem("C");
+        comboBox2.addItem("D");
+        comboBox2.addItem("F");
         list = new HashMap<>();
         Organizer.setText("Student     Math     English     Science     Social Studies     GPA");
         addStudentButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 var Student = textField1.getText();
-                var subject = textField2.getText();
-                var Grade = textField3.getText();
+                var subject = (String) comboBox1.getItemAt(comboBox1.getSelectedIndex());
+                var Grade = (String) comboBox2.getItemAt(comboBox2.getSelectedIndex());
                 if (list.containsKey(Student)) {
                     if (subject.equals("Math")) {
                         list.get(Student).setMath(Grade);
@@ -116,8 +131,6 @@ public class project3 {
                 }
                 list1.clearSelection();
                 list1.setListData(list.values().toArray(new student[0]));
-                textField2.setText("");
-                textField3.setText("");
             }
         });
     }
