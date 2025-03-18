@@ -28,3 +28,7 @@ public class prog1062x {
         }
     }
 }
+//A
+//4:D -> 1:A -> 3:C ->
+//null
+//4:D -> 1:A -> 3:C ->

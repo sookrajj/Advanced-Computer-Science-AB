@@ -47,7 +47,7 @@ public class prog1999s {
                 sm.add(new shipment(line));
             }
 
-            for (int i = 0; i < sm.getSize(); i++) {
+            for (int i = 0; i < sm.size(); i++) {
                 var ship = sm.get(i);
                 var ing = ship.getShips();
                 var nu = ship.getNumshi();
