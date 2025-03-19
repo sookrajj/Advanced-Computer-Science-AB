@@ -11,10 +11,10 @@ import DataStructures.LinkedList;
 import DataStructures.binarySearchTree;
 import DataStructures.CircularLinkedList;
 
-record Fish(String name, int cost) implements Comparable<Fish>{
+record Fish(String name, double cost) implements Comparable<Fish>{
     @Override
     public int compareTo(Fish o) {
-        return this.cost - o.cost;
+        return (int) (this.cost - o.cost);
     }
 }
 
@@ -55,7 +55,12 @@ public class prog1999t {
                 }
 
                 var fish = new CircularLinkedList<Fish>();
-
+                var iter = fishname.iterator();
+                while (iter.hasNext()) {
+                    var name = iter.next();
+                    var cost = Math.random() * name.length();
+                    fish.add(new Fish(name, cost));
+                }
                 eels[i] = new Eel(fn, ln, grid, fishname, fish);
 
             }
@@ -87,7 +92,79 @@ public class prog1999t {
             What day was the most expensive day to feed the eels? Monday, Tuesday, …
             **/
             var most = eels[0];
-            var cost = 0.0;
+            var mosteel = 0;
+            var mostcount = 0;
+            var cost = 0;
+            var eelcost = eels[0];
+            var eelcosts = 0;
+            var mostcost = 0;
+            var weeks = new int[3];
+            var week = 0;
+            var mostweek = new Eel[3];
+            for (int i = 0; i < eels.length; i++) {
+                var eel = eels[i];
+                var food = eel.food();
+                for (int l = 0; l < food.length; l++) {
+                    if (l == 1) {
+                        cost += food[l][1] * 2;
+                    }
+                    for(int temp : food[l]) mostcount += temp;
+                    for (int p = 0; p < food[l].length; p++) {
+                        var mult = p%5 + 1;
+                        mostcost += mult * food[l][p];
+                        week += mostcost;
+                    }
+                    if (i > 0) {
+                        if (week > weeks[l]) {
+                            weeks[l] = week;
+                            mostweek[l] = eel;
+                        }
+                    } else {
+                        weeks[l] = week;
+                        mostweek[l] = eel;
+                    }
+                }
+
+                if (mostcost > eelcosts) {
+                    eelcost = eel;
+                    eelcosts = mostcost;
+                }
+                if (mosteel < mostcount) {
+                    most = eel;
+                    mosteel = mostcount;
+                }
+            }
+            System.out.println("1) " + most.getName());
+            System.out.println("2) $" + cost);
+            System.out.println("3) " + eelcost.getName());
+            System.out.println("4) Week 1: " + mostweek[0].getName() + " Week 2: " + mostweek[1].getName() + " Week 3: " + mostweek[2].getName());
+            var eellong = "";
+            var eeeeeel = eels[0];
+            var eellongo = "";
+            var longestnames = new String[eels.length];
+            for (int l = 0; l < eels.length; l++) {
+                var eel = eels[l];
+                var fish = eel.fishEaten();
+                for (int i = 0; i < fish.size(); i++) {
+                    if (eellong.length() < fish.get(i).length()) {
+                        eellong = fish.get(i);
+                    }
+                }
+                longestnames[l] = eellong;
+                if (eellong.length() > eellongo.length()) {
+                    eellongo = eellong;
+                    eeeeeel = eel;
+                }
+                eellong = "";
+            }
+            System.out.print("5) ");
+            for (int i = 0; i < longestnames.length; i++) System.out.print(longestnames[i] + " ");
+            System.out.println(" Eel that at longest fish name: " + eeeeeel.getName());
+
+            var eatsame = false;
+            var mostday = "Monday";
+            var mostdaycost = 0.0;
+
 
         } catch (IOException e) {
             System.out.println("No data file found.");
