@@ -2,6 +2,7 @@ package Q3;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.random.*;
@@ -83,11 +84,7 @@ public class prog1999t {
                 bunnies.add(new Bunny(name, sold, set, dict, bt));
             }
             input.close();
-            /* Which eel ate the most fish?
-            How much did it cost to feed all of the eels on the 2nd Tuesday?
-            If fish cost 1 on Monday, 2 on Tuesday … all the way to 5 on Friday, which eel costs the most to feed?
-            If fish cost 1 on Monday, 2 on Tuesday … all the way to 5 on Friday, which eel costs the most to feed on week1? Week2? Week3?
-            What is the name of the longest fish that each eel has eaten, and which eel ate the longest fish?
+            /*
             Did any of the eels eat a fish of the same name?
             What day was the most expensive day to feed the eels? Monday, Tuesday, …
             **/
@@ -163,7 +160,90 @@ public class prog1999t {
 
             var eatsame = false;
             var mostday = "Monday";
-            var mostdaycost = 0.0;
+            var mostdaycost = new int[5];
+            for (int i = 0; i < eels.length; i++) {
+                for (int p = eels.length-1; p < eels.length; p++) {
+                    for (int u = 0; u < eels[p].fishEaten().size(); u++) {
+                        if (eels[i].fishEaten().contains(eels[p].fishEaten().get(u))) eatsame = true;
+                    }
+                }
+                for (int[] wee : eels[i].food()) {
+                    for (int l = 0 ; l < wee.length; l++) {
+                        mostdaycost[l] += wee[l] * (l+1);
+                    }
+                }
+            }
+            System.out.println("6) " + eatsame);
+            var great = mostdaycost[0];
+            great = Math.max(mostdaycost[1], great);
+            great = Math.max(mostdaycost[2], great);
+            great = Math.max(mostdaycost[3], great);
+            great = Math.max(mostdaycost[4], great);
+            System.out.println("7) " + (great == mostdaycost[0] ? "Monday" : great == mostdaycost[1] ? "Tuesday" : great == mostdaycost[2] ? "Wednesday" : great == mostdaycost[3] ? "Thursday" : "Friday"));
+            System.out.println();
+
+
+            var feetuni = new ArrayList<String>();
+            var tot = 0;
+            var numhats = 0;
+            var hat = 1;
+            var numletbun = bunnies.get(0);
+            var numlet = 0;
+            var longhat = "";
+            var longhatbun = bunnies.get(0);
+            var bunfewhat = bunnies.get(0);
+            for (int i = 0; i < bunnies.size(); i++) {
+                var bun = bunnies.get(i);
+                var feet = bun.customers();
+                var iter = feet.iterator();
+                while (iter.hasNext()) {
+                    var f = iter.next();
+                    if (!feetuni.contains(f)) feetuni.add(f);
+                }
+                var tree = bun.numbers();
+                tot += tree.getRoot() + tree.findclose(0);
+                var hats = bun.hats();
+                numhats += hats.size();
+                var lets = 0;
+                for (int l = 0 ; l < hats.size(); l++) {
+                    lets += hats.get(hat).length();
+                    if (longhat.length() < hats.get(hat).length()) {
+                        longhat = hats.get(hat);
+                        longhatbun = bun;
+                    }
+                    hat++;
+
+                }
+                if (numlet < lets) {
+                    numletbun = bun;
+                }
+                if (bunfewhat.hats().size() > hats.size()) bunfewhat = bun;
+            }
+            System.out.print("1) ");
+            for (int i = 0; i < feetuni.size(); i++) System.out.print(feetuni.get(i) + " ");
+            System.out.println();
+            System.out.println("2) " + tot);
+            System.out.println("3) " + numhats);
+            System.out.println("4) " + numletbun.name());
+            System.out.println("5) " + longhatbun.name());
+            System.out.println("6) Bunny getting taken out back " + bunfewhat.name());
+            for (int i = 0; i < bunnies.size(); i++) {
+                if (bunnies.get(i).equals(bunfewhat)) {
+                    bunnies.remove(i);
+                }
+            }
+
+            /*
+            The first bunny just purchased a magic hat with a number of 100 which polymorphs and the last bunny bought a magic hat with a number of 101 which shrinks.
+            The second bunny lost his second magic hat.
+            Fred is not allowed to be a customer of any bunny any more.  Delete Fred from the set of purchasers from all of the bunnies.
+            How many of the bunnies has Pill been a customer?
+             */
+            for (int i = 0; i < bunnies.size(); i++) {
+                bunnies.get(i).customers().insert("Jill");
+                if (i % 2 == 0) bunnies.get(i).customers().insert("Pill");
+            }
+
 
 
         } catch (IOException e) {
