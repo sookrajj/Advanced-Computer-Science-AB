@@ -84,10 +84,7 @@ public class prog1999t {
                 bunnies.add(new Bunny(name, sold, set, dict, bt));
             }
             input.close();
-            /*
-            Did any of the eels eat a fish of the same name?
-            What day was the most expensive day to feed the eels? Monday, Tuesday, …
-            **/
+
             var most = eels[0];
             var mosteel = 0;
             var mostcount = 0;
@@ -201,7 +198,7 @@ public class prog1999t {
                     if (!feetuni.contains(f)) feetuni.add(f);
                 }
                 var tree = bun.numbers();
-                tot += tree.getRoot() + tree.findclose(0);
+                tot += tree.findclose(100000) + tree.findclose(1);
                 var hats = bun.hats();
                 numhats += hats.size();
                 var lets = 0;
@@ -233,21 +230,45 @@ public class prog1999t {
                 }
             }
 
-            /*
-            The first bunny just purchased a magic hat with a number of 100 which polymorphs and the last bunny bought a magic hat with a number of 101 which shrinks.
-            The second bunny lost his second magic hat.
-            Fred is not allowed to be a customer of any bunny any more.  Delete Fred from the set of purchasers from all of the bunnies.
-            How many of the bunnies has Pill been a customer?
-             */
             for (int i = 0; i < bunnies.size(); i++) {
                 bunnies.get(i).customers().insert("Jill");
                 if (i % 2 == 0) bunnies.get(i).customers().insert("Pill");
             }
-
-
+            bunnies.get(0).hats().insert(100, "Polymorph");
+            bunnies.get(bunnies.size()-1).hats().insert(101, "Shrink");
+            for (int i = 0 ; i < 10; i++) {
+                if (bunnies.get(1).hats().contains(i)) {
+                    bunnies.get(1).hats().remove(i+1);
+                    break;
+                }
+            }
+            int pillnum = 0;
+            for (int i = 0; i < bunnies.size(); i++) {
+                if (bunnies.get(i).customers().contains("Fred")) {
+                    bunnies.get(i).customers().remove("Fred");
+                }
+                if (bunnies.get(i).customers().contains("Pill")) pillnum++;
+            }
+            System.out.println("11) " + pillnum);
 
         } catch (IOException e) {
             System.out.println("No data file found.");
         }
     }
 }
+
+//1) Patt Anne
+//2) $422
+//3) Patt Anne
+//4) Week 1: Patt Anne Week 2: Patt Anne Week 3: Patt Anne
+//5) Addison Kaelyn Hannah Sydney Julianna  Eel that at longest fish name: Patt Anne
+//6) true
+//7) Friday
+//
+//1) Ian Addison Jazz Lydia Mike Grace Anna Rick Macy Izzy YaYa Kaelyn Karlie
+//2) 259976
+//3) 24
+//4) Vince
+//5) Joan
+//6) Bunny getting taken out back Joan
+//11) 2

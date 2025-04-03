@@ -32,7 +32,7 @@ public class project3 {
             var nums = 0.0;
             var tot = 0.0;
             for (String str : grades) {
-                if (!str.equalsIgnoreCase("")) {
+                if (!str.equalsIgnoreCase("N/A")) {
                     nums++;
                     tot += str.equalsIgnoreCase("A") ? 4.0 :
                             str.equalsIgnoreCase("B") ? 3.0 :
@@ -109,16 +109,16 @@ public class project3 {
                     }
                 } else {
                     if (subject.equals("Math")) {
-                        list.put(Student, new student(Student, new String[] {Grade, "", "", ""}));
+                        list.put(Student, new student(Student, new String[] {Grade, "N/A", "N/A", "N/A"}));
                     }
                     if (subject.equals("English")) {
-                        list.put(Student, new student(Student, new String[] {"", Grade, "", ""}));
+                        list.put(Student, new student(Student, new String[] {"N/A", Grade, "N/A", "N/A"}));
                     }
                     if (subject.equals("Science")) {
-                        list.put(Student, new student(Student, new String[] {"", "", Grade, ""}));
+                        list.put(Student, new student(Student, new String[] {"N/A", "N/A", Grade, "N/A"}));
                     }
                     if (subject.equals("Social Studies")) {
-                        list.put(Student, new student(Student, new String[] {"", "", "", Grade}));
+                        list.put(Student, new student(Student, new String[] {"N/A", "N/A", "N/A", Grade}));
                     }
                 }
                 list1.clearSelection();
