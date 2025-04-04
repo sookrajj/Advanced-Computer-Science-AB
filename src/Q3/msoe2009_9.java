@@ -22,11 +22,15 @@ public class msoe2009_9 {
             this.per = per;
             connections = new int[num];
             used = new boolean[num];
+            this.initiateCon();
+        }
+        public void initiateCon() {
+            Arrays.fill(connections, -1);
         }
 
         public void add(int con) {
             int pos = 0;
-            while (connections[pos] != 0) {
+            while (connections[pos] != -1) {
                 pos++;
             }
             connections[pos] = con;
@@ -73,18 +77,36 @@ public class msoe2009_9 {
     }
 
     public static int find(ArrayList<container> persons, int start, int target, int num) {
-        if (num > 10) return -1;
-        for (int i = 0; i <persons.get(start).connections.length; i++) {
-            for (int t : persons.get(start).connections) {
-                System.out.println(t + " ");
-            }
-            System.out.println(persons.get(start).connections[i] + " " + target);
-            if (persons.get(start).connections[i] == target) return 1;
-            if (persons.get(start).used[i] == false) {
+//        if (num > 10) return 0;
+        if (persons.get(start).per == target) return num;
+        for (int i = 0; i < persons.get(start).connections.length; i++) {
+            if (persons.get(start).connections[i] == target) return num+1;
+            if (!persons.get(start).used[i] && persons.get(start).connections[i] != -1) {
                 persons.get(start).used[i] = true;
-                return 1 + find(persons, persons.get(start).connections[i], target, num+1);
+                persons.get(persons.get(start).connections[i]).used[start] = true;
+                return find(persons, persons.get(start).connections[i], target, num+1);
             }
         }
         return -1;
     }
 }
+//Who do you want to find the distance of connection with?
+//3
+// And?
+//5
+//
+//The amount of steps to the connection is infinite  steps
+
+//Who do you want to find the distance of connection with?
+//2
+// And?
+//4
+//
+//The amount of steps to the connection is 3 steps
+
+//Who do you want to find the distance of connection with?
+//5
+// And?
+//5
+//
+//The amount of steps to the connection is 0 steps

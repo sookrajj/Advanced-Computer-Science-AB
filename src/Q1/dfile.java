@@ -1,6 +1,8 @@
 package Q1;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 public class dfile {
     public static void main(String[] args) {
@@ -10,6 +12,7 @@ public class dfile {
             while (input.hasNext()) {
 
             }
+
             input.close();
         } catch (IOException e) {
             System.out.println("No data file found.");
