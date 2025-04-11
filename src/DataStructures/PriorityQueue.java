@@ -50,4 +50,21 @@ public class PriorityQueue <T extends Comparable<T>>{
         }
     }
 
+    public void print() {
+        var newheap = new heap<T>();
+        var num = 0;
+        while (!heap.isEmpty()) {
+            var m = heap.deleteMin();
+            newheap.insert(m);
+            System.out.print(m + " ");
+            num++;
+            if (num == 1 || num == 3 || num == 7 || num == 15 || num == 31) {
+                System.out.println();
+            }
+        }
+        while (!newheap.isEmpty()) {
+            heap.insert(newheap.deleteMin());
+        }
+    }
+
 }
