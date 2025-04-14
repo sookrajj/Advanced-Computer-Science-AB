@@ -1,6 +1,6 @@
 package Q4.prog1999w;
 
-public class Cow extends Animal{
+public class Cow extends Animal implements Comparable<Cow> {
     protected int milk;
     protected double milkPrice;
 
@@ -10,7 +10,7 @@ public class Cow extends Animal{
         milkPrice = mp;
     }
     public int getMilk() {return milk;}
-    public double getIncome() {return 0.0;} //TODO
+    public double getIncome() {return milk * milkPrice;} //TODO
 
     public String toString() {
         return "Cow: " +
@@ -23,8 +23,6 @@ public class Cow extends Animal{
                 "\nmilk= " + milk +
                 "\nmilk price=" + milkPrice;
     }
-    public int compareTo(Cow cow) {
-        return this.milk == cow.milk ? 0 : this.milk > milk ? 1 : -1;
-    }
+    public int compareTo(Cow cow) {return Double.compare(this.getIncome(), cow.getIncome());}
 
 }
