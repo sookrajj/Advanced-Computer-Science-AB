@@ -6,10 +6,7 @@ import DataStructures.Queue;
 import DataStructures.Stack;
 import Q4.prog1999w.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Farm {
     public static class cornCob implements Comparable<cornCob> {
@@ -50,7 +47,7 @@ public class Farm {
     }
 
     public void addCow(Cow cow) {
-        cows.insert(cow.getId(), cow);
+        cows.insert(cows.size(), cow);
     }
     public void addTurkey(Turkey turk) {
         turks.add(turk);
@@ -79,23 +76,96 @@ public class Farm {
     public void removeHay() {
         //TODO
     }
-    public int getCorn() {return 0;}
+    public int getCorn() {
+        var stack = new Stack<cornCob>();
+        var corn = 0;
+        while (!cornCobs.isEmpty()) {
+            var c = cornCobs.pop();
+            corn += c.cobs;
+            stack.push(c);
+        }
+        while (!stack.isEmpty()) cornCobs.push(stack.pop());
+        return corn;
+    }
     public int getHay() {return 0;}
     public int getBeans() {return beans;}
     public int getOats() {return oats;}
     public double getMilkPrice() {return milkPrice;}
     public int getNumHorseRiders() {
-        int riders = 0;
-        for (int i = 0; i < hors.size(); i++) {
-            hors.get(i);
+        int rider = 0;
+        for (int[]r : riders) {
+            for (int p : r) {
+                rider += p;
+            }
         }
-        return 0;
+        return rider;
     }
-    public double getCost() {return 0.0;}
-    public double getIncome() {return 0.0;}
-    public double getProfit() {return 0.0;}
-    public ArrayList getAllAnimals() {
-        return null;
+    public double getCost() {
+        var tot = 0.0;
+        for (int i = 0; i < cows.size(); i++) {
+            tot += cows.get(i).getCost();
+        }
+        var arr = (Turkey[]) turks.toArray();
+        for (int i = 0; i < arr.length; i++) {
+            tot += arr[i].getCost();
+        }
+        for (int i = 0; i < hors.size(); i++) {
+            tot += hors.get(i).getCost();
+        }
+        for (int i = 0; i < pens.length; i++) {
+            tot += pens[i].getCost();
+        }
+
+        return tot;
+    }
+    public double getIncome() {
+        var tot = 0.0;
+        for (int i = 0; i < cows.size(); i++) {
+            tot += cows.get(i).getIncome();
+        }
+        var arr = (Turkey[]) turks.toArray();
+        for (int i = 0; i < arr.length; i++) {
+            tot += arr[i].getIncome();
+        }
+        for (int i = 0; i < hors.size(); i++) {
+            tot += hors.get(i).getIncome();
+        }
+        for (int i = 0; i < pens.length; i++) {
+            tot += pens[i].getIncome();
+        }
+
+        return tot;
+    }
+    public double getProfit() {
+        var tot = 0.0;
+        for (int i = 0; i < cows.size(); i++) {
+            tot += cows.get(i).getProfit();
+        }
+        var arr = (Turkey[]) turks.toArray();
+        for (int i = 0; i < arr.length; i++) {
+            tot += arr[i].getProfit();
+        }
+        for (int i = 0; i < hors.size(); i++) {
+            tot += hors.get(i).getProfit();
+        }
+        for (int i = 0; i < pens.length; i++) {
+            tot += pens[i].getProfit();
+        }
+
+        return tot;
+    }
+    public ArrayList<Animal> getAllAnimals() {
+        ArrayList<Animal> animals = new ArrayList<>();
+        for (int i = 0; i < cows.size(); i++ ) {
+            animals.add(cows.get(i));
+        }
+        animals.addAll(List.of((Turkey[]) turks.toArray()));
+
+        for (int i = 0; i < hors.size(); i++ ) {
+            animals.add(hors.get(i));
+        }
+        animals.addAll(Arrays.asList(pens));
+        return animals;
     }
     public int compareTo(Farm farm) {
         return Double.compare(this.getIncome(), farm.getIncome());
