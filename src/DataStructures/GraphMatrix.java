@@ -64,18 +64,44 @@ public class GraphMatrix<T extends Comparable<T>> implements Graph<T>{
     }
 
     public void display() {
-
+        System.out.println("Vertices: ");
+        verts.enumerate();
+        System.out.println("Matrix");
+        for (int i = 0; i < vertCount; i++) {
+            for (int j = 0; j < vertCount; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     public int getEdgeWeight(T source, T destination) {
-        return 0;
+        int sourceIndex = verts.get(source);
+        int destIndext = verts.get(destination);
+        return matrix[sourceIndex][destIndext];
     }
 
     public Dictionary<T, Integer> getVertices() {
-        return null;
+        return verts;
+    }
+    public int[][] getMatrix() {
+        return matrix;
+    }
+    public int getVertCount() {
+        return vertCount;
     }
 
     public dynamicArray<T> getNeighbors(T vertex) {
-        return null;
+        dynamicArray<T> neighbors = new dynamicArray<>();
+        int index = verts.get(vertex);
+        for (int i = 0; i < vertCount; i++) {
+            if (matrix[index][i] != 0) {
+                neighbors.add(verts.getKey(i));
+            }
+        }
+        return neighbors;
     }
+
+
+
 }
