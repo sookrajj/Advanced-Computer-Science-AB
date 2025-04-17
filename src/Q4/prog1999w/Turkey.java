@@ -4,8 +4,7 @@ public class Turkey extends Animal{
     protected double value;
 
     public Turkey(int id, double w, int cc, int hb, int b, int o, int v) {
-        super(w, cc, hb, b, o);
-        super.id = id;
+        super(id, w, cc, hb, b, o);
         this.value = v;
     }
 

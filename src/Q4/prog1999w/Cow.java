@@ -4,8 +4,8 @@ public class Cow extends Animal implements Comparable<Cow> {
     protected int milk;
     protected double milkPrice;
 
-    public Cow(double w, int cc, int hb, int b, int o, int m, double mp) {
-        super(w, cc, hb, b, o);
+    public Cow(int id, double w, int cc, int hb, int b, int o, int m, double mp) {
+        super(id, w, cc, hb, b, o);
         milk = m;
         milkPrice = mp;
     }

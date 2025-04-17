@@ -1,22 +1,21 @@
-package Q4;
+package Q4.prog1999w;
 
 import DataStructures.CircularLinkedList;
 import DataStructures.Dictionary;
 import DataStructures.Queue;
 import DataStructures.Stack;
-import Q4.prog1999w.*;
 
 import java.util.*;
 
-public class Farm {
-    public static class cornCob implements Comparable<cornCob> {
+public class Farm implements Comparable<Farm> {
+    static class cornCob implements Comparable<cornCob> {
         private int cobs;
         public cornCob(int cobs) {
             this.cobs = cobs;
         }
         public int compareTo(cornCob corn) {return Integer.compare(this.cobs, corn.cobs);}
     }
-    public static class hayBale implements Comparable<hayBale> {
+    static class hayBale implements Comparable<hayBale> {
         private int hay;
         public hayBale(int hay) {
             this.hay = hay;
@@ -39,15 +38,36 @@ public class Farm {
 
     public Farm() {
         cornCobs = new Stack<>();
+        cornCobs.push(new cornCob(rand.nextInt(10000, 15000)));
         hayBales = new Queue<>();
+        hayBales.enqueue(new hayBale(rand.nextInt(2000, 3000)));
         cows = new Dictionary<>();
         turks = new HashSet<>();
         hors = new CircularLinkedList<>();
         pens = new Pig[500];
+        beans = rand.nextInt(750, 1000);
+        oats = rand.nextInt(1750, 2500);
+        var numCows = rand.nextInt(12, 15);
+        var numTurks = rand.nextInt(10, 20);
+        var numHors = rand.nextInt(8, 10);
+        var numPigs = rand.nextInt(12, 20);
+        milkPrice = rand.nextDouble(.20, .24);
+
+        for (int i = 0; i < numCows; i++) {
+            var id = rand.nextInt(1000, 9999);
+            var weight = rand.nextInt(1000, 1500);
+            var eatc = rand.nextInt(5, 8);
+            var eath = rand.nextInt(1, 3);
+            var eatb = rand.nextInt(2, 5);
+            var eato = rand.nextInt(1, 4);
+            var milk = rand.nextInt(20, 100);
+            cows.insert(id, new Cow(id, weight, eatc, eath, eatb, eato, milk, milkPrice));
+        }
     }
 
+
     public void addCow(Cow cow) {
-        cows.insert(cows.size(), cow);
+        cows.insert(cow.getId(), cow);
     }
     public void addTurkey(Turkey turk) {
         turks.add(turk);
@@ -58,23 +78,23 @@ public class Farm {
     public void addPig(Pig pig) {
         for (int i = 0; i < pens.length; i++) if (pens[i] == null) {pens[i] = pig; break;}
     }
-    public void stockCorn() {
-        //TODO
+    public int stockCorn() {
+        return cornCobs.peak().cobs;
     }
-    public void stockHay() {
-        //TODO
+    public int stockHay() {
+        return hayBales.peek().hay;
     }
     public void addCorn() {
-        //TODO
+        cornCobs.push(new cornCob(rand.nextInt(1000, 1250)));
     }
     public void addHay() {
-        //TODO
+        hayBales.enqueue(new hayBale(rand.nextInt(75, 100)));
     }
     public void removeCorn() {
-        //TODO
+        cornCobs.pop();
     }
     public void removeHay() {
-        //TODO
+        hayBales.dequeue();
     }
     public int getCorn() {
         var stack = new Stack<cornCob>();
@@ -87,7 +107,17 @@ public class Farm {
         while (!stack.isEmpty()) cornCobs.push(stack.pop());
         return corn;
     }
-    public int getHay() {return 0;}
+    public int getHay() {
+        var queue = new Queue<hayBale>();
+        var hay = 0;
+        while (!hayBales.isEmpty()) {
+            var h = hayBales.dequeue();
+            hay += h.hay;
+            queue.enqueue(h);
+        }
+        while (!queue.isEmpty()) hayBales.enqueue(queue.dequeue());
+        return hay;
+    }
     public int getBeans() {return beans;}
     public int getOats() {return oats;}
     public double getMilkPrice() {return milkPrice;}

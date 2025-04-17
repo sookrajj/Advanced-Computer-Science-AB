@@ -8,7 +8,8 @@ public abstract class Animal implements IFarm{
     protected int beans;
     protected int oats;
 
-    public Animal(double w, int cc, int hb, int b, int o) {
+    public Animal(int id, double w, int cc, int hb, int b, int o) {
+        this.id = id;
         weight = w;
         cornCobs = cc;
         hayBales = hb;

@@ -5,8 +5,8 @@ public class Horse extends Animal implements Comparable<Horse> {
     protected double riderCost;
     protected int numRiders;
 
-    public Horse(double w, int cc, int hb, int b, int o, String n, double rC, int nR) {
-        super(w, cc, hb, b, o);
+    public Horse(int id, double w, int cc, int hb, int b, int o, String n, double rC, int nR) {
+        super(id, w, cc, hb, b, o);
         this.name = n;
         this.riderCost = rC;
         this.numRiders = nR;
