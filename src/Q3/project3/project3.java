@@ -43,18 +43,6 @@ public class project3 {
             tot /= nums;
             return tot;
         }
-
-        public String getName() {
-            return name;
-        }
-
-        public double getGpa() {
-            return gpa;
-        }
-
-        public String[] getGrades() {
-            return grades;
-        }
         public void setMath(String grade) {
             grades[0] = grade;
             gpa = this.calc();
@@ -71,6 +59,19 @@ public class project3 {
             grades[3] = grade;
             gpa = this.calc();
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public double getGpa() {
+            return gpa;
+        }
+
+        public String[] getGrades() {
+            return grades;
+        }
+
         public String toString() {
             return "   " + name + "               " + grades[0] + "          " + grades[1] + "             " + grades[2] + "             " + grades[3] + "                                       " + gpa;
         }
