@@ -3,8 +3,8 @@ package Q4.prog1999w;
 public class Turkey extends Animal{
     protected double value;
 
-    public Turkey(int id, double w, int cc, int hb, int b, int o, int v) {
-        super(id, w, cc, hb, b, o);
+    public Turkey(int id, double w, int cc, int o, double v) {
+        super(id, w, cc, 0, 0, o);
         this.value = v;
     }
 

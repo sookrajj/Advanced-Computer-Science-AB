@@ -63,6 +63,37 @@ public class Farm implements Comparable<Farm> {
             var milk = rand.nextInt(20, 100);
             cows.insert(id, new Cow(id, weight, eatc, eath, eatb, eato, milk, milkPrice));
         }
+
+        for (int i = 0; i < numTurks; i++) {
+            var id = rand.nextInt(100, 999);
+            var weight = rand.nextDouble(25, 35);
+            var eatc = rand.nextInt(1, 3);
+            var eato = rand.nextInt(2, 4);
+            double val = rand.nextDouble(.75, .99);
+            turks.add(new Turkey(id, weight, eatc, eato, val));
+
+        }
+        var con = "BCDFGHJKLMNPQRSTVWXYZ";
+        var vow = "AEIOU";
+        for (int i = 0; i < numHors; i++) {
+            var name = "";
+            var id = rand.nextInt(0, 20);
+            name += con.charAt(id);
+            id = rand.nextInt(0, 20);
+            name += con.charAt(id);
+            id = rand.nextInt(0, 5);
+            name += vow.charAt(id);
+            id = rand.nextInt(0, 20);
+            name += con.charAt(id);
+            var riderCost = rand.nextDouble(7.0, 10.5);
+            var weight = rand.nextInt(1000, 1500);
+            var eatc = rand.nextInt(5, 8);
+            var eath = rand.nextInt(1, 3);
+            var eatb = rand.nextInt(2, 5);
+            var eato = rand.nextInt(1, 4);
+            var milk = rand.nextInt(20, 100);
+            cows.insert(id, new Cow(id, weight, eatc, eath, eatb, eato, milk, milkPrice));
+        }
     }
 
 
