@@ -3,10 +3,10 @@ package Q4.prog1999w;
 public class Horse extends Animal implements Comparable<Horse> {
     protected String name;
     protected double riderCost;
-    protected int numRiders;
+    protected int[][] numRiders;
 
-    public Horse(int id, double w, int cc, int hb, int b, int o, String n, double rC, int nR) {
-        super(id, w, cc, hb, b, o);
+    public Horse(double w, int cc, int hb, int b, int o, String n, double rC, int[][] nR) {
+        super(0, w, cc, hb, b, o);
         this.name = n;
         this.riderCost = rC;
         this.numRiders = nR;
@@ -16,7 +16,9 @@ public class Horse extends Animal implements Comparable<Horse> {
         return name;
     }
     public double getIncome() {
-        return riderCost * numRiders;
+        int n = 0;
+        for (int[]l : numRiders) for (int y : l) n += y;
+        return n * riderCost;
     }
     public String toString() {
         return "Horse: " +

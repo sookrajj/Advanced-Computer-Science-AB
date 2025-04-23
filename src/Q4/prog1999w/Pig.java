@@ -3,7 +3,7 @@ package Q4.prog1999w;
 public class Pig extends Animal {
     protected double value;
 
-    public Pig(int id, double w, int cc, int hb, int b, int o, int v) {
+    public Pig(int id, double w, int cc, int hb, int b, int o, double v) {
         super(id, w, cc, hb, b, o);
         this.value = v;
     }

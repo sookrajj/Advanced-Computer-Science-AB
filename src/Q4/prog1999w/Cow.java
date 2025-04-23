@@ -10,7 +10,7 @@ public class Cow extends Animal implements Comparable<Cow> {
         milkPrice = mp;
     }
     public int getMilk() {return milk;}
-    public double getIncome() {return milk * milkPrice;} //TODO
+    public double getIncome() {return milk * milkPrice;}
 
     public String toString() {
         return "Cow: " +

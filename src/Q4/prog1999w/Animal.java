@@ -23,9 +23,9 @@ public abstract class Animal implements IFarm{
     public int getHayBales() {return hayBales;}
     public int getBeans() {return beans;}
     public int getOats() {return oats;}
-    public double getCost() {return 0;}
+    public double getCost() {return cornCobs + hayBales + beans + oats;}
     public abstract double getIncome();
-    public double getProfit() {return 0;}
+    public double getProfit() {return getIncome() - getCost();}
 
     @Override
     public String toString() {

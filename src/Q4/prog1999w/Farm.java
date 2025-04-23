@@ -62,7 +62,7 @@ public class Farm implements Comparable<Farm> {
             var eato = rand.nextInt(1, 4);
             var milk = rand.nextInt(20, 100);
             cows.insert(id, new Cow(id, weight, eatc, eath, eatb, eato, milk, milkPrice));
-        }
+        } // Cows
 
         for (int i = 0; i < numTurks; i++) {
             var id = rand.nextInt(100, 999);
@@ -72,7 +72,7 @@ public class Farm implements Comparable<Farm> {
             double val = rand.nextDouble(.75, .99);
             turks.add(new Turkey(id, weight, eatc, eato, val));
 
-        }
+        } // Turkeys
         var con = "BCDFGHJKLMNPQRSTVWXYZ";
         var vow = "AEIOU";
         for (int i = 0; i < numHors; i++) {
@@ -87,13 +87,30 @@ public class Farm implements Comparable<Farm> {
             name += con.charAt(id);
             var riderCost = rand.nextDouble(7.0, 10.5);
             var weight = rand.nextInt(1000, 1500);
-            var eatc = rand.nextInt(5, 8);
+            var eatc = rand.nextInt(2, 4);
             var eath = rand.nextInt(1, 3);
             var eatb = rand.nextInt(2, 5);
             var eato = rand.nextInt(1, 4);
-            var milk = rand.nextInt(20, 100);
-            cows.insert(id, new Cow(id, weight, eatc, eath, eatb, eato, milk, milkPrice));
-        }
+            var mat = new int[3][7];
+            for (int l = 0; l < 3; l++) {
+                for (int p = 0; p < 7; p++) {
+                    var num = p == 6 ? rand.nextInt(3, 7) : p == 5 ? rand.nextInt(5, 10) : rand.nextInt(1, 5);
+                    mat[l][p] = num;
+                }
+            }
+            hors.add(new Horse(weight, eatc, eath, eatb, eato, name, riderCost, mat));
+        } // Horses
+
+        for (int i = 0; i < numPigs; i++) {
+            var id = 0;
+            var weight = rand.nextInt(250, 500);
+            var eatc = rand.nextInt(5, 10);
+            var eath = 0;
+            var eatb = rand.nextInt(10, 20);
+            var eato = rand.nextInt(25, 50);
+            var value = weight * rand.nextDouble(2.25, 2.75);
+            pens[i] = new Pig(id, weight, eatc, eath, eatb, eato, value);
+        } // Pigs
     }
 
 
@@ -109,6 +126,7 @@ public class Farm implements Comparable<Farm> {
     public void addPig(Pig pig) {
         for (int i = 0; i < pens.length; i++) if (pens[i] == null) {pens[i] = pig; break;}
     }
+    public Dictionary<Integer, Cow> getCows() {return cows;}
     public int stockCorn() {
         return cornCobs.peak().cobs;
     }
