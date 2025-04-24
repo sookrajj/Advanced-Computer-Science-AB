@@ -127,6 +127,7 @@ public class Farm implements Comparable<Farm> {
         for (int i = 0; i < pens.length; i++) if (pens[i] == null) {pens[i] = pig; break;}
     }
     public Dictionary<Integer, Cow> getCows() {return cows;}
+    public Set<Turkey> getTurks() {return turks;}
     public int stockCorn() {
         return cornCobs.peak().cobs;
     }

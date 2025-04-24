@@ -32,7 +32,17 @@ public class GigaFarms {
         }
         System.out.println("Total Milk Produced in Pounds " + pounds);
         //endregion milk
-
+        // region turkey weight
+        double weigh = 0;
+        for (int i = 0; i < farms.size(); i++) {
+            var turks = farms.get(i).getTurks();
+            var keys = (Turkey[]) turks.toArray();
+            for (Turkey h : keys) {
+                weigh += h.weight;
+            }
+        }
+        System.out.println("Total Turkey Weight in Pounds " + weigh);
+        //endregion turkey weight
 
     }
 }
