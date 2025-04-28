@@ -36,15 +36,31 @@ public class GigaFarms {
         double weigh = 0;
         for (int i = 0; i < farms.size(); i++) {
             var turks = farms.get(i).getTurks();
-            var keys = (Turkey[]) turks.toArray();
-            for (Turkey h : keys) {
+            for (Turkey h : turks) {
                 weigh += h.weight;
             }
         }
         System.out.println("Total Turkey Weight in Pounds " + weigh);
         //endregion turkey weight
-        //region Most expensive per farm
-
+        //region Most expensive feed per farm
+        for (int i = 0; i < farms.size(); i++) {
+            var anis = farms.get(i).getAllAnimals();
+            var cor = 0;
+            var hay = 0;
+            var bean = 0;
+            var oat = 0;
+            for (Animal l : anis) {
+                if (l != null) {
+                    cor += l.cornCobs;
+                    hay += l.hayBales;
+                    bean += l.beans;
+                    oat += l.oats;
+                }
+            }
+            var m = Math.max(Math.max(cor, hay), Math.max(bean, oat));
+            var t = m == cor ? "Corn" : m == hay ? "Hay" : m == bean ? "Bean" : "Oats";
+            System.out.println("The Most Expensive Feed on Farm " + i + " is " + t);
+        }
         //endregion Most expensive per farm
     }
 }
