@@ -1,5 +1,6 @@
 package Q4.prog1999w;
 
+import DataStructures.Dictionary;
 import DataStructures.LinkedList;
 
 public class GigaFarms {
@@ -7,7 +8,7 @@ public class GigaFarms {
         var farms = new LinkedList<Farm>();
 
         for (int i = 0; i < 5; i++) {
-            farms.add(new Farm());
+            farms.add(new Farm(i));
         }
 
         //region Profit
@@ -62,5 +63,52 @@ public class GigaFarms {
             System.out.println("The Most Expensive Feed on Farm " + i + " is " + t);
         }
         //endregion Most expensive per farm
+        //region costs
+        var totcost = 0;
+        for (int i = 0; i < farms.size(); i++) {
+            var anis = farms.get(i).getAllAnimals();
+            var cost = 0;
+            for (Animal l : anis) {
+                if (l != null) {
+                    cost += l.getCost();
+                }
+            }
+            totcost += cost;
+            System.out.println("Total Cost of Feed on Farm " + i + " is $" + cost);
+        }
+        System.out.println("Total Cost of Feed on all Farms Combined is $" + totcost);
+        //endregion costs
+        //region income
+        var totincome = 0;
+        for (int i = 0; i < farms.size(); i++) {
+            var anis = farms.get(i).getAllAnimals();
+            var income = 0;
+            for (Animal l : anis) {
+                if (l != null) {
+                    income += l.getIncome();
+                }
+            }
+            totincome += income;
+        }
+        System.out.println("Total Income of Feed on all Farms Combined is $" + totincome);
+        //endregion income
+        //region profit
+        var totprofit = 0;
+        for (int i = 0; i < farms.size(); i++) {
+            var anis = farms.get(i).getAllAnimals();
+            var profit = 0;
+            for (Animal l : anis) {
+                if (l != null) {
+                    profit += l.getProfit();
+                }
+            }
+            totprofit += profit;
+        }
+        System.out.println("Total Profit of Feed on all Farms Combined is $" + totprofit);
+        //endregion profit
+        //region killCows
+        Dictionary<Integer, Cow> onTheChoppingBlock = new Dictionary<Integer, Cow>();
+
+        //endregion killCows
     }
 }

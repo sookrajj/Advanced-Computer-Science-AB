@@ -36,8 +36,8 @@ public class Farm implements Comparable<Farm> {
     private Pig[] pens;
 
 
-    public Farm() {
-        rand = new Random(32);
+    public Farm(int seed) {
+        rand = new Random(seed);
         cornCobs = new Stack<>();
         cornCobs.push(new cornCob(rand.nextInt(10000, 15000)));
         hayBales = new Queue<>();
@@ -118,14 +118,24 @@ public class Farm implements Comparable<Farm> {
     public void addCow(Cow cow) {
         cows.insert(cow.getId(), cow);
     }
+    public void removeCow(Cow cow) {cows.remove(cow.getId());}
     public void addTurkey(Turkey turk) {
         turks.add(turk);
     }
+    public void removeTurkey(Turkey turk) {turks.remove(turk);}
     public void addHorse(Horse hor) {
         hors.add(hor);
     }
+    public void removeHorse(Horse hor) {
+        for (int i = 0; i < hors.size(); i++) {
+            if (hors.get(i).equals(hor)) hors.remove(i);
+        }
+    }
     public void addPig(Pig pig) {
         for (int i = 0; i < pens.length; i++) if (pens[i] == null) {pens[i] = pig; break;}
+    }
+    public void removePig(Pig pig) {
+        for (int i = 0; i < pens.length; i++) if (pens[i].equals(pig)) pens[i] = null;
     }
     public Dictionary<Integer, Cow> getCows() {return cows;}
     public Set<Turkey> getTurks() {return turks;}
