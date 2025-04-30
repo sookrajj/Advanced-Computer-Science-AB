@@ -15,7 +15,10 @@ public class project3 {
     private JLabel Organizer;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
+    private JButton filterForStudentsAboveButton;
+    private JTextField textField2;
     private static Map<String, student> list;
+
 
     private class student {
         private String name;
@@ -60,9 +63,7 @@ public class project3 {
             gpa = this.calc();
         }
 
-        public String getName() {
-            return name;
-        }
+        public String getName() {return name;}
 
         public double getGpa() {
             return gpa;
@@ -74,6 +75,19 @@ public class project3 {
 
         public String toString() {
             return "   " + name + "               " + grades[0] + "          " + grades[1] + "             " + grades[2] + "             " + grades[3] + "                                       " + gpa;
+        }
+        public int CompareTo(String y) {
+            return name.compareTo(y);
+        }
+
+
+    }
+    public void getStudentAboveGPA(double minGPA) {
+        for (student s : list.values()) {
+            if (s.getGpa() < minGPA) {
+                list.remove(s.name);
+
+            }
         }
     }
 
@@ -122,6 +136,14 @@ public class project3 {
                         list.put(Student, new student(Student, new String[] {"N/A", "N/A", "N/A", Grade}));
                     }
                 }
+                list1.clearSelection();
+                list1.setListData(list.values().toArray(new student[0]));
+            }
+        });
+        filterForStudentsAboveButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                var num = Double.parseDouble(textField2.getText());
+                getStudentAboveGPA(num);
                 list1.clearSelection();
                 list1.setListData(list.values().toArray(new student[0]));
             }
