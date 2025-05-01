@@ -108,6 +108,27 @@ public class GigaFarms {
         //endregion profit
         //region killCows
         Dictionary<Integer, Cow> onTheChoppingBlock = new Dictionary<Integer, Cow>();
+        var bol = new Boolean[] {false, false, false, false, false};
+        for (int i = 0; i < 5; i++) {
+            var cows = farms.get(i).getCows();
+            var id = cows.keySet();
+            for (int d : id) {
+                if (onTheChoppingBlock.size() < 7) {
+                    onTheChoppingBlock.insert(d, cows.get(d));
+                } else {
+                    var cow = cows.get(d);
+                    for (int h : onTheChoppingBlock.keySet()) {
+                        if (cow.getIncome() < onTheChoppingBlock.get(h).getIncome()) {
+                            var temp = cow;
+                            cow = onTheChoppingBlock.get(h);
+                            onTheChoppingBlock.remove(h);
+                            onTheChoppingBlock.insert(temp.getId(), temp);
+                        }
+                    }
+                }
+            }
+        }
+
 
         //endregion killCows
     }
