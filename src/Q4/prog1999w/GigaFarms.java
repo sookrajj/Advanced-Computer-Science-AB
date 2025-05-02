@@ -186,6 +186,70 @@ public class GigaFarms {
         }
         System.out.println("Taken the Pigs out back");
         //endregion killpigs
+        //region killTurkeys
+        var tu = farms.get(0).getTurks();
+        var lowTurkeyProf = Integer.MAX_VALUE;
+        for (int i = 0; i < 5; i++) {
+            var tus = farms.get(i).getTurks();
+            var low = 0;
+            for (Turkey t : tus) {
+                low += t.getProfit();
+            }
+            if (low < lowTurkeyProf) {
+                lowTurkeyProf = low;
+                tu = tus;
+            }
+        }
+        for (int i = 0; i < farms.size(); i++) {
+            var tus = farms.get(i).getTurks();
+            if (tu.equals(tus)) {
+                var t = new Turkey[tu.size()/2];
+                for (Turkey p : tus) {
+                    for (int l = 0; l < t.length; l++) {
+                        if (t[l] != null) {
+                            if (p.getProfit() < t[l].getProfit()) {
+                                var temp = p;
+                                p = t[l];
+                                t[l] = p;
+                            }
+                        }
+                    }
+                }
 
+                for (Turkey turkey : t) {
+                    tus.remove(turkey);
+                }
+            }
+        }
+        System.out.println("Taken the Turkeys out back");
+        //endregion killTurkeys
+        //region Weight
+        var totw = 0;
+        for (int i = 0; i < farms.size(); i++) {
+            var anis = farms.get(i).getAllAnimals();
+            var w = 0;
+            for (Animal l : anis) {
+                if (l != null) {
+                    w += l.getCost();
+                }
+            }
+            totw += w;
+        }
+        System.out.println("Total Weight of Feed on all Farms Combined is " + totw);
+        //endregion weight
+        //region Weight
+        totw = 0;
+        for (int i = 0; i < farms.size(); i++) {
+            var anis = farms.get(i).getAllAnimals();
+            var w = 0;
+            for (Animal l : anis) {
+                if (l != null) {
+                    w += l.getCost();
+                }
+            }
+            totw += w;
+        }
+        System.out.println("Total Weight of Feed on all Farms Combined is " + totw);
+        //endregion weight
     }
 }
