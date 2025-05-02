@@ -139,6 +139,8 @@ public class Farm implements Comparable<Farm> {
     }
     public Dictionary<Integer, Cow> getCows() {return cows;}
     public Set<Turkey> getTurks() {return turks;}
+    public CircularLinkedList<Horse> getHorses() {return hors;}
+    public Pig[] getPigs() {return pens;}
     public int stockCorn() {
         return cornCobs.peak().cobs;
     }

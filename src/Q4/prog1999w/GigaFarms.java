@@ -3,6 +3,8 @@ package Q4.prog1999w;
 import DataStructures.Dictionary;
 import DataStructures.LinkedList;
 
+import java.util.Arrays;
+
 public class GigaFarms {
     public static void main(String[] args) {
         var farms = new LinkedList<Farm>();
@@ -128,8 +130,62 @@ public class GigaFarms {
                 }
             }
         }
-
-
+        for (int i = 0; i < farms.size(); i++) {
+            var cows = farms.get(i).getCows();
+            for (int n = 0; n < onTheChoppingBlock.size(); n++) {
+                var g = onTheChoppingBlock.keySet();
+                for (int t : g) {
+                    if (cows.contains(t)) cows.remove(t);
+                }
+            }
+        }
+        System.out.println("Taken the Cows out back");
         //endregion killCows
+        //region killpigs
+        var pigpen = farms.get(0).getPigs();
+        var tot = Integer.MAX_VALUE;
+        for (int i = 0; i < 5; i++) {
+            var pigs = farms.get(i).getPigs();
+            var prof = 0;
+            for (Pig pig : pigs) {
+                if (pig != null) {
+                    prof += pig.getProfit();
+                }
+            }
+            if (prof < tot) {
+                tot = prof;
+                pigpen = pigs;
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            var pigs = farms.get(i).getPigs();
+            var prof = 0;
+            if (Arrays.equals(pigs, pigpen)) {
+                Pig[] p = new Pig[]{pigs[0], pigs[1]};
+                for (int l = 2; l < pigs.length; l++) {
+                    var pig = pigs[l];
+                    if (pig != null) {
+                        if (pig.getProfit() > p[0].getProfit()) {
+                            var temp = p[0];
+                            p[0] = pig;
+                            pig = temp;
+                        }
+                        if (pig.getProfit() > p[1].getProfit()) {
+                            var temp = p[0];
+                            p[0] = pig;
+                            pig = temp;
+                        }
+                    }
+                }
+                for (int y = 0; y < pigs.length; y++) {
+                    if (pigs[y] != p[0] || pigs[y] != p[1]) {
+                        pigs[y] = null;
+                    }
+                }
+            }
+        }
+        System.out.println("Taken the Pigs out back");
+        //endregion killpigs
+
     }
 }
