@@ -237,6 +237,86 @@ public class GigaFarms {
         }
         System.out.println("Total Weight of Feed on all Farms Combined is " + totw);
         //endregion weight
+        //region killHeavy
+        for (int i = 0; i < 5; i++) {
+            var farm = farms.get(i);
+            var horses = farm.getHorses();
+            int he = 0;
+            for (int h = 0; h < horses.size(); h++) {
+                if (horses.get(h).weight > horses.get(he).weight) he = h;
+            }
+            farm.removeHorse(horses.get(he));
+
+            var cows = farm.getCows();
+            int[] place = new int[] {0, 0};
+            for (int l : cows.keySet()) {
+                if (place[0] == 0) {
+                    place[0] = l;
+                } else if (place[1] == 0) {
+                    place[1] = l;
+                }else {
+                    if (cows.get(place[0]).weight < cows.get(l).weight) {
+                        var temp = place[0];
+                        place[0] = l;
+                        l = temp;
+                    }
+                    if (cows.get(place[1]).weight < cows.get(l).weight) place[1] = l;
+                }
+            }
+            farm.removeCow(cows.get(place[0]));
+            farm.removeCow(cows.get(place[1]));
+
+            var turks = farm.getTurks();
+            Turkey[] t = new Turkey[3];
+            for (Turkey turkey : turks) {
+                if (t[0] == null) {
+                    t[0] = turkey;
+                } else if (t[1] == null) {
+                    t[1] = turkey;
+                } else if (t[2] == null) {
+                    t[2] = turkey;
+                } else {
+                    if (turkey.weight > t[0].weight) {
+                        var temp = t[0];
+                        t[0] = turkey;
+                        turkey = temp;
+                    }
+                    if (turkey.weight > t[1].weight) {
+                        var temp = t[1];
+                        t[1] = turkey;
+                        turkey = temp;
+                    }
+                    if (turkey.weight > t[0].weight) t[2] = turkey;
+                }
+            }
+            farm.removeTurkey(t[0]);
+            farm.removeTurkey(t[1]);
+            farm.removeTurkey(t[2]);
+
+            var pigs = farm.getPigs();
+            int[] indexs = new int[] {0, 1, 2, 3};
+            for (int l = 0; l < pigs.length; l++) {
+                if (pigs[l] != null) {
+                    for (int p = 0; p < indexs.length; p++) {
+                        if (pigs[indexs[p]] == null) indexs[p] = l;
+                        else {
+                            if (pigs[indexs[p]].weight < pigs[l].weight) {
+                                var temp = indexs[p];
+                                indexs[p] = l;
+                                l = temp;
+                            }
+                        }
+                    }
+                }
+            }
+            pigs[indexs[0]] = null;
+            pigs[indexs[1]] = null;
+            pigs[indexs[2]] = null;
+            pigs[indexs[3]] = null;
+
+        }
+        System.out.println("Taken the Animals out back.");
+        //endregion killHeavy
         //region Weight
         totw = 0;
         for (int i = 0; i < farms.size(); i++) {
@@ -251,5 +331,10 @@ public class GigaFarms {
         }
         System.out.println("Total Weight of Feed on all Farms Combined is " + totw);
         //endregion weight
+        //region reportFood
+
+        //endregion reportFood
+
+
     }
 }
